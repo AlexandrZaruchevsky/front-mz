@@ -72,7 +72,7 @@ export const usePOFStore = defineStore('pOFStore', () => {
     }
     if (flag) {
       await fetchPOFs()
-      router.push({ name: 'PointOfPresence' })
+      router.push({ name: 'PointOfPresences' })
     }
   }
 

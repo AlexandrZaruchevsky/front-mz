@@ -11,6 +11,7 @@
         <router-link class="menu-item" to="/admin/departments">Departments</router-link>
         <router-link class="menu-item" to="/admin/point-of-presences">Point of presence</router-link>
         <router-link class="menu-item" to="/admin/positions">Positions</router-link>
+        <router-link class="menu-item" to="/admin/employees">Employees</router-link>
         <router-link class="menu-item" to="/admin/users">Users</router-link>
         <router-link class="menu-item" to="/admin/roles">Roles</router-link>
       </div>

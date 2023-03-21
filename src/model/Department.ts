@@ -7,9 +7,9 @@ export class Department {
     public id: number = -1,
     public name: String = "",
     public topLevel: Boolean = true,
-    public parentId: Number = -1,
-    public bossId: Number = -1,
-    public orgId: Number = -1,
+    public parentId: number = -1,
+    public bossId: number = -1,
+    public orgId: number = -1,
     public orgName: String = "",
     public organization: Organization = new Organization()
   ) { }

@@ -2,6 +2,7 @@ import type { Organization } from "@/model/Organization";
 import { PageRequest } from "@/model/Page";
 import { Position, PositionPage } from "@/model/Position";
 import type { ServiceRequest } from "@/model/ServiceRequest";
+import router from "@/router";
 import OrgService from "@/services/OrgService";
 import PosService from "@/services/PosService";
 import { defineStore } from "pinia";
@@ -41,9 +42,60 @@ export const usePositionStore = defineStore('positionStore', () => {
     })
   }
 
+  async function fetchPosition(id: Number = -1) {
+    await positionService.getEntity(id).then(response => {
+      position.value = response;
+    }).catch(err => {
+      console.log(err.response.data);
+    })
+  }
+
+  function setAdd(val: Boolean = true) {
+    serviceRequest.add(val)
+    if (serviceRequest.isAdd()) {
+      position.value = new Position();
+    }
+  }
+
+  async function savePosition() {
+    let flag = false;
+    if (serviceRequest.isAdd()) {
+      await positionService.addEntity(position.value).then(response => {
+        position.value = response
+        flag = true;
+      })
+    } else {
+      await positionService.updateEntity(position.value).then(response => {
+        position.value = response
+        flag = true;
+      })
+    }
+    if (flag) {
+      await fetchPositions()
+      router.push({ name: 'Positions' })
+    }
+  }
+
+  async function deletePosition(id:Number=-1){
+    const flag = await positionService.deleteEntity(id);
+    if(flag){
+      await fetchPositions();
+      router.push({ name: 'Positions' })
+    }
+  }
+
+
   return {
+    orgs,
+    position,
     positions,
-    fetchPositions
+    serviceRequest,
+    setAdd,
+    fetchOrgs,
+    fetchPositions,
+    fetchPosition,
+    savePosition,
+    deletePosition
   }
 
 

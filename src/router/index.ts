@@ -6,6 +6,7 @@ import organizationRoutes from './OrganizationRoutes'
 import departmentRoutes from './DepartmentRoutes'
 import pOFRoutes from './POFRoutes'
 import positionRoutes from './PositionRoutes'
+import employeeRoutes from './EmployeeRoutes'
 
 import { useAuthStore } from "../stores/AuthStore"
 import { storeToRefs } from 'pinia'
@@ -34,7 +35,8 @@ const router = createRouter({
     ...organizationRoutes,
     ...departmentRoutes,
     ...pOFRoutes,
-    ...positionRoutes
+    ...positionRoutes,
+    ...employeeRoutes
   ]
 })
 

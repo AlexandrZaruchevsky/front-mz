@@ -1,7 +1,7 @@
 export class PageRequest {
   constructor(
     public pageCurrent: Number = 0,
-    public pageSize: Number = 10,
+    public pageSize: Number = 20,
     public sortBy: String = "",
     public search: String = "",
     public parentId: Number = -1
