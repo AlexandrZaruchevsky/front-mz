@@ -1,14 +1,17 @@
 <template>
   <div class="empl-row">
     <div class="w-1/2 flex">
-      <div class="w-1/3">
+      <div class="w-1/4">
         {{ empl?.lastName }}
       </div>
-      <div class="w-1/3">
+      <div class="w-1/4">
         {{ empl?.firstName }}
       </div>
-      <div class="w-1/3">
+      <div class="w-1/4">
         {{ empl?.middleName }}
+      </div>
+      <div class="w-1/4">
+        {{ empl?.kspd }}
       </div>
     </div>
     <div class="w-1/2 flex">
@@ -37,7 +40,7 @@ const props = defineProps({
   @apply border-b flex flex-row gap-2 bg-slate-500 bg-opacity-0;
 
   div {
-    @apply px-2 py-1 whitespace-nowrap overflow-hidden;
+    @apply px-1 py-0.5 whitespace-nowrap overflow-hidden;
   }
 }
 

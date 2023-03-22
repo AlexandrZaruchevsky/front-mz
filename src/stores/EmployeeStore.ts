@@ -25,7 +25,7 @@ export const useEmployeeStore = defineStore('employeeStore', () => {
   const emplPage = ref<EmployeePage>(new EmployeePage());
   const empls = computed<Array<Employee>>(() => emplPage.value.content);
   const empl = ref<Employee>(new Employee());
-  const pageRequest = ref<PageRequest>(new PageRequest());
+  const pageRequest = ref<PageRequest>(new PageRequest(0, 20, "fio"));
   const serviceRequest = reactive<ServiceRequest>(emplService.getServiceRequest());
 
   const orgs = ref<Array<Organization>>(new Array());
@@ -46,7 +46,7 @@ export const useEmployeeStore = defineStore('employeeStore', () => {
   async function fetchEmployee(id: number = -1) {
     await emplService.getEntity(id).then(async (response) => {
       empl.value = response;
-      if (empl.value.depId > 0){
+      if (empl.value.depId > 0) {
         await depService.getEntity(empl.value.depId).then((response) => {
           let dep = response
           orgId.value = dep.orgId;
@@ -122,14 +122,14 @@ export const useEmployeeStore = defineStore('employeeStore', () => {
     })
   }
 
-  watch(orgId, ()=>{
-    if(orgId.value>0){
-      fetchDepsByOrgId(orgId.value)  
+  watch(orgId, () => {
+    if (orgId.value > 0) {
+      fetchDepsByOrgId(orgId.value)
       fetchPositionsByOrgId(orgId.value)
       fetchPOFsByOrdId(orgId.value)
     }
   })
-  
+
 
   return {
     empls,
@@ -140,6 +140,7 @@ export const useEmployeeStore = defineStore('employeeStore', () => {
     deps,
     positions,
     pofs,
+    pageRequest,
     fetchEmployees,
     fetchEmployee,
     setAdd,
