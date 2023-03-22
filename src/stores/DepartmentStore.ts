@@ -33,8 +33,6 @@ export const useDepartmentStore = defineStore('departmentStore', () => {
   async function fetchDeps(orgId: Number = 0) {
     await depService.getAllDepsByOrg(orgId).then(response => {
       depList.value = [...response]
-      console.log(depList.value);
-      
     }).catch(err => {
       console.log(err.response.data);
     })
