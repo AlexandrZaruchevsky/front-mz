@@ -2,7 +2,7 @@
   <input 
     class="input" :type="type" 
     :value="inP" 
-    @input="$emit('update:modelValue', $event.target.value)"
+    @input="$emit('update:modelValue', ($event.target as HTMLInputElement).value)"
     :placeholder="placeHolder"
     @keypress.enter="$emit('enter')"
   />

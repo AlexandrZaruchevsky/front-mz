@@ -7,7 +7,7 @@ import router from '@/router';
 export const useAuthStore = defineStore('authStore', () => {
   const userAuth = ref<UserAuth>(new UserAuth());
   const isAuth = ref<Boolean>(false);
-  const token = computed<String>(() => `Bearer ${userAuth.value.token}`);
+  const token = computed<string>(() => `Bearer ${userAuth.value.token}`);
   const user = computed<User>(() => userAuth.value.user);
 
   const shortFIO = computed(() => {

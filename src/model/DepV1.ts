@@ -14,7 +14,7 @@ export class DepV1 {
 
 export class DepPageV1 extends Page {
   constructor(
-    public content: Array<Dep> = new Array()
+    public content: Array<DepV1> = new Array()
   ) {
     super();
   }
