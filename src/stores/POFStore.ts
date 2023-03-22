@@ -79,7 +79,7 @@ export const usePOFStore = defineStore('pOFStore', () => {
   async function deletePOF(id: Number) {
     await pOFService.deleteEntity(id).then(async () => {
       await fetchPOFs();
-      router.push({ name: 'Departments' })
+      router.push({ name: 'PointOfPresences' })
     }).catch(err => {
       console.log(err.response.data);
     })

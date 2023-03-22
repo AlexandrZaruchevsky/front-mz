@@ -1,8 +1,8 @@
 <template>
   <overlay-z>
-    <card-default :header="header" class="border">
+    <card-default :header="header" class="border w-1/2">
       <template v-slot:body>
-        <form @submit.prevent="">
+        <form @submit.prevent="saveEmployee">
           <div class="flex flex-col gap-2">
             <div class="flex flex-col gap-2">
               <div class="flex flex-row gap-2 items-center">
@@ -41,6 +41,17 @@
                 </select>
               </div>
               <div class="flex flex-row gap-2 items-center">
+                <span class="w-1/3">Точка присутствия:</span>
+                <select
+                  class="py-1 px-2 bg-white rounded w-full border-b-2 focus:outline-none border-teal-800 border-opacity-20 focus:border-opacity-60"
+                  v-model="empl.pofId">
+                  <option value="-1"></option>
+                  <option v-for="pof in pofs" :value="pof.id">
+                    {{ pof.shortName }}
+                  </option>
+                </select>
+              </div>
+              <div class="flex flex-row gap-2 items-center">
                 <span class="w-1/3">Отдел:</span>
                 <select
                   class="py-1 px-2 bg-white rounded w-full border-b-2 focus:outline-none border-teal-800 border-opacity-20 focus:border-opacity-60"
@@ -52,7 +63,7 @@
                 </select>
               </div>
               <div class="flex flex-row gap-2 items-center">
-                <span class="w-1/3">Отдел:</span>
+                <span class="w-1/3">Должность:</span>
                 <select
                   class="py-1 px-2 bg-white rounded w-full border-b-2 focus:outline-none border-teal-800 border-opacity-20 focus:border-opacity-60"
                   v-model="empl.posId">
@@ -66,7 +77,7 @@
             <div class="buttons flex justify-between mt-4">
               <div class="flex flex-row gap-2">
                 <button-z title="Save" />
-                <button-z title="Delete" @submit.stop="" />
+                <button-z title="Delete" @click="deleteEmployee(empl.id)" />
               </div>
               <button-link to="/admin/employees" title="Cancel" />
             </div>
@@ -89,17 +100,10 @@ const header = computed(() => {
   return serviceRequest.value.isAdd() ? "Employee | Add" : "Employee | Update"
 })
 
-// const orgId = ref<number>(-1);
-
-const { empl, serviceRequest, orgs, orgId, deps, positions } = storeToRefs(useEmployeeStore());
-const { fetchEmployee, setAdd, fetchOrgs, fetchDepsByOrgId, fetchPositionsByOrgId } = useEmployeeStore();
+const { empl, serviceRequest, orgs, orgId, deps, positions, pofs } = storeToRefs(useEmployeeStore());
+const { fetchEmployee, setAdd, fetchOrgs, saveEmployee, deleteEmployee } = useEmployeeStore();
 
 fetchOrgs();
-
-watch(orgId, ()=>{
-  fetchDepsByOrgId(orgId.value)  
-  fetchPositionsByOrgId(orgId.value)
-})
 
 const route = useRoute();
 const paramId = route.params.id as string;

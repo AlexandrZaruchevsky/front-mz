@@ -25,8 +25,6 @@ export default class CrudService<T, K extends Page>{
 
   public async getEntities(pageRequest: PageRequest = new PageRequest()): Promise<K> {
     this.serviceRequest.start();
-    console.log(pageRequest);
-    
     return await axios.get(`${this.baseUrl}`, {
       headers: {
         Authorization: token.value
