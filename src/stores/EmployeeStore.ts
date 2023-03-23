@@ -1,7 +1,7 @@
 import type { DepV1 } from "@/model/DepV1";
 import { Employee, EmployeePage } from "@/model/Employee";
 import type { Organization } from "@/model/Organization";
-import { PageRequest } from "@/model/Page";
+import { Page, PageRequest } from "@/model/Page";
 import type { POF } from "@/model/POF";
 import type { Position } from "@/model/Position";
 import type { ServiceRequest } from "@/model/ServiceRequest";
@@ -27,6 +27,8 @@ export const useEmployeeStore = defineStore('employeeStore', () => {
   const empl = ref<Employee>(new Employee());
   const pageRequest = ref<PageRequest>(new PageRequest(0, 20, "fio"));
   const serviceRequest = reactive<ServiceRequest>(emplService.getServiceRequest());
+
+  const page = computed<Page>(() => emplPage.value as Page)
 
   const orgs = ref<Array<Organization>>(new Array());
   const orgId = ref<number>(-1);
@@ -141,6 +143,7 @@ export const useEmployeeStore = defineStore('employeeStore', () => {
     positions,
     pofs,
     pageRequest,
+    page,
     fetchEmployees,
     fetchEmployee,
     setAdd,

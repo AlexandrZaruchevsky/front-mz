@@ -5,7 +5,7 @@
       <slot name="tool-buttons" />
     </div>
     <div class="card-body">
-      <slot name="card-body" />
+      <slot name="body" />
     </div>
     <div class="tool-pagination">
       <slot name="tool-pagination" />
@@ -27,10 +27,10 @@ withDefaults(defineProps<Props>(), {
 
 <style scoped lang="scss">
 .card {
-  @apply bg-white rounded-lg shadow-xl border flex flex-col text-slate-800;
+  @apply bg-white rounded-lg shadow-xl  flex flex-col text-slate-800;
 
   .card-header {
-    @apply p-2 border-b text-xl font-semibold;
+    @apply p-2 border-b text-xl font-semibold bg-stone-200 rounded-t;
   }
 
   .card-body {

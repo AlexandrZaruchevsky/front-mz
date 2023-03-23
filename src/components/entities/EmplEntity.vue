@@ -1,48 +1,56 @@
 <template>
-  <!-- <div class="empl-row lg:flex-col">
-      <div class="w-2/12 border">
+  <div>
+    <div class="empl-row hidden">
+      <div class="flex w-1/2">
+      <div class="w-1/4">
         {{ empl?.lastName }}
       </div>
-      <div class="w-2/12 border">
+      <div class="w-1/4">
         {{ empl?.firstName }}
       </div>
-      <div class="w-2/12 border">
+      <div class="w-1/4">
         {{ empl?.middleName }}
       </div>
-      <div class="w-1/12 border">
-        {{ empl?.kspd }}
-      </div>
-      <div class="w-3/12 border">
-        {{ empl?.posName }}
-      </div>
-      <div class="w-full lg:w-2/12 border">
-        {{ empl?.depName }}
-      </div>
-  </div> -->
-  <div class="empl-row">
-    <div class="flex flex-col gap-2 w-full lg:flex-row lg:w-1/2">
-      <div class="w-full lg:w-1/4">
-        {{ empl?.lastName }}
-      </div>
-      <div class="w-full lg:w-1/4">
-        {{ empl?.firstName }}
-      </div>
-      <div class="w-full lg:w-1/4">
-        {{ empl?.middleName }}
-      </div>
-      <div class="w-full lg:w-1/4">
+      <div class="w-1/4">
         {{ empl?.kspd }}
       </div>
     </div>
-    <div class="w-full flex flex-col gap-2 lg:flex-row lg:w-1/2">
-      <div class="w-full lg:w-1/2">
+    <div class="flex gap-2 w-1/2">
+      <div class="w-1/2">
         {{ empl?.posName }}
       </div>
-      <div class="w-full lg:w-1/2">
+      <div class="w-1/2">
         {{ empl?.depName }}
       </div>
     </div>
   </div>
+  <div class="lg:hidden flex flex-col border rounded p-2 shadow-lg bg-slate-500 bg-opacity-0 hover:bg-opacity-10 hover:cursor-pointer">
+    <div class="flex flex-row">
+      <span class="w-1/4">Фамилия:</span>
+      <span class="w-full border-b">{{ empl?.lastName }}</span>
+    </div>
+    <div class="flex flex-row">
+      <span class="w-1/4">Имя:</span>
+      <span class="w-full border-b">{{ empl?.firstName }}</span>
+    </div>
+    <div class="flex flex-row">
+      <span class="w-1/4">Отчество:</span>
+      <span class="w-full border-b">{{ empl?.middleName }}</span>
+    </div>
+    <div class="flex flex-row">
+      <span class="w-1/4">Телефон:</span>
+      <span class="w-full border-b">{{ empl?.kspd }}</span>
+    </div>
+    <div class="flex flex-row">
+      <span class="w-1/4">Должность:</span>
+      <span class="w-full border-b">{{ empl?.posName }}</span>
+    </div>
+    <div class="flex flex-row">
+      <span class="w-1/4">Подразделение:</span>
+      <span class="w-full border-b">{{ empl?.depName }}</span>
+    </div>
+  </div>
+</div>
 </template>
 
 <script setup lang="ts">
@@ -57,7 +65,7 @@ const props = defineProps({
 
 <style lang="scss">
 .empl-row {
-  @apply border-b flex flex-col shadow-lg border-2 lg:border-none rounded-xl lg:shadow-none lg:flex-row lg:w-full bg-slate-500 bg-opacity-0;
+  @apply hidden lg:flex flex-col shadow-lg lg:border-b rounded-xl lg:shadow-none lg:flex-row lg:w-full bg-slate-500 bg-opacity-0;
   div {
     @apply px-1 py-0.5 whitespace-nowrap overflow-hidden;
   }
