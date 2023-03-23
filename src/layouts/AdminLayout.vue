@@ -25,6 +25,6 @@ export default {
   @apply bg-teal-800 bg-opacity-20 flex;
 }
 .content{
-  @apply w-full p-4;
+  @apply w-full h-full p-4;
 }
 </style>

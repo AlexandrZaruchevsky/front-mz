@@ -1,37 +1,6 @@
 <template>
   <div class="relative flex h-full justify-center items-start">
-    <card-z class="h-full w-full" header="Employees">
-      <template #tool-buttons>
-        <div>
-          <div class="p-2 flex gap-2">
-            <button-link class="px-2 py-1 rounded bg-teal-800 bg-opacity-30 hover:bg-opacity-90 hover:text-white"
-              to="/admin/employees/add" title="add" />
-          </div>
-          <div class="px-2 py-1 border-b shadow-md flex flex-row gap-2 items-center">
-            <select class="px-2 py-1 bg-white rounded border-2" v-model="pageRequest.sortBy" @change="changeSort">
-              <option selected value="fio">Поиск по ФИО</option>
-              <option selected value="kspd">Поиск по Телефону</option>
-            </select>
-            <input-default :inP="pageRequest.search" v-model="pageRequest.search" @keyup.enter="fetchEmployees" />
-          </div>
-        </div>
-      </template>
-      <template #card-body>
-        <div class="p-2 flex flex-col gap-2">
-          <empl-entity v-for="empl in empls" :key="empl.id" @click="gotoEmpl(empl.id)" :empl="empl" />
-        </div>
-      </template>
-      <template #tool-pagination>
-        <div class="p-2 border-t">
-          <select class="px-2 py-1 bg-white rounded border-2" v-model="pageRequest.pageSize" @change="fetchEmployees">
-            <option selected value="10">10</option>
-            <option selected value="20">20</option>
-            <option selected value="50">50</option>
-          </select>
-        </div>
-      </template>
-    </card-z>
-    <!-- <card-default header="Employees" class="w-full h-full">
+    <card-default header="Employees" class="w-full h-full">
       <template v-slot:body>
         <div class="h-full flex flex-col">
           <div class="text-xl font-semibold">Employees</div>
@@ -71,7 +40,7 @@
           </div>
         </div>
       </template>
-    </card-default> -->
+    </card-default>
     <router-view />
   </div>
 </template>
@@ -90,8 +59,8 @@ const { fetchEmployees } = useEmployeeStore();
 
 fetchEmployees();
 
-const changeSort = async () => {
-  pageRequest.value.search = "";
+const changeSort = async ()=>{
+  pageRequest.value.search="";
   await fetchEmployees()
 }
 
@@ -102,5 +71,8 @@ const gotoEmpl = (id: Number) => {
 </script>
 
 <style lang="scss">
-
+.empl-list{
+  // height: 100vh ;
+  // @apply border;
+}
 </style>
