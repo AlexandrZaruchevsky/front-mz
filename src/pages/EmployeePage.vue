@@ -30,6 +30,22 @@
                 <input-default :inP="empl.kspd" v-model="empl.kspd" />
               </div>
               <div class="flex flex-row gap-2 items-center">
+                <span class="w-1/3">Acoount name:</span>
+                <input-default :inP="empl.accountName" v-model="empl.accountName" />
+              </div>
+              <div class="flex flex-row gap-2 items-center">
+                <span class="w-1/3">Principal name:</span>
+                <input-default :inP="empl.principalName" v-model="empl.principalName" />
+              </div>
+              <div class="flex flex-row gap-2 items-center">
+                <span class="w-1/3">WorkStation:</span>
+                <input-default :inP="empl.wsName" v-model="empl.wsName" />
+              </div>
+              <div class="flex flex-row gap-2 items-center">
+                <span class="w-1/3">Description:</span>
+                <input-default :inP="empl.description" v-model="empl.description" />
+              </div>
+              <div class="flex flex-row gap-2 items-center">
                 <span class="w-1/3">Организация:</span>
                 <select
                   class="py-1 px-2 bg-white rounded w-full border-b-2 focus:outline-none border-teal-800 border-opacity-20 focus:border-opacity-60"

@@ -29,6 +29,15 @@ const router = createRouter({
         return {name:"Organizations"}
       }
     },
+    {
+      path:'/admin/upload',
+      name:'UploadPage',
+      component: ()=> import('@/pages/UploadPage.vue'),
+      meta:{
+        layout: "admin-layout",
+        authRequired: true
+      }
+    },
     ...userRoutes,
     ...authRoutes,
     ...roleRoutes,

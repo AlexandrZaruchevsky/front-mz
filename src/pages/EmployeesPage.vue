@@ -12,7 +12,7 @@
               <option selected value="fio">Поиск по ФИО</option>
               <option selected value="kspd">Поиск по Телефону</option>
             </select>
-            <input-default :inP="pageRequest.search" v-model="pageRequest.search" @keyup.enter="fetchEmployees" />
+            <input-default :inP="pageRequest.search" v-model="pageRequest.search" @keyup.enter="fetchBy" />
           </div>
         </div>
       </template>
@@ -23,7 +23,7 @@
       </template>
       <template #tool-pagination>
         <div class="p-2 border-t flex justify-between items-center">
-          <select class="px-2 py-1 bg-white rounded border-2" v-model="pageRequest.pageSize" @change="fetchEmployees">
+          <select class="px-2 py-1 bg-white rounded border-2" v-model="pageRequest.pageSize" @change="changeAmountPage">
             <option selected value="10">10</option>
             <option selected value="20">20</option>
             <option selected value="50">50</option>
@@ -38,8 +38,7 @@
       <template #footer>
         <div class="p-2 text-sm flex flex-row gap-2">
           <div class="border-r pr-2">Записей всего - {{ page.totalElements }}</div>
-          <div class="border-r pr-2">Страниц всего - {{ page.totalPages }}</div>
-          <div class="border-r pr-2">Номер страницы - {{ currentPage }}</div>
+          <div class="border-r pr-2">Страница - {{ currentPage }} из {{ page.totalPages }}</div>
         </div>
       </template>
     </card-z>
@@ -60,12 +59,22 @@ import { computed } from 'vue';
 const { empls, pageRequest, page } = storeToRefs(useEmployeeStore());
 const { fetchEmployees } = useEmployeeStore();
 
-const currentPage=computed(()=>pageRequest.value.pageCurrent+1)
+const currentPage = computed(() => pageRequest.value.pageCurrent + 1)
 
 fetchEmployees();
 
 const changeSort = async () => {
   pageRequest.value.search = "";
+  await fetchEmployees()
+}
+
+const fetchBy = async () => {
+  pageRequest.value.pageCurrent = 0
+  await fetchEmployees()
+}
+
+const changeAmountPage = async () => {
+  pageRequest.value.pageCurrent = 0
   await fetchEmployees()
 }
 

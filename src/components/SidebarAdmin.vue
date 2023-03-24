@@ -14,6 +14,7 @@
         <router-link class="menu-item" to="/admin/employees">Employees</router-link>
         <router-link class="menu-item" to="/admin/users">Users</router-link>
         <router-link class="menu-item" to="/admin/roles">Roles</router-link>
+        <router-link class="menu-item" to="/admin/upload">Upload</router-link>
       </div>
     </div>
     <div class="p-2">{{ shortFIO }}</div>
