@@ -134,6 +134,40 @@ export class CardData {
 
 }
 
+export class CardFunction {
+  constructor(
+    public id: number = -1,
+    public saveEntityFunc?: Function,
+    public deleteEntityFunc?: Function,
+    public cancelFunc?: Function
+  ) { }
+
+  public saveEntity() {
+    if (typeof this.saveEntityFunc == "function") {
+      this.saveEntityFunc()
+    } else {
+      console.log("saveEntity not implemented");
+    }
+  }
+
+  public deleteEntity(id: number = -1) {
+    if (typeof this.deleteEntityFunc == "function") {
+      this.deleteEntityFunc(id)
+    } else {
+      console.log("deleteEntity not implemented");
+    }
+  }
+
+  public cancel() {
+    if (typeof this.cancelFunc == "function") {
+      this.cancelFunc()
+    } else {
+      console.log("cancel not implemented");
+    }
+  }
+
+}
+
 export class StringPage extends Page {
   constructor(
     public content: Array<string> = new Array()
