@@ -1,24 +1,33 @@
 <template>
   <div class="relative flex h-full justify-center items-start">
-    <card-z class="h-full w-full" header="Employees">
+    <card-z class="h-full w-full" header="Departments">
       <template #tool-buttons>
-        <div class="flex gap-2 border-b shadow-md ">
-          <div class="p-2 flex gap-2">
+        <div class="flex p-2 gap-2 border-b shadow-md items-end ">
+          <div class="flex gap-2">
             <button-link class="px-2 py-1 rounded bg-teal-800 bg-opacity-30 hover:bg-opacity-90 hover:text-white"
-              to="/admin/employees/add" title="add" />
+              to="/admin/departments/add" title="add" />
           </div>
-          <div class="px-2 py-1 flex flex-row gap-2 items-center w-full">
-            <select class="px-2 py-1 bg-white rounded border-2" v-model="pageRequest.sortBy" @change="changeSort">
-              <option selected value="fio">Поиск по ФИО</option>
-              <option selected value="kspd">Поиск по Телефону</option>
-            </select>
-            <input-default :inP="pageRequest.search" v-model="pageRequest.search" @keyup.enter="fetchBy" />
+          <div class="w-full">
+            <input-default class="w-full" />
           </div>
         </div>
       </template>
       <template #body>
-        <div class="p-2 flex flex-col gap-2">
-          <empl-entity v-for="empl in empls" :key="empl.id" @click="gotoEmpl(empl.id)" :empl="empl" />
+        <div class="p-2">
+          <div v-for="department in deps" :key="department.id" class="flex flex-col gap-2">
+            <div class="flex gap-2 border-b hover:cursor-pointer bg-slate-800 bg-opacity-0 hover:bg-opacity-10"
+              @click="gotoOrg(department.id)">
+              <div class="w-3/6 px-2 py-1 whitespace-nowrap overflow-hidden">
+                {{ department.name }}
+              </div>
+              <div class="w-2/6 px-2 py-1 whitespace-nowrap overflow-hidden">
+                {{ department.orgName }}
+              </div>
+              <div class="w-1/6  px-2 py-1 text-center">
+                {{ department.topLevel ? "Top" : "Ne top" }}
+              </div>
+            </div>
+          </div>
         </div>
       </template>
       <template #tool-pagination>
@@ -45,53 +54,40 @@
     <router-view />
   </div>
 </template>
-    
+
 <script setup lang="ts">
 
-import { useEmployeeStore } from '@/stores/EmployeeStore';
-import { storeToRefs } from 'pinia';
 import router from '@/router';
-
-import EmplEntity from '@/components/entities/EmplEntity.vue';
+import { useDepartmentStore } from '@/stores/DepartmentStore';
+import { storeToRefs } from 'pinia';
 import { computed } from 'vue';
 
+const { deps, page, pageRequest } = storeToRefs(useDepartmentStore());
 
-const { empls, pageRequest, page } = storeToRefs(useEmployeeStore());
-const { fetchEmployees } = useEmployeeStore();
+const { fetchDepartments } = useDepartmentStore();
 
 const currentPage = computed(() => pageRequest.value.pageCurrent + 1)
 
-fetchEmployees();
+fetchDepartments();
 
-const changeSort = async () => {
-  pageRequest.value.search = "";
-  await fetchEmployees()
-}
-
-const fetchBy = async () => {
-  pageRequest.value.pageCurrent = 0
-  await fetchEmployees()
+const gotoOrg = (id: Number) => {
+  router.push({ path: `/admin/departments/${id}` })
 }
 
 const changeAmountPage = async () => {
   pageRequest.value.pageCurrent = 0
-  await fetchEmployees()
-}
-
-const gotoEmpl = (id: Number) => {
-  router.push({ path: `/admin/employees/${id}` })
+  await fetchDepartments()
 }
 
 const next = async () => {
   pageRequest.value.pageCurrent += 1
-  await fetchEmployees()
+  await fetchDepartments()
 }
 
 const previos = async () => {
   pageRequest.value.pageCurrent -= 1
-  await fetchEmployees()
+  await fetchDepartments()
 }
 
-</script>
 
-<style lang="scss"></style>
+</script>

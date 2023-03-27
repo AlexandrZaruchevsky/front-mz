@@ -5,25 +5,25 @@
         <form @submit.prevent="saveDepartment">
           <div class="flex flex-col gap-2">
             <div class="p-2 flex justify-between">
-              <select class="py-1 px-2 bg-white rounded" v-model="dep.orgId">
+              <select class="py-1 px-2 bg-white rounded w-full border-b-2" v-model="dep.orgId">
                 <option value="-1"></option>
-                <option v-for="org in orgs" :value="org.id">{{ org.shortName }}</option>
+                <option v-for="org in orgList" :value="org.id">{{ org.shortName }}</option>
               </select>
             </div>
-            <input-with-label class="border" label="Наименование:" :inP="dep.name" v-model="dep.name" />
-            <div class="flex gap-2 py-0.5 border">
+            <input-with-label class="p-2" label="Наименование:" :inP="dep.name" v-model="dep.name" />
+            <div class="p-2 flex gap-2 py-0.5">
               <label class="w-1/4">Top Level</label>
               <input type="checkbox" v-model="dep.topLevel" />
             </div>
             <div class="p-2 flex justify-between" v-if="!dep.topLevel">
-              <select class="py-1 px-2 bg-white rounded" v-model="dep.parentId">
+              <select class="py-1 px-2 border-b-2 w-full bg-white rounded" v-model="dep.parentId">
                 <option value="-1"></option>
                 <option v-for="dep in depList" :value="dep.id">{{ dep.name }}</option>
               </select>
             </div>
           </div>
           <div class="buttons flex justify-between mt-4">
-            <button-z title="Save" />
+            <button-z-v1 class="bg-blue-700" title="Save" />
             <button-link to="/admin/departments" title="Cancel" />
           </div>
         </form>
@@ -45,20 +45,10 @@ const header = computed(() => {
 
 const route = useRoute();
 
-const { orgs, dep, depList, serviceRequest } = storeToRefs(useDepartmentStore())
-const { fetchDepartment, fetchOrganizations, depsClear, fetchDeps, setAdd, saveDepartment } = useDepartmentStore();
+const { orgList, dep, depList, serviceRequest } = storeToRefs(useDepartmentStore())
+const { fetchAllOrgs, setAdd, fetchDepartment, saveDepartment } = useDepartmentStore();
 
-const isTopLevel = computed(() => dep.value.topLevel)
-
-watch(isTopLevel, val => {
-  if (!isTopLevel.value) {
-    fetchDeps(dep.value.orgId);
-  } else {
-    depsClear();
-  }
-})
-
-fetchOrganizations()
+fetchAllOrgs();
 
 const paramId = route.params.id as string;
 
