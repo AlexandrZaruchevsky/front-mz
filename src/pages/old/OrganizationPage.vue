@@ -20,7 +20,7 @@
 </template>
 
 <script setup lang="ts">
-import { useOrganizationStore } from '@/stores/OrganizationStore'
+import { useOrganizationStore } from '@/stores/old/OrganizationStore'
 import { storeToRefs } from 'pinia';
 import { useRoute } from 'vue-router';
 import router from '@/router';

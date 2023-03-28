@@ -2,7 +2,7 @@ export default [
   {
     path: '/admin/positions',
     name: 'Positions',
-    component: () => import("@/pages/PositionsPage.vue"),
+    component: () => import("@/pages/PossPage.vue"),
     meta: {
       layout: "admin-layout",
       authRequired: true
@@ -10,7 +10,7 @@ export default [
     children: [
       {
         path: ':id',
-        component: () => import("@/pages/PositionPage.vue"),
+        component: () => import("@/pages/PosPage.vue"),
         meta: {
           authRequired: true
         }

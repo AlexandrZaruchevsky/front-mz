@@ -96,7 +96,7 @@
 import router from '@/router';
 import { useRoute } from 'vue-router';
 
-import { usePOFStore } from '@/stores/POFStore';
+import { usePOFStore } from '@/stores/old/POFStore';
 import { storeToRefs } from 'pinia';
 import { computed } from 'vue';
 

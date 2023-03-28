@@ -2,7 +2,7 @@ export default [
   {
     path: '/admin/employees',
     name: 'Employees',
-    component: () => import("@/pages/EmployeesPage.vue"),
+    component: () => import("@/pages/EmplsPage.vue"),
     meta: {
       layout: "admin-layout",
       authRequired: true
@@ -10,7 +10,7 @@ export default [
     children: [
       {
         path: ':id',
-        component: () => import("@/pages/EmployeePage.vue"),
+        component: () => import("@/pages/EmplPage.vue"),
         meta: {
           authRequired: true
         }

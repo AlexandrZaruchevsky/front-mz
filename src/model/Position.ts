@@ -3,9 +3,9 @@ import { Page } from "./Page";
 export class Position {
   constructor(
     public id: number = -1,
-    public name: String = "",
+    public name: string = "",
     public orgId: number = -1,
-    public orgName: String = ""
+    public orgName: string = ""
   ) { }
 }
 

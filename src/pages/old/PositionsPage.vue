@@ -28,7 +28,7 @@
 <script setup lang="ts">
 
 import router from '@/router';
-import { usePositionStore } from '@/stores/PostionStore';
+import { usePositionStore } from '@/stores/old/PostionStore';
 import { storeToRefs } from 'pinia';
 
 const { positions } = storeToRefs(usePositionStore());

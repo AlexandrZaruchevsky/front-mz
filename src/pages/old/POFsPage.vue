@@ -24,7 +24,7 @@
 
 <script setup lang="ts">
 
-import { usePOFStore } from '@/stores/POFStore';
+import { usePOFStore } from '@/stores/old/POFStore';
 import { storeToRefs } from 'pinia';
 import router from '@/router';
 

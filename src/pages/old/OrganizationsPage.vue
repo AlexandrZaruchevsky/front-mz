@@ -33,7 +33,7 @@
 <script setup lang="ts">
 
 import router from '@/router';
-import { useOrganizationStore } from '@/stores/OrganizationStore';
+import { useOrganizationStore } from '@/stores/old/OrganizationStore';
 import { storeToRefs } from 'pinia';
 
 const { orgs } = storeToRefs(useOrganizationStore());

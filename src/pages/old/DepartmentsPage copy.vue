@@ -49,7 +49,7 @@
 <script setup lang="ts">
 
 import router from '@/router';
-import { useDepartmentStore } from '@/stores/DepartmentStore';
+import { useDepartmentStore } from '@/stores/old/DepartmentStore';
 import { storeToRefs } from 'pinia';
 
 const { deps } = storeToRefs(useDepartmentStore());

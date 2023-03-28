@@ -34,7 +34,7 @@
 
 <script setup lang="ts">
 import router from '@/router';
-import { useDepartmentStore } from '@/stores/DepartmentStore'
+import { useDepartmentStore } from '@/stores/old/DepartmentStore'
 import { storeToRefs } from 'pinia';
 import { computed } from 'vue';
 import { useRoute } from 'vue-router';

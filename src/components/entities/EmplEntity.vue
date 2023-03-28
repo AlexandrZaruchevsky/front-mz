@@ -26,27 +26,27 @@
   </div>
   <div class="lg:hidden flex flex-col border rounded p-2 shadow-lg bg-slate-500 bg-opacity-0 hover:bg-opacity-10 hover:cursor-pointer">
     <div class="flex flex-row">
-      <span class="w-1/4">Фамилия:</span>
+      <span class="w-1/4" style="min-width: 140px;">Фамилия:</span>
       <span class="w-full border-b">{{ empl?.lastName }}</span>
     </div>
     <div class="flex flex-row">
-      <span class="w-1/4">Имя:</span>
+      <span class="w-1/4" style="min-width: 140px;">Имя:</span>
       <span class="w-full border-b">{{ empl?.firstName }}</span>
     </div>
     <div class="flex flex-row">
-      <span class="w-1/4">Отчество:</span>
+      <span class="w-1/4" style="min-width: 140px;">Отчество:</span>
       <span class="w-full border-b">{{ empl?.middleName }}</span>
     </div>
     <div class="flex flex-row">
-      <span class="w-1/4">Телефон:</span>
+      <span class="w-1/4" style="min-width: 140px;">Телефон:</span>
       <span class="w-full border-b">{{ empl?.kspd }}</span>
     </div>
     <div class="flex flex-row">
-      <span class="w-1/4">Должность:</span>
+      <span class="w-1/4" style="min-width: 140px;">Должность:</span>
       <span class="w-full border-b">{{ empl?.posName }}</span>
     </div>
     <div class="flex flex-row">
-      <span class="w-1/4">Подразделение:</span>
+      <span class="w-1/4" style="min-width: 140px;">Подразделение:</span>
       <span class="w-full border-b">{{ empl?.depName }}</span>
     </div>
   </div>

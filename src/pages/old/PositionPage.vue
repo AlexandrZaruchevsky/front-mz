@@ -45,7 +45,7 @@ import router from '@/router';
 import { useRoute } from 'vue-router';
 import { storeToRefs } from 'pinia';
 import { computed } from 'vue';
-import { usePositionStore } from '@/stores/PostionStore';
+import { usePositionStore } from '@/stores/old/PostionStore';
 
 const { position, orgs, serviceRequest } = storeToRefs(usePositionStore());
 const { fetchOrgs, setAdd, fetchPosition, savePosition, deletePosition } = usePositionStore();

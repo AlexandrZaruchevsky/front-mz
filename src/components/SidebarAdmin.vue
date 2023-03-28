@@ -7,14 +7,10 @@
         </router-link>
       </div>
       <div class="menu">
-        <router-link class="menu-item" to="/admin/organizations">Organizations</router-link>
-        <router-link class="menu-item" to="/admin/departments">Departments</router-link>
-        <router-link class="menu-item" to="/admin/point-of-presences">Point of presence</router-link>
-        <router-link class="menu-item" to="/admin/positions">Positions</router-link>
-        <router-link class="menu-item" to="/admin/employees">Employees</router-link>
-        <router-link class="menu-item" to="/admin/users">Users</router-link>
-        <router-link class="menu-item" to="/admin/roles">Roles</router-link>
-        <router-link class="menu-item" to="/admin/upload">Upload</router-link>
+        <router-link v-for="item in menu" :key="item.id" class="menu-item" :class="isActive(item.id)?'menu-item-active':'menu-item-not-active'" :to="item.link"
+          @click="clickItem(item.id)">
+          {{ item.title }}
+        </router-link>
       </div>
     </div>
     <div class="p-2">{{ shortFIO }}</div>
@@ -24,9 +20,82 @@
 <script setup lang="ts">
 import { useAuthStore } from '@/stores/AuthStore';
 import { storeToRefs } from 'pinia';
+import { ref, watch } from 'vue';
+
+interface IMenuLink {
+  id: number,
+  link: string,
+  title: string,
+  active: boolean
+}
+
+const menu = ref<Array<IMenuLink>>([
+  {
+    id: 0,
+    link: "/admin/organizations",
+    title: "Organizations",
+    active: true
+  },
+  {
+    id: 1,
+    link: "/admin/departments",
+    title: "Departments",
+    active: false
+  },
+  {
+    id: 2,
+    link: "/admin/point-of-presences",
+    title: "Point of presence",
+    active: false
+  },
+  {
+    id: 3,
+    link: "/admin/positions",
+    title: "Positions",
+    active: false
+  },
+  {
+    id: 4,
+    link: "/admin/employees",
+    title: "Employees",
+    active: false
+  },
+  {
+    id: 5,
+    link: "/admin/users",
+    title: "Users",
+    active: false
+  },
+  {
+    id: 6,
+    link: "/admin/roles",
+    title: "Roles",
+    active: false
+  },
+  {
+    id: 7,
+    link: "/admin/upload",
+    title: "Upload",
+    active: false
+  }
+])
 
 const title = import.meta.env.VITE_APP_NAME
 const { shortFIO } = storeToRefs(useAuthStore())
+
+const currentItem = ref<number>(0);
+
+const clickItem = (id: number) => {
+  currentItem.value = id
+}
+
+const isActive = (id: number) => menu.value.filter(item => item.id == id)[0]?.active
+
+watch(currentItem, () => {
+  menu.value.forEach(item => item.active = false)
+  menu.value.filter(item => item.id == currentItem.value)
+    .forEach(item => item.active = true)
+})
 
 </script>
 
@@ -45,7 +114,15 @@ const { shortFIO } = storeToRefs(useAuthStore())
 }
 
 .menu-item {
-  @apply bg-slate-600 px-2 py-1 rounded bg-opacity-20 text-center whitespace-nowrap;
+  @apply px-2 py-1 rounded  text-center whitespace-nowrap;
+}
+
+.menu-item-active {
+  @apply bg-slate-500 text-white;
+}
+
+.menu-item-not-active{
+  @apply bg-slate-400 bg-opacity-20;
 }
 
 .menu-item:hover {
