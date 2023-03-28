@@ -24,7 +24,6 @@
 <script lang="ts">
 // import { IPageNavigation } from "@/model/Page"
 // import { IPageNavigation } from "@/model/Page";
-import { computed } from "vue";
 export default {
   props: {
     // pageNavigation: {
@@ -42,7 +41,7 @@ export default {
       default: false
     }
   },
-  setup(props) {
+  setup() {
     // const currentPage = computed<number>(() => props.pageNavigation.currentPage + 1)
     // return {
     //   currentPage

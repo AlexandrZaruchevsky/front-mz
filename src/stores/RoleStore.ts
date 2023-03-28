@@ -6,7 +6,7 @@ import { computed, ref } from 'vue'
 
 export const useRoleStore = defineStore('roleStore', () => {
   const rolePage = ref<RolePage>(new RolePage());
-  const permissions = ref<Array<String>>(new Array());
+  // const permissions = ref<Array<String>>(new Array());
 
   const roles = computed<Array<Role>>(() => rolePage.value.content);
 

@@ -51,7 +51,7 @@
                   class="py-1 px-2 bg-white rounded w-full border-b-2 focus:outline-none border-teal-800 border-opacity-20 focus:border-opacity-60"
                   v-model="orgId">
                   <option value="-1"></option>
-                  <option v-for="org in orgs" :value="org.id">
+                  <option v-for="org in orgs" :value="org.id" :key="org.id">
                     {{ org.shortName }}
                   </option>
                 </select>
@@ -62,7 +62,7 @@
                   class="py-1 px-2 bg-white rounded w-full border-b-2 focus:outline-none border-teal-800 border-opacity-20 focus:border-opacity-60"
                   v-model="empl.pofId">
                   <option value="-1"></option>
-                  <option v-for="pof in pofs" :value="pof.id">
+                  <option v-for="pof in pofs" :value="pof.id" :key="pof.id">
                     {{ pof.shortName }}
                   </option>
                 </select>
@@ -73,7 +73,7 @@
                   class="py-1 px-2 bg-white rounded w-full border-b-2 focus:outline-none border-teal-800 border-opacity-20 focus:border-opacity-60"
                   v-model="empl.depId">
                   <option value="-1"></option>
-                  <option v-for="dep in deps" :value="dep.id">
+                  <option v-for="dep in deps" :value="dep.id" :key="dep.id">
                     {{ dep.name }}
                   </option>
                 </select>
@@ -84,7 +84,7 @@
                   class="py-1 px-2 bg-white rounded w-full border-b-2 focus:outline-none border-teal-800 border-opacity-20 focus:border-opacity-60"
                   v-model="empl.posId">
                   <option value="-1"></option>
-                  <option v-for="position in positions" :value="position.id">
+                  <option v-for="position in positions" :value="position.id" :key="position.id">
                     {{ position.name }}
                   </option>
                 </select>
@@ -109,7 +109,7 @@
 import router from '@/router';
 import { useRoute } from 'vue-router';
 import { storeToRefs } from 'pinia';
-import { computed, ref, watch } from 'vue';
+import { computed } from 'vue';
 import { useEmployeeStore } from '@/stores/EmployeeStore';
 
 const header = computed(() => {

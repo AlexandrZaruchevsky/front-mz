@@ -2,19 +2,24 @@ import { ref, computed, reactive } from 'vue'
 import { defineStore } from 'pinia'
 import { CardData, CardFunction, PageRequest, SelectOption } from '@/model/Page'
 import type { ServiceRequest } from '@/model/ServiceRequest';
-import { Organization, OrganizationPage } from '@/model/Organization';
 import EntityService from '@/services/EntityService';
 import router from '@/router';
+import type { Organization, OrganizationPage } from '@/model/Organization';
+import POFService from '@/services/POFService';
+import { POF, POFPage } from '@/model/POF';
 
-export const useOrgStore = defineStore('orgStore', () => {
+export const usePopStore = defineStore('popStore', () => {
 
-  const page = ref<OrganizationPage>(new OrganizationPage());
-  const entityService = new EntityService<Organization, OrganizationPage>("organizations");
+  const page = ref<POFPage>(new POFPage());
+  const entityService = new POFService("point-of-presences");
   const serviceRequest = reactive<ServiceRequest>(entityService.getServiceRequest());
+  const orgService = new EntityService<Organization, OrganizationPage>("organizations")
 
   const pageRequest = reactive<PageRequest>(new PageRequest(0, 20, "shortName"));
-  const entities = computed<Array<Organization>>(() => page.value.content);
-  const org = ref<Organization>(new Organization());
+  const entities = computed<Array<POF>>(() => page.value.content);
+  const entity = ref<POF>(new POF());
+
+  const orgList = ref<Array<Organization>>(new Array);
 
   const pageSizeList = [
     new SelectOption(10, 10),
@@ -27,11 +32,11 @@ export const useOrgStore = defineStore('orgStore', () => {
   ]
 
   const addEntity = async () => {
-    router.push({ path: "/admin/organizations/add" })
+    router.push({ path: "/admin/point-of-presences/add" })
   }
 
   const search = async () => {
-    console.log("Search ...");
+    fetchEntities()
   }
 
   const setSearchText = async (searchText: string = "") => {
@@ -82,11 +87,11 @@ export const useOrgStore = defineStore('orgStore', () => {
 
   const cardFunction = computed<CardFunction>(() => {
     return new CardFunction(
-      org.value.id,
+      entity.value.id,
       saveEntity,
       deleteEntity,
       () => {
-        router.push({ name: "Organizations" })
+        router.push({ name: "PointOfPresences" })
       }
     )
   })
@@ -99,63 +104,73 @@ export const useOrgStore = defineStore('orgStore', () => {
     })
   }
 
-  //Current Store
-
 
   function setAdd(val: Boolean = true) {
     serviceRequest.add(val)
     if (serviceRequest.isAdd()) {
-      org.value = new Organization();
+      entity.value = new POF();
     }
   }
 
   async function fetchEntity(id: Number = -1) {
     await entityService.getEntity(id).then(response => {
-      org.value = response
+      entity.value = response
     }).catch(err => {
       console.log(err.response.data);
     })
   }
 
   async function saveEntity() {
+    console.log("save");
+    
     let flag = false;
     if (serviceRequest.isAdd()) {
-      await entityService.addEntity(org.value).then(response => {
-        org.value = response
+      await entityService.addEntity(entity.value).then(response => {
+        entity.value = response
         flag = true;
       })
     } else {
-      await entityService.updateEntity(org.value).then(response => {
-        org.value = response
+      await entityService.updateEntity(entity.value).then(response => {
+        entity.value = response
         flag = true;
       })
     }
     if (flag) {
       await fetchEntities();
-      router.push({ name: 'Organizations' })
+      router.push({ name: 'PointOfPresences' })
     }
   }
 
   async function deleteEntity(id: number = -1) {
     await entityService.deleteEntity(id).then(async () => {
       await fetchEntities();
-      router.push({ name: "Organizations" })
+      router.push({ name: 'PointOfPresences' })
     }).catch(err => {
       console.log(err.response.data);
     })
+  }
+
+  async function fetchAllOrgs() {
+    if (orgList.value.length == 0) {
+      await orgService.getAllEntities().then(response => {
+        orgList.value = response;
+      })
+    }
   }
 
   return {
     cardData,
     cardFunction,
     entities,
-    org,
+    entity,
     serviceRequest,
+    orgList,
     fetchEntities,
     setAdd,
     fetchEntity,
     saveEntity,
     deleteEntity,
+    fetchAllOrgs,
   }
 
 })

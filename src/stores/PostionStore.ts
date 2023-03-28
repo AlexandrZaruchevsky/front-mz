@@ -30,9 +30,9 @@ export const usePositionStore = defineStore('positionStore', () => {
     })
   }
 
-  function orgsClear() {
-    orgs.value = new Array();
-  }
+  // function orgsClear() {
+  //   orgs.value = new Array();
+  // }
 
   async function fetchPositions() {
     await positionService.getEntities(pageRequest).then(response => {

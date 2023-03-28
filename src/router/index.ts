@@ -25,7 +25,7 @@ const router = createRouter({
     },
     {
       path: '/admin',
-      redirect: to => {
+      redirect: () => {
         return {name:"Organizations"}
       }
     },

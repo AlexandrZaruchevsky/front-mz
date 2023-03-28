@@ -114,7 +114,7 @@ export const useDepartmentStore = defineStore('departmentStore', () => {
     if (orgId > 0 && !dep.value.topLevel) {
       await depService.getAllDepsByOrg(orgId).then(response => {
         depList.value = [...response]
-      }).catch(err => {
+      }).catch(() => {
         depList.value = []
       })
     } else {

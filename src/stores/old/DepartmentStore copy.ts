@@ -33,19 +33,19 @@ export const useDepartmentStore = defineStore('departmentStore', () => {
   //   )
   // });
 
-  const next = async () => {
-    if(!depPageV1.value.last){
-      pageRequest.pageCurrent += 1;
-      await fetchDepartments();
-    }
-  }
+  // const next = async () => {
+  //   if(!depPageV1.value.last){
+  //     pageRequest.pageCurrent += 1;
+  //     await fetchDepartments();
+  //   }
+  // }
 
-  const previos = async () => {
-    if(!depPageV1.value.first){
-      pageRequest.pageCurrent -= 1;
-      await fetchDepartments();
-    }
-  }
+  // const previos = async () => {
+  //   if(!depPageV1.value.first){
+  //     pageRequest.pageCurrent -= 1;
+  //     await fetchDepartments();
+  //   }
+  // }
 
   const organizationService = new EntityService<Organization, OrganizationPage>("organizations");
 
@@ -111,14 +111,14 @@ export const useDepartmentStore = defineStore('departmentStore', () => {
     }
   }
 
-  async function deleteDepartment(id: Number) {
-    await depService.deleteEntity(id).then(async () => {
-      await fetchDepartments();
-      router.push({ name: 'Departments' })
-    }).catch(err => {
-      console.log(err.response.data);
-    })
-  }
+  // async function deleteDepartment(id: Number) {
+  //   await depService.deleteEntity(id).then(async () => {
+  //     await fetchDepartments();
+  //     router.push({ name: 'Departments' })
+  //   }).catch(err => {
+  //     console.log(err.response.data);
+  //   })
+  // }
 
   return {
     orgs,

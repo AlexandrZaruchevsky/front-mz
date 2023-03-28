@@ -7,7 +7,7 @@
 </template>
 
 <script lang="ts">
-import { computed, onMounted } from "@vue/runtime-core";
+import { computed, onMounted } from "vue";
 import { useRoute } from "vue-router";
 import { useAuthStore } from "./stores/AuthStore";
 

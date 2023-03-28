@@ -13,6 +13,7 @@
           <div></div>
           <div 
             v-for="org in orgs" 
+            :key="org.id"
             class="flex flex-row items-center border-b hover:cursor-pointer bg-teal-800 bg-opacity-0 hover:bg-opacity-10"
             @click="gotoOrg(org.id)"
           >

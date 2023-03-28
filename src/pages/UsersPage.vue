@@ -11,7 +11,9 @@
             />
           </div>
           <div class="flex flex-col w-full">
-            <div v-for="user in users"
+            <div 
+              v-for="user in users"
+              :key="user.id"
               class="row flex w-full hover:bg-teal-900 border-b hover:bg-opacity-20 hover:cursor-pointer"
               @click="gotoUser(user.id)"
             >

@@ -8,7 +8,7 @@
       </div>
     </div>
     <div style="min-height: 200px; max-height: 200px;" class=" flex flex-col ">
-      
+
       <div v-if="getItem('boss')?.visible" class="flex flex-row gap-2 p-2">
         <span>
           Руководитель:
@@ -17,21 +17,21 @@
           {{ org?.boss?.lastName }} {{ org?.boss?.firstName }} {{ org?.boss?.middleName }}
         </strong>
       </div>
-      
+
       <div v-if="getItem('deps')?.visible" class="p-2 h-full overflow-y-auto flex flex-col gap-1">
-        <div v-for="dep in org?.departments" class="border-b-2 py-1 border-dotted">
+        <div v-for="dep in org?.departments" class="border-b-2 py-1 border-dotted" :key="dep.id">
           {{ dep.name }}
         </div>
       </div>
 
       <div v-if="getItem('pops')?.visible" class="p-2 h-full overflow-y-auto flex flex-col gap-1">
-        <div v-for="pop in org?.pofs" class="border-b-2 py-1 border-dotted">
+        <div v-for="pop in org?.pofs" class="border-b-2 py-1 border-dotted" :key="pop.id">
           {{ pop.shortName }}
         </div>
       </div>
 
       <div v-if="getItem('poss')?.visible" class="p-2 h-full overflow-y-auto flex flex-col gap-1">
-        <div v-for="pos in org?.positions" class="border-b-2 py-1 border-dotted">
+        <div v-for="pos in org?.positions" class="border-b-2 py-1 border-dotted" :key="pos.id">
           {{ pos.name }}
         </div>
       </div>
@@ -73,7 +73,7 @@ const menu = ref<Array<IMenu>>([
   },
 ]);
 
-const getItem = (name:string)=>{
+const getItem = (name: string) => {
   return menu.value.filter(item => item.name == name)[0]
 }
 
@@ -86,5 +86,7 @@ const itemClick = (name: string) => {
 defineProps({
   org: Object as PropType<Organization>
 })
+
+// const organizations = compute
 
 </script>

@@ -1,54 +1,58 @@
 <template>
   <overlay-z>
-    <card-default :header="header" class="border w-1/2">
-      <template v-slot:body>
-        <form @submit.prevent="saveDepartment">
-          <div class="flex flex-col gap-2">
+    <card-entity 
+      :header="header" 
+      class="w-1/2"
+      editable 
+      :cardFunc="cardFunction"
+    >
+      <template #body>
+        <form @submit.prevent="saveEntity">
+          <div class="flex flex-col gap-1">
             <div class="p-2 flex justify-between">
-              <select class="py-1 px-2 bg-white rounded w-full border-b-2" v-model="dep.orgId">
+              <select class="py-1 px-2 bg-white rounded w-full border-b-2" v-model="entity.orgId">
                 <option value="-1"></option>
                 <option v-for="org in orgList" :value="org.id" :key="org.id">{{ org.shortName }}</option>
               </select>
             </div>
-            <input-with-label class="p-2" label="Наименование:" :inP="dep.name" v-model="dep.name" />
+            <div class="p-2">
+              <input-default class="p-2" :inP="entity.name" v-model="entity.name" />
+            </div>
             <div class="p-2 flex gap-2 py-0.5">
               <label class="w-1/4">Top Level</label>
-              <input type="checkbox" v-model="dep.topLevel" />
+              <input type="checkbox" v-model="entity.topLevel" />
             </div>
-            <div class="p-2 flex justify-between" v-if="!dep.topLevel">
-              <select class="py-1 px-2 border-b-2 w-full bg-white rounded" v-model="dep.parentId">
+            <div class="p-2 flex justify-between" v-if="!entity.topLevel">
+              <select class="py-1 px-2 border-b-2 w-full bg-white rounded" v-model="entity.parentId">
                 <option value="-1"></option>
                 <option v-for="dep in depList" :value="dep.id" :key="dep.id">{{ dep.name }}</option>
               </select>
             </div>
           </div>
-          <div class="buttons flex justify-between mt-4">
-            <button-z-v1 class="bg-blue-700" title="Save" />
-            <button-link to="/admin/departments" title="Cancel" />
-          </div>
         </form>
       </template>
-    </card-default>
+    </card-entity>
   </overlay-z>
 </template>
 
 <script setup lang="ts">
+
 import router from '@/router';
-import { useDepartmentStore } from '@/stores/DepartmentStore'
+import { useDepStore } from '@/stores/DepStore';
 import { storeToRefs } from 'pinia';
 import { computed } from 'vue';
 import { useRoute } from 'vue-router';
+
+const { serviceRequest, entity, orgList, depList, cardFunction } = storeToRefs(useDepStore());
+const { fetchEntity, fetchAllOrgs, setAdd, saveEntity } = useDepStore();
 
 const header = computed(() => {
   return serviceRequest.value.isAdd() ? "Department | Add" : "Department | Update"
 })
 
-const route = useRoute();
-
-const { orgList, dep, depList, serviceRequest } = storeToRefs(useDepartmentStore())
-const { fetchAllOrgs, setAdd, fetchDepartment, saveDepartment } = useDepartmentStore();
-
 fetchAllOrgs();
+
+const route = useRoute()
 
 const paramId = route.params.id as string;
 
@@ -62,7 +66,7 @@ if (!parseInt(paramId)) {
 }
 else {
   setAdd(false);
-  fetchDepartment(parseInt(paramId));
+  fetchEntity(parseInt(paramId));
 }
 
 </script>

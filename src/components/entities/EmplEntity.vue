@@ -57,7 +57,7 @@
 import type { Employee } from '@/model/Employee';
 import type { PropType } from 'vue';
 
-const props = defineProps({
+defineProps({
   empl: Object as PropType<Employee>
 })
 

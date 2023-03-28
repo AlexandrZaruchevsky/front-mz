@@ -17,13 +17,13 @@
                 <div class="p-2 flex justify-between">
                   <select class="py-1 px-2 bg-white rounded" v-model="roleId">
                     <option value="-1"></option>
-                    <option v-for="role in roles" :value="role.id">{{ role.name }}</option>
+                    <option v-for="role in roles" :value="role.id" :key="role.id">{{ role.name }}</option>
                   </select>
                   <button-z title="Add Role" @click="addRoleLocal(currentRole)" />
                   <!-- <button-z title="Add Role" @click="addRole" /> -->
                 </div>
                 <div class="flex flex-col gap-2 p-4">
-                  <div v-for="role in userRoles" class="flex justify-between">
+                  <div v-for="role in userRoles" :key="role.id" class="flex justify-between">
                     <span class="underline underline-offset-4">
                       {{ role.name }}
                     </span>
@@ -58,12 +58,15 @@ const route = useRoute();
 const { user, isAdd } = storeToRefs(useUserStore());
 const { fetchUser, setAdd, addRoleLocal, deleteRoleLocal, saveUser } = useUserStore();
 
-const userRoles = computed<Array<Role>>(() => user.value.roles
-  .sort((a, b) => {
-    if (a.name > b.name) return 1
-    if (a.name < b.name) return -1
-    return 0
-  })
+const userRoles = computed<Array<Role>>(() => {
+  return [...user.value.roles
+    .sort((a, b) => {
+      if (a.name > b.name) {
+        return 1
+      } else if (a.name < b.name) return -1
+      return 0
+    })]
+}
 )
 
 const { roles } = storeToRefs(useRoleStore());
@@ -88,9 +91,9 @@ else {
   fetchUser(parseInt(paramId));
 }
 
-const addRole = () => {
-  addRoleLocal(currentRole.value);
-}
+// const addRole = () => {
+//   addRoleLocal(currentRole.value);
+// }
 
 watch(roleId, () => {
   currentRole.value = roles.value.filter(r => r.id === roleId.value)[0];

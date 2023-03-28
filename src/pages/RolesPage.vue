@@ -10,7 +10,7 @@
             />
           </div>
           <div class="flex flex-col gap-2">
-            <div v-for="role in roles"
+            <div v-for="role in roles" :key="role.id"
               class="bg-teal-800 bg-opacity-10 px-2 py-1.5 hover:bg-opacity-70 hover:text-white hover:cursor-pointer flex justify-between items-center">
               <span>
                 {{ role.name }}

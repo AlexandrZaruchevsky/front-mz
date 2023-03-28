@@ -5,7 +5,7 @@
       <button-z v-if="editable" title="add" class="bg-green-600" @click="addEntity" />
       <div v-if="searchable" class="flex items-end gap-2 w-full">
         <select class="select-z" v-model="selectedSort" @change="changeSort">
-          <option v-for="opt in cardData.sortOptions" :value="opt.key">{{ opt.value }}</option>
+          <option v-for="opt in cardData.sortOptions" :value="opt.key" :key="opt.key">{{ opt.value }}</option>
         </select>
         <input type="text" v-model="searchText" @input="setSearch" @keyup.enter="search" />
       </div>
@@ -15,7 +15,7 @@
     </div>
     <div class="tool-pagination border-t" v-if="navigation">
       <select class="select-z" v-model="selectedPageSize" @change="changePageSize">
-        <option v-for="opt in cardData.pageSizeOptions" :value="opt.key">{{ opt.value }}</option>
+        <option v-for="opt in cardData.pageSizeOptions" :value="opt.key" :key="opt.key">{{ opt.value }}</option>
       </select>
       <div class="flex gap-2">
         <button-z-v1 @click="previos" title="Previos" class="btn bg-slate-600" :disabled="cardData.page.first" />
@@ -128,7 +128,7 @@ export default {
   @apply bg-white rounded-lg shadow-xl flex flex-col text-slate-800;
 
   .card-header {
-    @apply p-2 border-b text-xl font-semibold bg-slate-600 rounded-t-lg bg-opacity-80 text-slate-100;
+    @apply p-2 border-b text-xl font-semibold bg-slate-700 rounded-t-lg bg-opacity-80 text-slate-100;
   }
 
   .card-body {
@@ -153,7 +153,7 @@ export default {
 }
 
 input {
-  @apply w-full px-2 py-1 border-b focus:outline-none;
+  @apply w-full px-2 py-1 border-b-2 focus:outline-none focus:border-b-slate-600;
 }
 </style>
   

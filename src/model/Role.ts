@@ -2,9 +2,9 @@ import { Page } from "./Page";
 
 export class Role {
   constructor(
-    public id: Number = -1,
-    public name: String = "",
-    public permissions: String[] = new Array<String>()
+    public id: number = -1,
+    public name: string = "",
+    public permissions: string[] = new Array<string>()
   ) { }
 }
 

@@ -3,20 +3,20 @@ import type { Role } from "./Role";
 
 export class LoginPassword {
   constructor(
-    public username: String = "",
-    public password: String = ""
+    public username: string = "",
+    public password: string = ""
   ) { }
 }
 
 export class User {
   constructor(
-    public id: Number = 0,
-    public username: String = "",
-    public password: String = "",
-    public lastName: String = "",
-    public firstName: String = "",
-    public middleName: String = "",
-    public email: String = "",
+    public id: number = 0,
+    public username: string = "",
+    public password: string = "",
+    public lastName: string = "",
+    public firstName: string = "",
+    public middleName: string = "",
+    public email: string = "",
     public roles: Role[] = new Array<Role>()
   ) { }
 }

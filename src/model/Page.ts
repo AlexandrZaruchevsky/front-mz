@@ -1,4 +1,3 @@
-import type { ComputedRef } from "vue";
 
 export class PageRequest {
   constructor(

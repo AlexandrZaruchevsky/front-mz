@@ -78,7 +78,7 @@ export default class CrudService<T, K extends Page>{
     }).then(response => {
       this.serviceRequest.end();
       return response.data
-    }).catch(err => {
+    }).catch(() => {
       this.serviceRequest.error("Error ADD Entity")
     })
   }
@@ -92,7 +92,7 @@ export default class CrudService<T, K extends Page>{
     }).then(response => {
       this.serviceRequest.end();
       return response.data
-    }).catch(err => {
+    }).catch(() => {
       this.serviceRequest.error("Error UPDATE Entity")
     })
   }

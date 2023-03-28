@@ -13,6 +13,7 @@
                   <option value="-1"></option>
                   <option 
                     v-for="org in orgs"
+                    :key="org.id"
                     :value="org.id"
                   >
                     {{ org.shortName }}

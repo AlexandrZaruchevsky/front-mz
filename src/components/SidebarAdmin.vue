@@ -37,7 +37,7 @@ const { shortFIO } = storeToRefs(useAuthStore())
 }
 
 .sidebar-header {
-  @apply text-2xl font-bold py-2 px-4 text-teal-800 bg-white shadow-lg mb-4;
+  @apply text-2xl font-bold py-2 px-4 text-slate-800 bg-white shadow-lg mb-4;
 }
 
 .menu {
@@ -45,7 +45,7 @@ const { shortFIO } = storeToRefs(useAuthStore())
 }
 
 .menu-item {
-  @apply bg-teal-800 px-2 py-1 rounded bg-opacity-20 text-center whitespace-nowrap;
+  @apply bg-slate-600 px-2 py-1 rounded bg-opacity-20 text-center whitespace-nowrap;
 }
 
 .menu-item:hover {

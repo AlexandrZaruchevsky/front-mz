@@ -50,7 +50,7 @@ export const useEmployeeStore = defineStore('employeeStore', () => {
       empl.value = response;
       if (empl.value.depId > 0) {
         await depService.getEntity(empl.value.depId).then((response) => {
-          let dep = response
+          const dep = response
           orgId.value = dep.orgId;
         })
       }

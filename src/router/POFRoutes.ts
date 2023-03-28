@@ -2,7 +2,7 @@ export default [
   {
     path: '/admin/point-of-presences',
     name: 'PointOfPresences',
-    component: () => import("@/pages/POFsPage.vue"),
+    component: () => import("@/pages/POPsPage.vue"),
     meta: {
       layout: "admin-layout",
       authRequired: true
@@ -10,7 +10,7 @@ export default [
     children: [
       {
         path: ':id',
-        component: () => import("@/pages/POFPage.vue"),
+        component: () => import("@/pages/POPPage.vue"),
         meta: {
           authRequired: true
         }

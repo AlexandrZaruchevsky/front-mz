@@ -53,7 +53,7 @@ export const useAuthStore = defineStore('authStore', () => {
       userAuth.value.user = { ...response }
       isLoaded.value = false;
       errorMessage.value = "";
-    }).catch(err => {
+    }).catch(() => {
       isAuthError.value = true;
       errorMessage.value = "Invalidate token";
       logoutWithGoHome();
@@ -74,7 +74,7 @@ export const useAuthStore = defineStore('authStore', () => {
   }
 
   function saveToLocalStorage() {
-    if (isAuth) {
+    if (isAuth.value) {
       localStorage.setItem("user", JSON.stringify(userAuth.value));
       localStorage.setItem("isAuth", isAuth.value ? "true" : "false");
     }
@@ -83,7 +83,7 @@ export const useAuthStore = defineStore('authStore', () => {
   function loadFromLocalStorage() {
     const auth = localStorage.getItem("isAuth");
     const user = localStorage.getItem("user");
-    if (isAuth && user) {
+    if (isAuth.value && user) {
       isAuth.value = auth == "true" ? true : false;
       userAuth.value = JSON.parse(user);
     }
