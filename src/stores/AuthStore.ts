@@ -83,7 +83,7 @@ export const useAuthStore = defineStore('authStore', () => {
   function loadFromLocalStorage() {
     const auth = localStorage.getItem("isAuth");
     const user = localStorage.getItem("user");
-    if (isAuth.value && user) {
+    if (auth && user) {
       isAuth.value = auth == "true" ? true : false;
       userAuth.value = JSON.parse(user);
     }

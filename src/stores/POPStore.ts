@@ -121,8 +121,6 @@ export const usePopStore = defineStore('popStore', () => {
   }
 
   async function saveEntity() {
-    console.log("save");
-    
     let flag = false;
     if (serviceRequest.isAdd()) {
       await entityService.addEntity(entity.value).then(response => {
