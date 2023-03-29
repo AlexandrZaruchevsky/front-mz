@@ -7,8 +7,9 @@
         </router-link>
       </div>
       <div class="menu">
-        <router-link v-for="item in menu" :key="item.id" class="menu-item" :class="isActive(item.id)?'menu-item-active':'menu-item-not-active'" :to="item.link"
-          @click="clickItem(item.id)">
+        <router-link v-for="item in menu" :key="item.id" class="menu-item"
+          :class="isActive(item.id) ? 'menu-item-active' : 'menu-item-not-active'" :to="item.link"
+          >
           {{ item.title }}
         </router-link>
       </div>
@@ -18,84 +19,17 @@
 </template>
 
 <script setup lang="ts">
+
 import { useAuthStore } from '@/stores/AuthStore';
 import { storeToRefs } from 'pinia';
-import { ref, watch } from 'vue';
-
-interface IMenuLink {
-  id: number,
-  link: string,
-  title: string,
-  active: boolean
-}
-
-const menu = ref<Array<IMenuLink>>([
-  {
-    id: 0,
-    link: "/admin/organizations",
-    title: "Organizations",
-    active: true
-  },
-  {
-    id: 1,
-    link: "/admin/departments",
-    title: "Departments",
-    active: false
-  },
-  {
-    id: 2,
-    link: "/admin/point-of-presences",
-    title: "Point of presence",
-    active: false
-  },
-  {
-    id: 3,
-    link: "/admin/positions",
-    title: "Positions",
-    active: false
-  },
-  {
-    id: 4,
-    link: "/admin/employees",
-    title: "Employees",
-    active: false
-  },
-  {
-    id: 5,
-    link: "/admin/users",
-    title: "Users",
-    active: false
-  },
-  {
-    id: 6,
-    link: "/admin/roles",
-    title: "Roles",
-    active: false
-  },
-  {
-    id: 7,
-    link: "/admin/upload",
-    title: "Upload",
-    active: false
-  }
-])
+import { useMenuStore } from '@/stores/MenuStore';
 
 const title = import.meta.env.VITE_APP_NAME
+
+const { menu } = storeToRefs(useMenuStore());
 const { shortFIO } = storeToRefs(useAuthStore())
 
-const currentItem = ref<number>(0);
-
-const clickItem = (id: number) => {
-  currentItem.value = id
-}
-
 const isActive = (id: number) => menu.value.filter(item => item.id == id)[0]?.active
-
-watch(currentItem, () => {
-  menu.value.forEach(item => item.active = false)
-  menu.value.filter(item => item.id == currentItem.value)
-    .forEach(item => item.active = true)
-})
 
 </script>
 
@@ -114,14 +48,14 @@ watch(currentItem, () => {
 }
 
 .menu-item {
-  @apply px-2 py-1 rounded  text-center whitespace-nowrap;
+  @apply px-2 py-1 rounded text-center whitespace-nowrap;
 }
 
 .menu-item-active {
   @apply bg-slate-500 text-white;
 }
 
-.menu-item-not-active{
+.menu-item-not-active {
   @apply bg-slate-400 bg-opacity-20;
 }
 
