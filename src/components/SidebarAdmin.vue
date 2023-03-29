@@ -7,8 +7,8 @@
         </router-link>
       </div>
       <div class="menu">
-        <router-link v-for="item in menu" :key="item.id" class="menu-item"
-          :class="isActive(item.id) ? 'menu-item-active' : 'menu-item-not-active'" :to="item.link"
+        <router-link v-for="item in settingMenu" :key="item.id" class="menu-item"
+          :class="item.active ? 'menu-item-active' : 'menu-item-not-active'" :to="item.link"
           >
           {{ item.title }}
         </router-link>
@@ -26,10 +26,8 @@ import { useMenuStore } from '@/stores/MenuStore';
 
 const title = import.meta.env.VITE_APP_NAME
 
-const { menu } = storeToRefs(useMenuStore());
+const { settingMenu } = storeToRefs(useMenuStore());
 const { shortFIO } = storeToRefs(useAuthStore())
-
-const isActive = (id: number) => menu.value.filter(item => item.id == id)[0]?.active
 
 </script>
 

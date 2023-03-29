@@ -16,6 +16,8 @@ export const useAuthStore = defineStore('authStore', () => {
       : "NoName"
   })
 
+  const isAdmin = computed<boolean>(() => user.value.roles.filter(role => role.name.includes("ADMIN")).length > 0)
+
   const isAuthError = ref<Boolean>(false);
   const errorMessage = ref<String>("");
 
@@ -44,7 +46,7 @@ export const useAuthStore = defineStore('authStore', () => {
   }
 
   async function validateToken() {
-    if (!isAuth.value){
+    if (!isAuth.value) {
       return
     }
     isLoaded.value = true;
@@ -64,6 +66,7 @@ export const useAuthStore = defineStore('authStore', () => {
     userAuth.value = new UserAuth();
     isAuth.value = false;
     clearLocalStorage()
+    router.push({path:"/"})
   }
 
   function logoutWithGoHome() {
@@ -106,6 +109,7 @@ export const useAuthStore = defineStore('authStore', () => {
     isAuthError,
     errorMessage,
     isLoaded,
+    isAdmin,
     init,
     login,
     logout,

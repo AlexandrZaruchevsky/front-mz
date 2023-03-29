@@ -49,6 +49,7 @@ export const useEmplStore = defineStore('emplStore', () => {
   }
 
   const search = async () => {
+    pageRequest.pageCurrent = 0;
     fetchEntities()
   }
 
@@ -175,7 +176,7 @@ export const useEmplStore = defineStore('emplStore', () => {
   }
 
   async function fetchOrgById(orgId: number) {
-    await orgService.getEntity(orgId).then(resp=>{
+    await orgService.getEntity(orgId).then(resp => {
       org.value = resp
     })
   }

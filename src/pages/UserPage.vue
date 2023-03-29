@@ -59,7 +59,8 @@ const { user, isAdd } = storeToRefs(useUserStore());
 const { fetchUser, setAdd, addRoleLocal, deleteRoleLocal, saveUser } = useUserStore();
 
 const userRoles = computed<Array<Role>>(() => {
-  return [...user.value.roles
+  const arr = [...user.value.roles]
+  return [...arr
     .sort((a, b) => {
       if (a.name > b.name) {
         return 1

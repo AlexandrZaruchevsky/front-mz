@@ -32,7 +32,7 @@ const {isLoaded, isAuthError, errorMessage} = storeToRefs(authStore);
 
 const { login } = authStore;
 
-const loginPassword: LoginPassword = reactive(new LoginPassword("admin", "12345678"));
+const loginPassword: LoginPassword = reactive(new LoginPassword("", ""));
 
 const loginIn = () => {
   login(loginPassword);
