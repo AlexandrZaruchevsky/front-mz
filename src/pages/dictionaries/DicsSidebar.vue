@@ -14,7 +14,7 @@
         </router-link>
       </div>
     </div>
-    <div class="px-2 py-1 border-t border-slate-600">Footer</div>
+    <!-- <div class="px-2 py-1 border-t border-slate-600">Footer</div> -->
   </div>
 </template>
 

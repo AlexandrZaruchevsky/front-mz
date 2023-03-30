@@ -1,13 +1,18 @@
 <template>
   <div class="card">
     <div class="card-header" v-if="header">{{ header }}</div>
-    <div class="tool-buttons">
-      <button-z v-if="editable" title="add" class="bg-green-600" @click="addEntity" />
-      <div v-if="searchable" class="flex items-end gap-2 w-full">
-        <select class="select-z" v-model="selectedSort" @change="changeSort">
-          <option v-for="opt in cardData.sortOptions" :value="opt.key" :key="opt.key">{{ opt.value }}</option>
-        </select>
-        <input type="text" v-model="searchText" @input="setSearch" @keyup.enter="search" />
+    <div class="flex flex-col">
+      <div>
+        <slot name="tool-additional" />
+      </div>
+      <div class="tool-buttons">
+        <button-z v-if="editable" title="add" class="bg-green-600" @click="addEntity" />
+        <div v-if="searchable" class="flex items-end gap-2 w-full">
+          <select class="select-z" v-model="selectedSort" @change="changeSort">
+            <option v-for="opt in cardData.sortOptions" :value="opt.key" :key="opt.key">{{ opt.value }}</option>
+          </select>
+          <input type="text" v-model="searchText" @input="setSearch" @keyup.enter="search" />
+        </div>
       </div>
     </div>
     <div class="card-body">
@@ -70,7 +75,7 @@ export default {
     const selectedPageSize = ref(props.cardData.pageRequest.pageSize);
     const selectedSort = ref<string>(props.cardData.pageRequest.sortBy);
     const searchText = ref<string>(props.cardData.pageRequest.search);
-    const currentPage = computed<number>(() => props.cardData.page.number + 1)
+    const currentPage = computed<number>(() => props.cardData.page.empty ? 0 : props.cardData.page.number + 1)
 
     const addEntity = () => {
       props.cardData.addEntity()

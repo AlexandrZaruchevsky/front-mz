@@ -1,19 +1,25 @@
-import { EquipType } from "@/model/EquipType"
+import { EquipModel } from "@/model/EquipModel"
+import type { EquipType } from "@/model/EquipType"
 import { CardData, CardFunction, PageGen, PageRequest, SelectOption } from "@/model/Page"
 import type { ServiceRequest } from "@/model/ServiceRequest"
 import router from "@/router"
 import EntityServiceV1 from "@/services/EntityServiceV1"
 import { defineStore } from "pinia"
-import { computed, reactive, ref } from "vue"
+import { computed, reactive, ref, watch } from "vue"
 
-export const useEquipTypeStore = defineStore('equipTypeStore', () => {
-  const page = ref<PageGen<EquipType>>(new PageGen<EquipType>())
-  const entities = computed<Array<EquipType>>(() => page.value.content)
-  const entity = ref<EquipType>(new EquipType);
-  const entityService = new EntityServiceV1<EquipType, PageGen<EquipType>>("equip-types");
+export const useEquipModelStore = defineStore('equipModelStore', () => {
+  const page = ref<PageGen<EquipModel>>(new PageGen<EquipModel>())
+  const entities = computed<Array<EquipModel>>(() => page.value.content)
+  const entity = ref<EquipModel>(new EquipModel());
+  const entityService = new EntityServiceV1<EquipModel, PageGen<EquipModel>>("equip-models");
 
   const serviceRequest = reactive<ServiceRequest>(entityService.getServiceRequest());
   const pageRequest = reactive<PageRequest>(new PageRequest(0, 20, "name"));
+
+  const equipTypeService = new EntityServiceV1<EquipType, PageGen<EquipType>>("equip-types");
+  const equipTypeList = ref<Array<EquipType>>(new Array());
+
+  const currentEquipTypeId = computed<number>(()=>pageRequest.parentId);
 
   const pageSizeList = [
     new SelectOption(10, 10),
@@ -26,13 +32,13 @@ export const useEquipTypeStore = defineStore('equipTypeStore', () => {
   ]
 
   const addEntity = async () => {
-    router.push({ path: "#" })
-    router.push({ path: "/dictionaries/equip-types/add" })
+    router.push({ path: "/dictionaries/equip-models/add" });
+
   }
 
   const search = async () => {
     pageRequest.pageCurrent = 0;
-    fetchEntities()
+    fetchEntities();
   }
 
   const setSearchText = async (searchText: string = "") => {
@@ -93,18 +99,19 @@ export const useEquipTypeStore = defineStore('equipTypeStore', () => {
   })
 
   async function fetchEntities() {
-    await entityService.getEntities(pageRequest).then(response => {
-      page.value = response
+    await entityService.getEntities(pageRequest).then(async response => {
+      page.value = response;
+      await fetchtEquipTypes();
     }).catch(err => {
       console.log(err.response.data);
     })
   }
 
-
   function setAdd(val: Boolean = true) {
     serviceRequest.add(val)
     if (serviceRequest.isAdd()) {
-      entity.value = new EquipType();
+      entity.value = new EquipModel();
+      entity.value.equipTypeId = pageRequest.parentId >= 0 ? pageRequest.parentId : -1;
     }
   }
 
@@ -131,7 +138,7 @@ export const useEquipTypeStore = defineStore('equipTypeStore', () => {
     }
     if (flag) {
       await fetchEntities();
-      router.go(-1)
+      router.go(-1);
     }
   }
 
@@ -144,15 +151,30 @@ export const useEquipTypeStore = defineStore('equipTypeStore', () => {
     })
   }
 
+  async function fetchtEquipTypes() {
+    await equipTypeService.getAllEntities().then(response => {
+      equipTypeList.value = response
+    }).catch(err => {
+      console.log(err.response.data);
+    })
+  }
+
+  watch(currentEquipTypeId, async()=>{
+    await fetchEntities();
+  })
+
   return {
     entities,
     entity,
     cardData,
     cardFunction,
     serviceRequest,
+    equipTypeList,
+    pageRequest,
     setAdd,
     fetchEntities,
     fetchEntity,
-    saveEntity
+    saveEntity,
+    fetchtEquipTypes
   }
 })

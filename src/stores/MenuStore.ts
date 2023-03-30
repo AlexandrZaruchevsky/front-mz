@@ -25,7 +25,7 @@ export const useMenuStore = defineStore('menuStore', () => {
 
   const menuDicList = ref<Array<LinkItem>>([
     new LinkItem(0, "/dictionaries/equip-types", "EquipType", false, "all"),
-    new LinkItem(1, "/dictionaries/equip-model", "EquipModel", false, "all"),
+    new LinkItem(1, "/dictionaries/equip-models", "EquipModel", false, "all"),
   ])
 
   const path = computed<string>(() => useRoute().fullPath);

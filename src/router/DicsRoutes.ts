@@ -7,7 +7,7 @@ export default [
     }
   },
   {
-    path: "/dictionaries/equip-model",
+    path: "/dictionaries/equip-models",
     name: "EquipModels",
     components: {
       Sidebar:()=> import("@/pages/dictionaries/DicsSidebar.vue"),
@@ -17,6 +17,15 @@ export default [
       layout: "layout-z",
       authRequired: true
     },
+    children: [
+      {
+        path: ':id',
+        component: ()=> import("@/pages/dictionaries/EquipModelPage.vue"),
+        meta:{
+          authRequired: true
+        }
+      }
+    ]
   },{
     path: "/dictionaries/equip-types",
     name: "EquipTypes",

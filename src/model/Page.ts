@@ -6,7 +6,7 @@ export class PageRequest {
     public pageSize: number = 20,
     public sortBy: string = "",
     public search: string = "",
-    public parentId: Number = -1
+    public parentId: number = -1
   ) { }
 }
 
