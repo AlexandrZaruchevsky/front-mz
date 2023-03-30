@@ -1,6 +1,6 @@
 <template>
-  <overlay-z @click="$router.push(`/phone`)">
-    <card-entity header="Employee Detail" class="w-full lg:w-5/6 xl:w-8/12 2xl:w-1/2" @click.stop>
+  <overlay-z>
+    <card-entity header="Employee Detail" class="w-full lg:w-5/6 xl:w-8/12 2xl:w-1/2">
       <template #body>
         <form>
           <div class="flex flex-col gap-2 p-4">

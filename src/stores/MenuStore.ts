@@ -19,12 +19,20 @@ export const useMenuStore = defineStore('menuStore', () => {
 
   const mainMenuList = ref<Array<LinkItem>>([
     new LinkItem(0, "/admin", "Setting", false, "admin"),
-    new LinkItem(0, "/phone", "Phone", false, "all"),
+    new LinkItem(1, "/phone", "Phone", false, "all"),
+    new LinkItem(2, "/dictionaries", "Dictionaries", false, "all"),
+  ])
+
+  const menuDicList = ref<Array<LinkItem>>([
+    new LinkItem(0, "/dictionaries/equip-types", "EquipType", false, "all"),
+    new LinkItem(1, "/dictionaries/equip-model", "EquipModel", false, "all"),
   ])
 
   const path = computed<string>(() => useRoute().fullPath);
 
   const settingMenu = computed<Array<LinkItem>>(() => setItemLinkActive(sideBarAdminMenu.value));
+
+  const menuDics = computed<Array<LinkItem>>(() => setItemLinkActive(menuDicList.value));
 
   const mainMenu = computed<Array<LinkItem>>(() => {
     if(useAuthStore().isAuth){
@@ -57,7 +65,8 @@ export const useMenuStore = defineStore('menuStore', () => {
 
   return {
     settingMenu,
-    mainMenu
+    mainMenu,
+    menuDics
   }
 
 })

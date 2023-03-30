@@ -1,3 +1,4 @@
+import type { Entity } from "./Entity";
 
 export class PageRequest {
   constructor(
@@ -41,6 +42,14 @@ export class Page {
     public totalElements: number = 0,
     public totalPages: number = 0
   ) { }
+}
+
+export class PageGen<T extends Entity> extends Page{
+  constructor(
+    public content:Array<T> = new Array()
+  ){
+    super();
+  }
 }
 
 export class SelectOption {

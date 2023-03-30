@@ -1,6 +1,6 @@
 <template>
   <div class="card">
-    <div class="card-header">{{ header }}</div>
+    <div class="card-header" v-if="header">{{ header }}</div>
     <div class="tool-buttons">
       <button-z v-if="editable" title="add" class="bg-green-600" @click="addEntity" />
       <div v-if="searchable" class="flex items-end gap-2 w-full">
@@ -45,8 +45,8 @@ export default {
     },
     header: {
       type: String,
-      required: false,
-      default: "Header"
+      // required: false,
+      // default: "Header"
     },
     navigation: {
       type: [Boolean, String],

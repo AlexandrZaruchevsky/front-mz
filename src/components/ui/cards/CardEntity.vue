@@ -1,6 +1,13 @@
 <template>
-  <div class="card">
-    <div class="card-header">{{ header }}</div>
+  <div class="card" @click.stop>
+    <div class="card-header">
+      <div>
+        {{ header }}
+      </div>
+      <div class="text-base hover:underline hover:cursor-pointer" @click="$router.go(-1)">
+        close
+      </div>
+    </div>
     <div class="card-body">
       <slot name="body" />
     </div>
@@ -14,7 +21,7 @@
           <button-z-v1 @click="deleteEntity(cardFunc.id)" title="Delete" class="btn bg-red-500" />
         </div>
         <div class="flex flex-row gap-2">
-          <button-z-v1 @click="cancel" title="Cancel" class="btn bg-slate-600" />
+          <button-z-v1 @click="$router.go(-1)" title="Cancel" class="btn bg-slate-600" />
         </div>
       </div>
     </div>
@@ -49,12 +56,12 @@ export default {
 
     const saveEntity = () => props.cardFunc.saveEntity();
     const deleteEntity = (id:number=-1) => props.cardFunc.deleteEntity(id);
-    const cancel = () => props.cardFunc.cancel();
+    // const cancel = () => props.cardFunc.cancel();
 
     return {
       saveEntity,
       deleteEntity,
-      cancel
+      // cancel
     }
 
   }
@@ -70,7 +77,7 @@ export default {
   @apply bg-white rounded-lg shadow-xl flex flex-col text-slate-800;
 
   .card-header {
-    @apply p-2 border-b text-xl font-semibold bg-gray-600 rounded-t-lg bg-opacity-80 text-slate-100;
+    @apply flex flex-row items-center justify-between p-2 border-b text-xl font-semibold bg-gray-600 rounded-t-lg bg-opacity-80 text-slate-100;
   }
 
   .card-body {

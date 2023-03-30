@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="h-full">
     <component :is="layout">
       <RouterView />
     </component>
@@ -14,16 +14,18 @@ import { useAuthStore } from "./stores/AuthStore";
 import DefaultLayout from "./layouts/DefaultLayout.vue";
 import AuthLayout from "./layouts/AuthLayout.vue";
 import AdminLayout from "./layouts/AdminLayout.vue";
+import LayoutZ from "./layouts/LayoutZ.vue";
 
 export default {
   components: {
     DefaultLayout,
     AuthLayout,
-    AdminLayout
+    AdminLayout,
+    LayoutZ
   },
   setup() {
     const layout = computed(() => {
-      return useRoute().meta.layout;
+      return useRoute().meta.layout || "default-layout";
     });
     // const router = useRouter();
     

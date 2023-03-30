@@ -1,5 +1,5 @@
 <template>
-  <div class="">
+  <div class="h-full">
     <app-bar class="shadow-xl"/>
     <div class="content">
       <slot />
@@ -17,8 +17,8 @@ export default {
   
 <style lang="scss" scoped>
 .content {
-  height: calc(100vh - 48px);
-  @apply p-4 bg-teal-800 bg-opacity-5;
+  height: calc(100vh - 50px);
+  @apply p-4 bg-slate-800 bg-opacity-40;
 
 }
 </style>
