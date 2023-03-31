@@ -1,9 +1,9 @@
 import type { Entity } from "@/model/Entity";
-import { PageRequest, type Page } from "@/model/Page";
+import { PageRequest, type PageGen } from "@/model/Page";
 import { ServiceRequest } from "@/model/ServiceRequest";
 import http from './http-common';
 
-export default class CrudService<T extends Entity, K extends Page>{
+export default class EntityService<T extends Entity>{
   constructor(
     public url: String,
     private serviceRequest: ServiceRequest = new ServiceRequest(),
@@ -14,7 +14,7 @@ export default class CrudService<T extends Entity, K extends Page>{
     return this.serviceRequest;
   }
 
-  public async getEntities(pageRequest: PageRequest = new PageRequest()): Promise<K> {
+  public async getEntities(pageRequest: PageRequest = new PageRequest()): Promise<PageGen<T>> {
     this.serviceRequest.start();
     return await http.get(`${this.url}`, {
       params: pageRequest
