@@ -2,7 +2,7 @@ export default [
     {
       path: '/admin/departments',
       name: 'Departments',
-      component: () => import("@/pages/DepsPage.vue"),
+      component: () => import("@/pages/admin-page/DepsPage.vue"),
       meta: {
         layout: "admin-layout",
         authRequired: true
@@ -10,7 +10,7 @@ export default [
       children: [
         {
           path: ':id',
-          component: ()=> import("@/pages/DepPage.vue"),
+          component: ()=> import("@/pages/admin-page/DepPage.vue"),
           meta:{
             authRequired: true
           }

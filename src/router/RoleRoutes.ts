@@ -2,7 +2,7 @@ export default [
     {
       path: '/admin/roles',
       name: 'Roles',
-      component: () => import("@/pages/RolesPage.vue"),
+      component: () => import("@/pages/admin-page/RolesPage.vue"),
       meta: {
         layout: "admin-layout",
         authRequired: true

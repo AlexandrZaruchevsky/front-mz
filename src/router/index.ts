@@ -34,7 +34,7 @@ const router = createRouter({
     {
       path:'/admin/upload',
       name:'UploadPage',
-      component: ()=> import('@/pages/UploadPage.vue'),
+      component: ()=> import('@/pages/admin-page/UploadPage.vue'),
       meta:{
         layout: "admin-layout",
         authRequired: true

@@ -2,7 +2,7 @@ export default [
   {
     path: '/phone',
     name: 'Phone',
-    component: () => import("@/pages/PhonePage.vue"),
+    component: () => import("@/pages/user-page/PhonePage.vue"),
     meta: {
       layout: "default-layout",
       authRequired: true
@@ -10,7 +10,7 @@ export default [
     children: [
       {
         path: ':id',
-        component: () => import("@/pages/PhoneDetailPage.vue"),
+        component: () => import("@/pages/user-page/PhoneDetailPage.vue"),
         meta: {
           authRequired: true
         }

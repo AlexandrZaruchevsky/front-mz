@@ -2,8 +2,7 @@ export default [
     {
       path: '/admin/organizations',
       name: 'Organizations',
-      component: () => import("@/pages/OrgsPage.vue"),
-      // component: () => import("@/pages/OrganizationsPage.vue"),
+      component: () => import("@/pages/admin-page/OrgsPage.vue"),
       meta: {
         layout: "admin-layout",
         authRequired: true
@@ -11,8 +10,7 @@ export default [
       children: [
         {
           path: ':id',
-          component: ()=> import("@/pages/OrgPage.vue"),
-          // component: ()=> import("@/pages/OrganizationPage.vue"),
+          component: ()=> import("@/pages/admin-page/OrgPage.vue"),
           meta:{
             authRequired: true
           }
