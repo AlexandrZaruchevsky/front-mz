@@ -12,12 +12,12 @@ export const useEquipModelStore = defineStore('equipModelStore', () => {
   const page = ref<PageGen<EquipModel>>(new PageGen<EquipModel>())
   const entities = computed<Array<EquipModel>>(() => page.value.content)
   const entity = ref<EquipModel>(new EquipModel());
-  const entityService = new EntityServiceV1<EquipModel>("equip-models");
+  const entityService = new EntityServiceV1<EquipModel, PageRequest>("equip-models");
 
   const serviceRequest = reactive<ServiceRequest>(entityService.getServiceRequest());
   const pageRequest = reactive<PageRequest>(new PageRequest(0, 20, "name"));
 
-  const equipTypeService = new EntityServiceV1<EquipType>("equip-types");
+  const equipTypeService = new EntityServiceV1<EquipType, PageRequest>("equip-types");
   const equipTypeList = ref<Array<EquipType>>(new Array());
 
   const currentEquipTypeId = computed<number>(()=>pageRequest.parentId);

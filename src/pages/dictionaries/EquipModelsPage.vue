@@ -8,9 +8,9 @@
       editable 
       footer 
     >
-      <template #tool-additional>
-        <div class="p-2">
-          <select class="py-1 px-2 bg-white rounded w-full border-b-2" v-model="pageRequest.parentId">
+      <template #tool-buttons>
+        <div class="">
+          <select class="py-1 px-2 bg-white rounded w-full border" v-model="pageRequest.parentId">
             <option value="-1">Все типы оборудования</option>
             <option 
               v-for="opt in equipTypeList" 

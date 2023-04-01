@@ -10,7 +10,7 @@ export const useEquipTypeStore = defineStore('equipTypeStore', () => {
   const page = ref<PageGen<EquipType>>(new PageGen<EquipType>())
   const entities = computed<Array<EquipType>>(() => page.value.content)
   const entity = ref<EquipType>(new EquipType);
-  const entityService = new EntityServiceV1<EquipType, PageGen<EquipType>>("equip-types");
+  const entityService = new EntityServiceV1<EquipType, PageRequest>("equip-types");
 
   const serviceRequest = reactive<ServiceRequest>(entityService.getServiceRequest());
   const pageRequest = reactive<PageRequest>(new PageRequest(0, 20, "name"));

@@ -111,7 +111,7 @@ export default class TestServiceV1<T extends Entity>{
   }
 
   public getPage(): PageGen<T> {
-    return this.page.value
+    throw Error("")
   }
 
   public getEntities(): Array<T> {

@@ -10,6 +10,19 @@ export class PageRequest {
   ) { }
 }
 
+export class PageRequestEquip extends PageRequest {
+  constructor(
+    public pageCurrent: number = 0,
+    public pageSize: number = 20,
+    public sortBy: string = "",
+    public search: string = "",
+    public equipTypeId: number = -1,
+    public equipModelId: number = -1
+  ) {
+    super(pageCurrent, pageSize, sortBy, search);
+  }
+}
+
 export class Sort {
   constructor(
     public empty: Boolean = true,
@@ -44,10 +57,10 @@ export class Page {
   ) { }
 }
 
-export class PageGen<T extends Entity> extends Page{
+export class PageGen<T extends Entity> extends Page {
   constructor(
-    public content:Array<T> = new Array()
-  ){
+    public content: Array<T> = new Array()
+  ) {
     super();
   }
 }

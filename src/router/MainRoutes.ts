@@ -1,6 +1,6 @@
 export default [
   {
-    path: '/phone',
+    path: '/employees',
     name: 'Phone',
     component: () => import("@/pages/user-page/PhonePage.vue"),
     meta: {
@@ -17,4 +17,22 @@ export default [
       }
     ]
   },
+  {
+    path: '/equips',
+    name: 'Equips',
+    component: () => import("@/pages/user-page/EquipsPage.vue"),
+    meta: {
+      layout: "default-layout",
+      authRequired: true
+    },
+    children: [
+      {
+        path: ':id',
+        component: () => import("@/pages/user-page/EquipPage.vue"),
+        meta: {
+          authRequired: true
+        }
+      }
+    ]
+  }
 ]

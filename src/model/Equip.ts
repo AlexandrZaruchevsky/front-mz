@@ -1,4 +1,7 @@
+import type { Arm } from "./Arm";
 import { Entity } from "./Entity";
+import type { EquipModel } from "./EquipModel";
+import type { EquipType } from "./EquipType";
 
 export class Equip extends Entity {
   constructor(
@@ -17,4 +20,12 @@ export class Equip extends Entity {
   ) {
     super()
   }
+}
+
+export class EquipParents{
+  constructor(
+    public arms:Array<Arm> = new Array(),
+    public equipTypes:Array<EquipType> = new Array(),
+    public equipModels:Array<EquipModel> = new Array()
+  ){}
 }

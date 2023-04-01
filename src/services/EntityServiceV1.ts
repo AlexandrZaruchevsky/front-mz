@@ -3,7 +3,7 @@ import { PageRequest, type PageGen } from "@/model/Page";
 import { ServiceRequest } from "@/model/ServiceRequest";
 import http from './http-common';
 
-export default class EntityService<T extends Entity>{
+export default class EntityServiceV1<T extends Entity, K extends PageRequest>{
   constructor(
     public url: String,
     private serviceRequest: ServiceRequest = new ServiceRequest(),
@@ -14,7 +14,7 @@ export default class EntityService<T extends Entity>{
     return this.serviceRequest;
   }
 
-  public async getEntities(pageRequest: PageRequest = new PageRequest()): Promise<PageGen<T>> {
+  public async getEntities(pageRequest: PageRequest | K = new PageRequest()): Promise<PageGen<T>> {
     this.serviceRequest.start();
     return await http.get(`${this.url}`, {
       params: pageRequest

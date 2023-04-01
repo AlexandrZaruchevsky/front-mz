@@ -7,6 +7,7 @@
       </div>
       <div class="tool-buttons">
         <button-z v-if="editable" title="add" class="bg-green-600" @click="addEntity" />
+        <slot name="tool-buttons" />
         <div v-if="searchable" class="flex items-end gap-2 w-full">
           <select class="select-z" v-model="selectedSort" @change="changeSort">
             <option v-for="opt in cardData.sortOptions" :value="opt.key" :key="opt.key">{{ opt.value }}</option>
@@ -154,7 +155,7 @@ export default {
 }
 
 .select-z {
-  @apply px-2 py-1 border rounded bg-white
+  @apply px-2 py-1 border-slate-500 border-2 rounded bg-white
 }
 
 input {
