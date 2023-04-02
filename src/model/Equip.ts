@@ -11,6 +11,9 @@ export class Equip extends Entity {
     public inventoryNumber: string = "",
     public manufacturer: string = "",
     public dateOfManufacture: string = "",
+    public groupAccounting: boolean = false,
+    public parentId: number = -1,
+    public children: boolean = false,
     public armId: number = -1,
     public armName: string = "",
     public equipTypeId: number = -1,
@@ -22,10 +25,10 @@ export class Equip extends Entity {
   }
 }
 
-export class EquipParents{
+export class EquipParents {
   constructor(
-    public arms:Array<Arm> = new Array(),
-    public equipTypes:Array<EquipType> = new Array(),
-    public equipModels:Array<EquipModel> = new Array()
-  ){}
+    public arms: Array<Arm> = new Array(),
+    public equipTypes: Array<EquipType> = new Array(),
+    public equipModels: Array<EquipModel> = new Array()
+  ) { }
 }

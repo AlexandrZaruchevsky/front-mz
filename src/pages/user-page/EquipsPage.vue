@@ -1,6 +1,6 @@
 <template>
   <div class="relative flex h-full justify-center items-start">
-    <card-z-v2 class="h-full w-full" header="Equips" :cardData="cardData" navigation searchable footer editable >
+    <card-z-v2 class="h-full w-full" header="Equips" :cardData="cardData" navigation searchable footer editFloat >
       <template #tool-buttons>
         <div class="">
           <div class="flex flex-row gap-2">
@@ -23,8 +23,11 @@
             class="flex flex-row border-b-2 border-dotted hover:cursor-pointer hover:bg-slate-200 rounded items-center"
             @click="$router.push({path:`/equips/${entity.id}`})"
           >
-            <div class="px-2 py-1 w-3/6 whitespace-nowrap overflow-hidden">
+            <div class="px-2 py-1 w-2/6 whitespace-nowrap overflow-hidden">
               {{ entity.shortName }}
+            </div>
+            <div class="px-2 py-1 whitespace-nowrap overflow-hidden w-1/6 text-center">
+              {{ entity.groupAccounting ? 'Групповой учёт' : 'Одинарный учёт' }}
             </div>
             <div class="px-2 py-1 whitespace-nowrap overflow-hidden w-1/6 text-center">
               {{ entity.inventoryNumber }}

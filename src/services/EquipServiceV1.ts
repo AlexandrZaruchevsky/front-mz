@@ -21,4 +21,15 @@ export default class EquipService extends EntityServiceV1<Equip, PageRequestEqui
     })
   }
 
+  public async fetchChildren(parentId:number): Promise<Array<Equip>> {
+    this.getServiceRequest().start();
+    return await http.get(`${this.url}/${parentId}/children`).then(response => {
+      this.getServiceRequest().end();
+      return response.data
+    }).catch(err=>{
+      this.getServiceRequest().error("Error fetch equip children")
+      throw err;
+    })
+  }  
+
 }

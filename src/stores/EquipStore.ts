@@ -36,6 +36,9 @@ export const useEquipStore = defineStore('equipStore', () => {
   const equipTypeId = computed<number>(() => pageRequest.equipTypeId)
   const equipModelId = computed<number>(() => pageRequest.equipModelId)
   const equipTypeIdEntity = computed<number>(() => entity.value.equipTypeId);
+  const isGroupAccounting = computed<boolean>(() => entity.value.groupAccounting);
+
+  const equipChildren = ref<Array<Equip>>(new Array());
 
   watch(equipTypeIdEntity, () => {
     if (equipTypeIdEntity.value == -1) {
@@ -54,10 +57,11 @@ export const useEquipStore = defineStore('equipStore', () => {
 
   async function editForm() {
     const paramId = useRoute().params.id as string;
-
     if (!parseInt(paramId)) {
       if (paramId === "add") {
         setAdd();
+        entity.value.equipTypeId = pageRequest.equipTypeId;
+        entity.value.equipModelId = pageRequest.equipModelId;
       } else {
         setAdd(false);
         router.push({ name: "Equips" })
@@ -66,6 +70,16 @@ export const useEquipStore = defineStore('equipStore', () => {
     else {
       setAdd(false);
       await fetchEntity(parseInt(paramId));
+    }
+  }
+
+  async function detailForm() {
+    const paramId = useRoute().params.id as string;
+    if (parseInt(paramId)) {
+      fetchEntity(parseInt(paramId)).then(async () => {
+        await fetchEquipChildren()
+      })
+
     }
   }
 
@@ -205,6 +219,13 @@ export const useEquipStore = defineStore('equipStore', () => {
     })
   }
 
+  async function fetchEquipChildren() {
+    await entityService.fetchChildren(entity.value.id).then(response => {
+      equipChildren.value = response
+    })
+  }
+
+
   return {
     entities,
     entity,
@@ -219,8 +240,10 @@ export const useEquipStore = defineStore('equipStore', () => {
     headerForm: computed(() => {
       return serviceRequest.isAdd() ? "Equip | Add" : "Equip | Update"
     }),
+    isGroupAccounting,
+    equipChildren,
     editForm,
-    // setAdd,
+    detailForm,
     fetchEntities,
     fetchEntity,
     saveEntity,

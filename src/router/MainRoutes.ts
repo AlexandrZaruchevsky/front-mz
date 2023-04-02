@@ -32,6 +32,13 @@ export default [
         meta: {
           authRequired: true
         }
+      },
+      {
+        path: ':id/details',
+        component: () => import("@/pages/user-page/EquipDetailsPage.vue"),
+        meta: {
+          authRequired: true
+        }
       }
     ]
   }

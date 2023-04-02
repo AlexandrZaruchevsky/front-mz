@@ -1,5 +1,10 @@
 <template>
-  <div class="card">
+  <div class="card relative">
+    <div v-if="editFloat" class="absolute floating-button button-0 z-50 bottom-0 right-0" style="min-height: 60px;min-width: 60px;" @click="addEntity">
+      <div class="absolute rigth-0 bottom-12">
+        <icon-plus class="bg-slate-800" />
+      </div>
+    </div>
     <div class="card-header" v-if="header">{{ header }}</div>
     <div class="flex flex-col">
       <div>
@@ -66,7 +71,11 @@ export default {
       type: [Boolean, String],
       default: false
     },
-    searchable: {
+    editFloat:{
+      type: [Boolean, String],
+      default: false
+    },
+   searchable: {
       type: [Boolean, String],
       default: false
     }
@@ -131,7 +140,7 @@ export default {
 }
 
 .card {
-  @apply bg-white rounded-lg shadow-xl flex flex-col text-slate-800;
+  @apply bg-white rounded-lg flex flex-col text-slate-800;
 
   .card-header {
     @apply p-2 border-b text-xl font-semibold bg-slate-700 rounded-t-lg bg-opacity-80 text-slate-100;
