@@ -20,7 +20,7 @@ export default [
   {
     path: '/equips',
     name: 'Equips',
-    component: () => import("@/pages/user-page/EquipsPage.vue"),
+    component: () => import("@/pages/user-page/equips/EquipsPage.vue"),
     meta: {
       layout: "default-layout",
       authRequired: true
@@ -28,17 +28,26 @@ export default [
     children: [
       {
         path: ':id',
-        component: () => import("@/pages/user-page/EquipPage.vue"),
+        component: () => import("@/pages/user-page/equips/EquipPage.vue"),
         meta: {
           authRequired: true
         }
       },
       {
         path: ':id/details',
-        component: () => import("@/pages/user-page/EquipDetailsPage.vue"),
+        component: () => import("@/pages/user-page/equips/EquipDetailsPage.vue"),
         meta: {
           authRequired: true
-        }
+        },
+        children: [
+          {
+            path: ':idChild',
+            component: () => import("@/pages/user-page/equips/EquipDetailPage.vue"),
+            meta: {
+              authRequired: true
+            },
+          }
+        ]
       }
     ]
   }

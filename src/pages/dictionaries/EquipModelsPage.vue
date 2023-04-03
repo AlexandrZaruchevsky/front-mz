@@ -5,12 +5,12 @@
       :cardData="cardData"
       navigation 
       searchable 
-      editable 
+      editFloat
       footer 
     >
       <template #tool-buttons>
         <div class="">
-          <select class="py-1 px-2 bg-white rounded w-full border" v-model="pageRequest.parentId">
+          <select class="border-slate-500 border-2 py-1 px-2 bg-white rounded w-full" v-model="pageRequest.parentId">
             <option value="-1">Все типы оборудования</option>
             <option 
               v-for="opt in equipTypeList" 

@@ -5,7 +5,7 @@
       :cardData="cardData"
       navigation 
       searchable 
-      editable 
+      editFloat 
       footer 
     >
       <template #body>

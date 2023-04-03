@@ -1,8 +1,8 @@
 <template>
   <div class="card relative">
-    <div v-if="editFloat" class="absolute floating-button button-0 z-50 bottom-0 right-0" style="min-height: 60px;min-width: 60px;" @click="addEntity">
+    <div v-if="editFloat" class="absolute floating-button button-0 z-50 bottom-0 right-14" style="min-height: 60px;min-width: 60px;" @click="addEntity">
       <div class="absolute rigth-0 bottom-12">
-        <icon-plus class="bg-slate-800" />
+        <icon-plus class="bg-slate-600" size="xl"/>
       </div>
     </div>
     <div class="card-header" v-if="header">{{ header }}</div>

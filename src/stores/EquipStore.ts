@@ -39,6 +39,29 @@ export const useEquipStore = defineStore('equipStore', () => {
   const isGroupAccounting = computed<boolean>(() => entity.value.groupAccounting);
 
   const equipChildren = ref<Array<Equip>>(new Array());
+  const equipChild = ref<Equip>(new Equip());
+
+
+  const equipTypeListForChild = computed<Array<EquipType>>(() => equipParents.value.equipTypes);
+  const equipModelListForChild = computed<Array<EquipModel>>(() => {
+    return equipChild.value.equipTypeId == -1
+      ? []
+      : equipParents.value.equipModels.filter(item => item.equipTypeId === equipChild.value.equipTypeId)
+  });
+
+  const equipTypeIdChild = computed(()=>equipChild.value.equipTypeId)
+
+  watch(equipTypeIdChild,()=>{
+    if(equipTypeIdChild.value==-1){
+      equipChild.value.equipModelId = -1;
+    }
+  })
+
+  watch(equipModelListForChild,()=>{
+    if(equipModelListForChild.value.length==0){
+      equipChild.value.equipModelId = -1;
+    }
+  })
 
   watch(equipTypeIdEntity, () => {
     if (equipTypeIdEntity.value == -1) {
@@ -70,6 +93,29 @@ export const useEquipStore = defineStore('equipStore', () => {
     else {
       setAdd(false);
       await fetchEntity(parseInt(paramId));
+    }
+  }
+
+  async function editChildForm() {
+    const paramId = useRoute().params.idChild as string;
+    const id = useRoute().params.id as string;
+    console.log("editChild");
+    
+    if (!parseInt(paramId)) {
+      if (paramId === "add") {
+        setAddChild();
+        equipChild.value.equipTypeId = -1;
+        equipChild.value.equipModelId = -1;
+        equipChild.value.parentId = parseInt(id);
+      } else {
+        setAddChild(false);
+        // router.push({ name: "Equips" })
+      }
+    }
+    else {
+      setAdd(false);
+      await fetchEquipChild(parseInt(paramId));
+      // await fetchEntity(parseInt(paramId));
     }
   }
 
@@ -161,6 +207,17 @@ export const useEquipStore = defineStore('equipStore', () => {
     )
   })
 
+  const cardFuncChild = computed<CardFunction>(() => {
+    return new CardFunction(
+      equipChild.value.id,
+      saveChild,
+      deleteChild,
+      () => {
+        router.go(-1)
+      }
+    )
+  })
+
   async function fetchEntities() {
     await entityService.getEntities(pageRequest).then(response => {
       page.value = response
@@ -177,9 +234,25 @@ export const useEquipStore = defineStore('equipStore', () => {
     }
   }
 
+  function setAddChild(val: Boolean = true) {
+    serviceRequest.add(val)
+    if (serviceRequest.isAdd()) {
+      equipChild.value = new Equip();
+      equipChild.value.children = true
+    }
+  }
+
   async function fetchEntity(id: Number = -1) {
     await entityService.getEntity(id).then(async response => {
       entity.value = response
+    }).catch(err => {
+      console.log(err.response.data);
+    })
+  }
+
+  async function fetchEquipChild(id: Number = -1) {
+    await entityService.getEntity(id).then(async response => {
+      equipChild.value = response
     }).catch(err => {
       console.log(err.response.data);
     })
@@ -204,9 +277,37 @@ export const useEquipStore = defineStore('equipStore', () => {
     }
   }
 
+  async function saveChild() {
+    let flag = false;
+    if (serviceRequest.isAdd()) {
+      await entityService.addEntity(equipChild.value).then(response => {
+        equipChild.value = response
+        flag = true;
+      })
+    } else {
+      await entityService.updateEntity(equipChild.value).then(response => {
+        equipChild.value = response
+        flag = true;
+      })
+    }
+    if (flag) {
+      await fetchEquipChildren();
+      router.go(-1)
+    }
+  }
+
   async function deleteEntity(id: number = -1) {
     await entityService.deleteEntity(id).then(async () => {
       await fetchEntities();
+      router.go(-1);
+    }).catch(err => {
+      console.log(err.response.data);
+    })
+  }
+
+  async function deleteChild(id: number = -1) {
+    await entityService.deleteEntity(id).then(async () => {
+      await fetchEquipChildren();
       router.go(-1);
     }).catch(err => {
       console.log(err.response.data);
@@ -231,21 +332,26 @@ export const useEquipStore = defineStore('equipStore', () => {
     entity,
     cardData,
     cardFunction,
+    cardFuncChild,
     serviceRequest,
     equipTypeList,
     equipModelList,
     equipTypeListForEntity,
     equipModelListForEntity,
+    equipTypeListForChild,
+    equipModelListForChild,
     pageRequest,
     headerForm: computed(() => {
       return serviceRequest.isAdd() ? "Equip | Add" : "Equip | Update"
     }),
     isGroupAccounting,
     equipChildren,
+    equipChild,
     editForm,
     detailForm,
     fetchEntities,
     fetchEntity,
+    editChildForm,
     saveEntity,
     fetchEquipParents
   }

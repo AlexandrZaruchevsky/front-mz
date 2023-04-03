@@ -1,6 +1,6 @@
 <template>
   <div class="relative flex h-full justify-center items-start">
-    <card-z-v2 class="w-full h-full" :cardData="cardData" header="Positions" navigation searchable editable footer>
+    <card-z-v2 class="w-full h-full" :cardData="cardData" header="Positions" navigation searchable editFloat footer>
       <template #body>
         <div class="p-2 flex flex-col gap-0.5">
           <div v-for="dep in entities" :key="dep.id"

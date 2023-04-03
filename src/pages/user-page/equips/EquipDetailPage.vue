@@ -1,6 +1,6 @@
 <template>
-  <overlay-z>
-    <card-entity :header="headerForm" class="w-full sm:w-3/4 md:w-7/12 lg:w-6/12 xl:w-5/12 2xl:w-4/12" editable :cardFunc="cardFunction">
+  <overlay-z class="bg-opacity-0">
+    <card-entity header="Equip Child" class="w-full sm:w-3/4 md:w-7/12 lg:w-6/12 xl:w-5/12 2xl:w-4/12" editable :cardFunc="cardFuncChild">
       <template #body>
         <form @submit.prevent="" class="p-2">
           <div class="flex flex-row gap-2 items-center px-2 py-1 border-b-2 border-slate-300 border-dotted">
@@ -8,9 +8,9 @@
               Тип оборудования:
             </label>
             <select name="type" class="py-1 px-2 bg-white w-full border-b-2 border-slate-400"
-              v-model="entity.equipTypeId">
+              v-model="equipChild.equipTypeId">
               <option value="-1">Тип не определён</option>
-              <option v-for="opt in equipTypeListForEntity" :key="opt.id" :value="opt.id">
+              <option v-for="opt in equipTypeListForChild" :key="opt.id" :value="opt.id">
                 {{ opt.name }}
               </option>
             </select>
@@ -20,9 +20,9 @@
               Модель оборудования:
             </label>
             <select name="model" class="py-1 px-2 bg-white w-full border-b-2 border-slate-400"
-              v-model="entity.equipModelId">
+              v-model="equipChild.equipModelId">
               <option value="-1">Модель не определёна</option>
-              <option v-for="opt in equipModelListForEntity" :key="opt.id" :value="opt.id">
+              <option v-for="opt in equipModelListForChild" :key="opt.id" :value="opt.id">
                 {{ opt.name }}
               </option>
             </select>
@@ -32,56 +32,54 @@
               <label class="label-input" for="shortName">
                 Краткое наименование:
               </label>
-              <input class="input-field" type="text" @keyup.enter="saveEntity" name="shortName"
-                v-model="entity.shortName" />
+              <input class="input-field" type="text" name="shortName"
+                v-model="equipChild.shortName" />
             </div>
             <div class="input-field-wraper">
               <label class="label-input" for="fullName">
                 Полное наименование:
               </label>
-              <input class="input-field" type="text" @keyup.enter="saveEntity" name="fullName"
-                v-model="entity.fullName" />
+              <input class="input-field" type="text" name="fullName"
+                v-model="equipChild.fullName" />
             </div>
             <div class="input-field-wraper">
               <label class="label-input" for="serialNumber">
                 Серийный номер:
               </label>
-              <input class="input-field" type="text" @keyup.enter="saveEntity" name="serialNumber"
-                v-model="entity.serialNumber" />
+              <input class="input-field" type="text" name="serialNumber"
+                v-model="equipChild.serialNumber" />
             </div>
             <div class="input-field-wraper">
               <label class="label-input" for="inventoryNumber">
                 Инвентарный номер:
               </label>
-              <input class="input-field" type="text" @keyup.enter="saveEntity" name="inventoryNumber"
-                v-model="entity.inventoryNumber" />
+              <input class="input-field" type="text" name="inventoryNumber"
+                v-model="equipChild.inventoryNumber" />
             </div>
             <div class="input-field-wraper">
               <label class="label-input" for="manufacturer">
                 Изготовитель:
               </label>
-              <input class="input-field" type="text" @keyup.enter="saveEntity" name="manufacturer"
-                v-model="entity.manufacturer" />
+              <input class="input-field" type="text" name="manufacturer"
+                v-model="equipChild.manufacturer" />
             </div>
             <div class="input-field-wraper">
               <label class="label-input" for="dateOfManufacture">
                 Дата производства:
               </label>
-              <input class="input-field" type="date" @keyup.enter="saveEntity" name="dateOfManufacture"
-                v-model="entity.dateOfManufacture" />
+              <input class="input-field" type="date" name="dateOfManufacture"
+                v-model="equipChild.dateOfManufacture" />
             </div>
             <div class="input-field-wraper">
-              <label class="label-input" for="groupAccounting">
-                Групповой учёт:
+              <label class="label-input" for="ipV4">
+                ip-адрес:
               </label>
-              <input class="" type="checkbox" @keyup.enter="saveEntity" name="groupAccounting"
-                v-model="entity.groupAccounting" />
-              <router-link v-if="isGroupAccounting && entity.id>0" :to="details" class="ml-4 underline">details</router-link>
+              <input class="input-field" type="text" name="ipV4"
+                v-model="equipChild.ipV4" />
+              <!-- <button style="min-width: 80px;" class="whitespace-nowrap px-2 py-0.5 border rounded hover:bg-slate-200">Ping</button> -->
             </div>
           </div>
         </form>
-        <div v-if="isGroupAccounting && entity.id>0">
-        </div>
       </template>
     </card-entity>
     <router-view />
@@ -94,12 +92,12 @@ import { useEquipStore } from '@/stores/EquipStore';
 import { computed } from 'vue';
 import { storeToRefs } from 'pinia';
 
-const { entity, headerForm, cardFunction, equipTypeListForEntity, equipModelListForEntity, isGroupAccounting } = storeToRefs(useEquipStore());
-const { saveEntity, editForm } = useEquipStore();
+const { equipChild, cardFuncChild, equipTypeListForChild, equipModelListForChild } = storeToRefs(useEquipStore());
+const { editChildForm } = useEquipStore();
 
-const details = computed<string>(()=>`/equips/${entity.value.id}/details`);
+// const details = computed<string>(()=>`/equips/${entity.value.id}/details`);
 
-editForm();
+editChildForm();
 
 </script>
 
