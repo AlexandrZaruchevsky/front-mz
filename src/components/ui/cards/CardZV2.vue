@@ -1,8 +1,9 @@
 <template>
   <div class="card relative">
-    <div v-if="editFloat" class="absolute floating-button button-0 z-50 bottom-0 right-14" style="min-height: 60px;min-width: 60px;" @click="addEntity">
+    <div v-if="editFloat" class="absolute floating-button button-0 z-50 bottom-0 right-14"
+      style="min-height: 60px;min-width: 60px;" @click="addEntity">
       <div class="absolute rigth-0 bottom-12">
-        <icon-plus class="bg-slate-600" size="xl"/>
+        <icon-plus class="bg-slate-600" size="xl" />
       </div>
     </div>
     <div class="card-header" v-if="header">{{ header }}</div>
@@ -17,7 +18,8 @@
           <select class="select-z" v-model="selectedSort" @change="changeSort">
             <option v-for="opt in cardData.sortOptions" :value="opt.key" :key="opt.key">{{ opt.value }}</option>
           </select>
-          <input type="text" v-model="searchText" @input="setSearch" @keyup.enter="search" />
+          <input type="text" v-model="searchText" @input="setSearch" @keyup="search" />
+          <!-- <input type="text" v-model="searchText" @input="setSearch" @keyup.enter="search" /> -->
         </div>
       </div>
     </div>
@@ -44,8 +46,9 @@
 </template>
   
 <script lang="ts">
+import debounce from 'lodash.debounce'
 import { CardData } from "@/model/Page";
-import { computed, ref } from "vue";
+import { computed, ref, watch } from "vue";
 export default {
   name: "CardZV2",
   props: {
@@ -71,11 +74,11 @@ export default {
       type: [Boolean, String],
       default: false
     },
-    editFloat:{
+    editFloat: {
       type: [Boolean, String],
       default: false
     },
-   searchable: {
+    searchable: {
       type: [Boolean, String],
       default: false
     }
@@ -91,9 +94,13 @@ export default {
       props.cardData.addEntity()
     }
 
-    const search = () => {
+    const search = debounce(() => {
       props.cardData.search();
-    }
+    }, 500)
+
+    // const search = () => {
+    //   props.cardData.search();
+    // }
 
     const setSearch = () => {
       props.cardData.setSearch(searchText.value);
