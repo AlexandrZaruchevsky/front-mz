@@ -1,12 +1,9 @@
-import type { Employee, EmployeePage } from "@/model/Employee";
-import { useAuthStore } from "@/stores/AuthStore";
-import axios from "axios";
-import { storeToRefs } from "pinia";
-import EntityService from "./EntityService";
+import type { Employee } from "@/model/Employee";
+import http from './http-common';
+import EntityServiceV1 from "./EntityServiceV1";
+import type { PageRequest } from "@/model/Page";
 
-const { token } = storeToRefs(useAuthStore())
-
-export default class EmplService extends EntityService<Employee, EmployeePage>{
+export default class EmplService extends EntityServiceV1<Employee, PageRequest>{
 
   constructor(
     public url: String,
@@ -16,10 +13,7 @@ export default class EmplService extends EntityService<Employee, EmployeePage>{
 
   public async getAllEmployees(orgId: Number = -1): Promise<Array<Employee>> {
     super.getServiceRequest().start();
-    return await axios.get(`${super.getBaseFull()}/all`, {
-      headers: {
-        Authorization: token.value
-      },
+    return await http.get(`${this.url}/all`, {
       params: {
         orgId
       }
@@ -30,6 +24,22 @@ export default class EmplService extends EntityService<Employee, EmployeePage>{
       super.getServiceRequest().error("Error fetch Positions")
       throw err;
     })
+  }
+
+  public async fetchAllForChoice(fio: string = ""): Promise<Array<Employee>> {
+    super.getServiceRequest().start();
+    return await http.get(`${this.url}/list-choice`, {
+      params: {
+        fio
+      }
+    }).then(response => {
+      super.getServiceRequest().end()
+      return response.data;
+    }).catch(err => {
+      super.getServiceRequest().error("Error fetch Positions")
+      throw err;
+    })
+
   }
 
 

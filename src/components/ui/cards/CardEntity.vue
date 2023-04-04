@@ -4,7 +4,7 @@
       <div>
         {{ header }}
       </div>
-      <div class="text-base hover:underline hover:cursor-pointer" @click="$router.go(-1)">
+      <div class="text-base hover:underline hover:cursor-pointer" @click="cancel">
         <x-icon class="" />
       </div>
     </div>
@@ -21,7 +21,7 @@
           <button-z-v1 v-if="cardFunc.id > 0" @click="deleteEntity(cardFunc.id)" title="Delete" class="btn bg-red-500" />
         </div>
         <div class="flex flex-row gap-2">
-          <button-z-v1 @click="$router.go(-1)" title="Cancel" class="btn bg-slate-600" />
+          <button-z-v1 @click="cancel" title="Cancel" class="btn bg-slate-600" />
         </div>
       </div>
     </div>
@@ -56,12 +56,12 @@ export default {
 
     const saveEntity = () => props.cardFunc.saveEntity();
     const deleteEntity = (id: number = -1) => props.cardFunc.deleteEntity(id);
-    // const cancel = () => props.cardFunc.cancel();
+    const cancel = () => props.cardFunc.cancel();
 
     return {
       saveEntity,
       deleteEntity,
-      // cancel
+      cancel
     }
 
   }

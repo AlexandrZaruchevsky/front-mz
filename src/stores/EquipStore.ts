@@ -49,16 +49,18 @@ export const useEquipStore = defineStore('equipStore', () => {
       : equipParents.value.equipModels.filter(item => item.equipTypeId === equipChild.value.equipTypeId)
   });
 
-  const equipTypeIdChild = computed(()=>equipChild.value.equipTypeId)
+  const equipTypeIdChild = computed(() => equipChild.value.equipTypeId)
 
-  watch(equipTypeIdChild,()=>{
-    if(equipTypeIdChild.value==-1){
+  const isDetails = ref<boolean>(false);
+
+  watch(equipTypeIdChild, () => {
+    if (equipTypeIdChild.value == -1) {
       equipChild.value.equipModelId = -1;
     }
   })
 
-  watch(equipModelListForChild,()=>{
-    if(equipModelListForChild.value.length==0){
+  watch(equipModelListForChild, () => {
+    if (equipModelListForChild.value.length == 0) {
       equipChild.value.equipModelId = -1;
     }
   })
@@ -79,6 +81,7 @@ export const useEquipStore = defineStore('equipStore', () => {
   })
 
   async function editForm() {
+    isDetails.value = false;
     const paramId = useRoute().params.id as string;
     if (!parseInt(paramId)) {
       if (paramId === "add") {
@@ -100,7 +103,7 @@ export const useEquipStore = defineStore('equipStore', () => {
     const paramId = useRoute().params.idChild as string;
     const id = useRoute().params.id as string;
     console.log("editChild");
-    
+
     if (!parseInt(paramId)) {
       if (paramId === "add") {
         setAddChild();
@@ -202,7 +205,7 @@ export const useEquipStore = defineStore('equipStore', () => {
       saveEntity,
       deleteEntity,
       () => {
-        router.go(-1)
+        router.push({name:"Equips"})
       }
     )
   })
@@ -245,10 +248,12 @@ export const useEquipStore = defineStore('equipStore', () => {
   async function fetchEntity(id: Number = -1) {
     await entityService.getEntity(id).then(async response => {
       entity.value = response
+      isDetails.value = entity.value.groupAccounting
     }).catch(err => {
       console.log(err.response.data);
     })
   }
+
 
   async function fetchEquipChild(id: Number = -1) {
     await entityService.getEntity(id).then(async response => {
@@ -261,19 +266,23 @@ export const useEquipStore = defineStore('equipStore', () => {
   async function saveEntity() {
     let flag = false;
     if (serviceRequest.isAdd()) {
-      await entityService.addEntity(entity.value).then(response => {
+      await entityService.addEntity(entity.value).then(async response => {
         entity.value = response
         flag = true;
+        await fetchEntity(entity.value.id);
+        serviceRequest.add(false);
+        router.push({ path: `/equips/${entity.value.id}` })
       })
     } else {
-      await entityService.updateEntity(entity.value).then(response => {
+      await entityService.updateEntity(entity.value).then(async response => {
         entity.value = response
         flag = true;
+        await fetchEntity(entity.value.id);
       })
     }
     if (flag) {
       await fetchEntities();
-      router.go(-1)
+      isDetails.value = entity.value.groupAccounting
     }
   }
 
@@ -299,7 +308,7 @@ export const useEquipStore = defineStore('equipStore', () => {
   async function deleteEntity(id: number = -1) {
     await entityService.deleteEntity(id).then(async () => {
       await fetchEntities();
-      router.go(-1);
+      router.push({name:"Equips"})
     }).catch(err => {
       console.log(err.response.data);
     })
@@ -328,6 +337,7 @@ export const useEquipStore = defineStore('equipStore', () => {
 
 
   return {
+    isDetails,
     entities,
     entity,
     cardData,

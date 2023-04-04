@@ -1,8 +1,9 @@
 <template>
-  <overlay-z>
-    <card-entity :header="headerForm" class="w-full sm:w-3/4 md:w-7/12 lg:w-6/12 xl:w-5/12 2xl:w-4/12" editable :cardFunc="cardFunction">
+  <overlay-z class="z-20">
+    <card-entity :header="headerForm" class="w-full sm:w-3/4 md:w-7/12 lg:w-6/12 xl:w-5/12 2xl:w-4/12" editable
+      :cardFunc="cardFunction">
       <template #body>
-        <form @submit.prevent="" class="p-2">
+        <form @submit.prevent class="p-2">
           <div class="flex flex-row gap-2 items-center px-2 py-1 border-b-2 border-slate-300 border-dotted">
             <label class="label-input" for="type">
               Тип оборудования:
@@ -32,90 +33,109 @@
               <label class="label-input" for="shortName">
                 Краткое наименование:
               </label>
-              <input class="input-field" type="text" @keyup.enter="saveEntity" name="shortName"
-                v-model="entity.shortName" />
+              <input class="input-field" type="text" name="shortName" v-model="entity.shortName" />
             </div>
             <div class="input-field-wraper">
               <label class="label-input" for="fullName">
                 Полное наименование:
               </label>
-              <input class="input-field" type="text" @keyup.enter="saveEntity" name="fullName"
-                v-model="entity.fullName" />
+              <input class="input-field" type="text" name="fullName" v-model="entity.fullName" />
             </div>
             <div class="input-field-wraper">
               <label class="label-input" for="serialNumber">
                 Серийный номер:
               </label>
-              <input class="input-field" type="text" @keyup.enter="saveEntity" name="serialNumber"
-                v-model="entity.serialNumber" />
+              <input class="input-field" type="text" name="serialNumber" v-model="entity.serialNumber" />
             </div>
             <div class="input-field-wraper">
               <label class="label-input" for="inventoryNumber">
                 Инвентарный номер:
               </label>
-              <input class="input-field" type="text" @keyup.enter="saveEntity" name="inventoryNumber"
-                v-model="entity.inventoryNumber" />
+              <input class="input-field" type="text" name="inventoryNumber" v-model="entity.inventoryNumber" />
             </div>
             <div class="input-field-wraper">
               <label class="label-input" for="manufacturer">
                 Изготовитель:
               </label>
-              <input class="input-field" type="text" @keyup.enter="saveEntity" name="manufacturer"
-                v-model="entity.manufacturer" />
+              <input class="input-field" type="text" name="manufacturer" v-model="entity.manufacturer" />
             </div>
             <div class="input-field-wraper">
               <label class="label-input" for="dateOfManufacture">
                 Дата производства:
               </label>
-              <input class="input-field" type="date" @keyup.enter="saveEntity" name="dateOfManufacture"
-                v-model="entity.dateOfManufacture" />
+              <input class="input-field" type="date" name="dateOfManufacture" v-model="entity.dateOfManufacture" />
             </div>
             <div class="input-field-wraper">
               <label class="label-input" for="molFio">
                 МОЛ:
               </label>
-              <input class="input-field" type="text" @keyup.enter="saveEntity" name="molFio"
-                v-model="entity.molFio" />
-              <button style="min-width: 80px;" class="whitespace-nowrap px-2 py-0.5 border border-slate-500 rounded hover:bg-slate-200">Set MOL</button>
+              <input class="input-field" type="text" name="molFio" v-model="entity.molFio" />
+              <div style="min-width: 80px;"
+                class="whitespace-nowrap px-2 py-0.5 border border-slate-500 rounded hover:bg-slate-200 hover:cursor-pointer"
+                @click="isSetMol = true">
+                Set MOL
+              </div>
             </div>
             <div class="input-field-wraper">
               <label class="label-input" for="ipV4">
                 ip-адрес:
               </label>
-              <input class="input-field" type="text" @keyup.enter="saveEntity" name="ipV4"
-                v-model="entity.ipV4" />
+              <input class="input-field" type="text" name="ipV4" v-model="entity.ipV4" />
               <!-- <button style="min-width: 80px;" class="whitespace-nowrap px-2 py-0.5 border rounded hover:bg-slate-200">Ping</button> -->
             </div>
             <div class="input-field-wraper">
               <label class="label-input" for="groupAccounting">
                 Групповой учёт:
               </label>
-              <input class="" type="checkbox" @keyup.enter="saveEntity" name="groupAccounting"
-                v-model="entity.groupAccounting" />
-              <router-link v-if="isGroupAccounting && entity.id>0" :to="details" class="ml-4 underline">details</router-link>
+              <input class="" type="checkbox" name="groupAccounting" v-model="entity.groupAccounting" />
+              <router-link v-if="isDetails" :to="details" class="ml-4 underline">details</router-link>
             </div>
           </div>
         </form>
-        <div v-if="isGroupAccounting && entity.id>0">
-        </div>
       </template>
     </card-entity>
     <router-view />
+  </overlay-z>
+  <overlay-z class="z-20" v-if="isSetMol" @click="isSetMol = false">
+    <card-choice-v1 :choiceList="choiceEmplList" :searchFunc="fetchEmployeeList" rowVisible="3" :choiceFunc="choiceFunc"
+      class="shadow-xl mt-20" @click.stop />
   </overlay-z>
 </template>
 
 <script setup lang="ts">
 
 import { useEquipStore } from '@/stores/EquipStore';
-import { computed } from 'vue';
+import { useChoiceStore } from '@/stores/ChoiceStore';
+import { EntityChoice } from '@/model/Choice';
+import { computed, ref, watch } from 'vue';
 import { storeToRefs } from 'pinia';
 
-const { entity, headerForm, cardFunction, equipTypeListForEntity, equipModelListForEntity, isGroupAccounting } = storeToRefs(useEquipStore());
-const { saveEntity, editForm } = useEquipStore();
+const { entity, isDetails, headerForm, cardFunction, equipTypeListForEntity, equipModelListForEntity } = storeToRefs(useEquipStore());
+const { editForm } = useEquipStore();
 
-const details = computed<string>(()=>`/equips/${entity.value.id}/details`);
+const details = computed<string>(() => `/equips/${entity.value.id}/details`);
 
 editForm();
+
+
+
+const isSetMol = ref<boolean>(false);
+
+const { choiceEmplList } = storeToRefs(useChoiceStore())
+const { fetchEmployeeList } = useChoiceStore()
+
+watch(isSetMol, async () => {
+  if (isSetMol.value)
+    await fetchEmployeeList();
+})
+
+const choiceFunc = (en: EntityChoice = new EntityChoice()) => {
+  if (en.key != -1) {
+    entity.value.employeeMol = en.key as string;
+    entity.value.molFio = en.value
+    isSetMol.value = false;
+  }
+}
 
 </script>
 
