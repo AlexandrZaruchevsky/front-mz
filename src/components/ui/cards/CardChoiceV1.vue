@@ -3,7 +3,7 @@
     style="min-height: 400px; max-height: 400px; min-width: 400px; max-width: 400px;">
     <div>
       <input type="text" class="px-2 py-1 rounded border-2 outline-none focus:border-slate-500 focus:shadow-lg w-full"
-        v-model="searchText" @keyup="search" />
+        v-model="searchText" @keyup="search" ref="searchInput" />
     </div>
     <div class="border-t-2 border-dotted"></div>
     <div></div>
@@ -37,7 +37,7 @@
 
 import { EntityChoice } from '@/model/Choice';
 import debounce from 'lodash.debounce';
-import { ref, computed } from 'vue';
+import { ref, computed, watch, onMounted } from 'vue';
 
 export default {
   name: "CardChoiceV1",
@@ -50,7 +50,6 @@ export default {
     rowVisible: {
       type: String,
       required: false,
-      default: () => 1
     },
     searchFunc: {
       type: Function,
@@ -59,10 +58,16 @@ export default {
     choiceFunc: {
       type: Function,
       required: false
-    }
+    },
   },
   setup(props) {
-    const searchText = ref<string>("")
+    const searchText = ref<string>("");
+    const searchInput = ref<HTMLElement>();
+    
+    onMounted(()=>{
+      searchInput.value?.focus()  
+    })
+
     const search = debounce(() => {
       if (typeof props.searchFunc != "function") {
         console.log("search function not implemented");
@@ -71,7 +76,7 @@ export default {
       }
     }, 500);
     const rowCount = computed<number>(() => {
-      if (parseInt(props.rowVisible)) {
+      if (typeof props.rowVisible == "string" && parseInt(props.rowVisible)) {
         return parseInt(props.rowVisible);
       } else {
         return 1;
@@ -88,7 +93,8 @@ export default {
       searchText,
       search,
       rowCount,
-      choice
+      choice,
+      searchInput
     }
   }
 }

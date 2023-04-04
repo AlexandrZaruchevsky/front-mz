@@ -33,7 +33,7 @@
               <label class="label-input" for="shortName">
                 Краткое наименование:
               </label>
-              <input class="input-field" type="text" name="shortName" v-model="entity.shortName" />
+              <input class="input-field" type="text" name="shortName" v-model="entity.shortName" ref="inputFocus" />
             </div>
             <div class="input-field-wraper">
               <label class="label-input" for="fullName">
@@ -107,8 +107,10 @@
 import { useEquipStore } from '@/stores/EquipStore';
 import { useChoiceStore } from '@/stores/ChoiceStore';
 import { EntityChoice } from '@/model/Choice';
-import { computed, ref, watch } from 'vue';
+import { computed, onMounted, ref, watch } from 'vue';
 import { storeToRefs } from 'pinia';
+import debounce from "lodash.debounce"
+
 
 const { entity, isDetails, headerForm, cardFunction, equipTypeListForEntity, equipModelListForEntity } = storeToRefs(useEquipStore());
 const { editForm } = useEquipStore();
@@ -116,6 +118,17 @@ const { editForm } = useEquipStore();
 const details = computed<string>(() => `/equips/${entity.value.id}/details`);
 
 editForm();
+
+const inputFocus = ref<HTMLElement>();
+
+const setF = debounce(()=>{
+  inputFocus.value?.focus();
+  (inputFocus.value as HTMLInputElement).select();
+},100);
+
+onMounted(()=>{
+  setF()
+})
 
 
 
