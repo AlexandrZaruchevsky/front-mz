@@ -30,46 +30,32 @@
           </div>
           <div class="flex flex-col gap-1">
             <div class="input-field-wraper">
-              <label class="label-input" for="shortName">
-                Краткое наименование:
-              </label>
-              <input class="input-field" type="text" name="shortName" v-model="entity.shortName" ref="inputFocus" />
+              <label class="label-input" >Краткое наименование:</label>
+              <input-field v-model="entity.shortName" v-focus />
             </div>
             <div class="input-field-wraper">
-              <label class="label-input" for="fullName">
-                Полное наименование:
-              </label>
-              <input class="input-field" type="text" name="fullName" v-model="entity.fullName" />
+              <label class="label-input">Полное наименование:</label>
+              <input-field v-model="entity.fullName" />
             </div>
             <div class="input-field-wraper">
-              <label class="label-input" for="serialNumber">
-                Серийный номер:
-              </label>
-              <input class="input-field" type="text" name="serialNumber" v-model="entity.serialNumber" />
+              <label class="label-input">Серийный номер:</label>
+              <input-field v-model="entity.serialNumber" />
             </div>
             <div class="input-field-wraper">
-              <label class="label-input" for="inventoryNumber">
-                Инвентарный номер:
-              </label>
-              <input class="input-field" type="text" name="inventoryNumber" v-model="entity.inventoryNumber" />
+              <label class="label-input">Инвентарный номер:</label>
+              <input-field v-model="entity.inventoryNumber" />
             </div>
             <div class="input-field-wraper">
-              <label class="label-input" for="manufacturer">
-                Изготовитель:
-              </label>
-              <input class="input-field" type="text" name="manufacturer" v-model="entity.manufacturer" />
+              <label class="label-input">Изготовитель:</label>
+              <input-field v-model="entity.manufacturer" />
             </div>
             <div class="input-field-wraper">
-              <label class="label-input" for="dateOfManufacture">
-                Дата производства:
-              </label>
-              <input class="input-field" type="date" name="dateOfManufacture" v-model="entity.dateOfManufacture" />
+              <label class="label-input">Дата производства:</label>
+              <input-field type="date" v-model="entity.dateOfManufacture" />
             </div>
             <div class="input-field-wraper">
-              <label class="label-input" for="molFio">
-                МОЛ:
-              </label>
-              <input class="input-field" type="text" name="molFio" v-model="entity.molFio" />
+              <label class="label-input">МОЛ:</label>
+              <input-field v-model="entity.molFio" />
               <div style="min-width: 80px;"
                 class="whitespace-nowrap px-2 py-0.5 border border-slate-500 rounded hover:bg-slate-200 hover:cursor-pointer"
                 @click="isSetMol = true">
@@ -77,11 +63,8 @@
               </div>
             </div>
             <div class="input-field-wraper">
-              <label class="label-input" for="ipV4">
-                ip-адрес:
-              </label>
-              <input class="input-field" type="text" name="ipV4" v-model="entity.ipV4" />
-              <!-- <button style="min-width: 80px;" class="whitespace-nowrap px-2 py-0.5 border rounded hover:bg-slate-200">Ping</button> -->
+              <label class="label-input">ip-адрес:</label>
+              <input-field v-model="entity.ipV4" />
             </div>
             <div class="input-field-wraper">
               <label class="label-input" for="groupAccounting">
@@ -107,9 +90,8 @@
 import { useEquipStore } from '@/stores/EquipStore';
 import { useChoiceStore } from '@/stores/ChoiceStore';
 import { EntityChoice } from '@/model/Choice';
-import { computed, onMounted, ref, watch } from 'vue';
+import { computed, ref, watch } from 'vue';
 import { storeToRefs } from 'pinia';
-import debounce from "lodash.debounce"
 
 
 const { entity, isDetails, headerForm, cardFunction, equipTypeListForEntity, equipModelListForEntity } = storeToRefs(useEquipStore());
@@ -118,19 +100,6 @@ const { editForm } = useEquipStore();
 const details = computed<string>(() => `/equips/${entity.value.id}/details`);
 
 editForm();
-
-const inputFocus = ref<HTMLElement>();
-
-const setF = debounce(()=>{
-  inputFocus.value?.focus();
-  (inputFocus.value as HTMLInputElement).select();
-},100);
-
-onMounted(()=>{
-  setF()
-})
-
-
 
 const isSetMol = ref<boolean>(false);
 

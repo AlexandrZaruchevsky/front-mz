@@ -110,6 +110,17 @@ export const useEmplStore = defineStore('emplStore', () => {
     )
   })
 
+  const cardFunctionPhone = computed<CardFunction>(() => {
+    return new CardFunction(
+      entity.value.id,
+      ()=>{},
+      ()=>{},
+      () => {
+        router.push({ name: "Phone" })
+      }
+    )
+  })
+
   async function fetchEntities() {
     await entityService.getEntities(pageRequest).then(response => {
       page.value = response
@@ -192,6 +203,7 @@ export const useEmplStore = defineStore('emplStore', () => {
   return {
     cardData,
     cardFunction,
+    cardFunctionPhone,
     entities,
     entity,
     serviceRequest,

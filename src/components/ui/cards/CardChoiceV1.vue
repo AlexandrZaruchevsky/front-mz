@@ -2,8 +2,7 @@
   <div class="flex flex-col gap-2 bg-white rounded-lg p-4"
     style="min-height: 400px; max-height: 400px; min-width: 400px; max-width: 400px;">
     <div>
-      <input type="text" class="px-2 py-1 rounded border-2 outline-none focus:border-slate-500 focus:shadow-lg w-full"
-        v-model="searchText" @keyup="search" ref="searchInput" />
+      <input-field v-model="searchText" @keyup="search" v-focus placeHolder="input fio"/>
     </div>
     <div class="border-t-2 border-dotted"></div>
     <div></div>

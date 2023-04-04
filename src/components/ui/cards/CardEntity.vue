@@ -17,11 +17,11 @@
     <div class="tool-buttons border-t" v-if="editable">
       <div class="flex flex-row justify-between w-full">
         <div class="flex flex-row gap-2">
-          <button-z-v1 @click="saveEntity" title="Save" class="btn bg-teal-600" />
-          <button-z-v1 v-if="cardFunc.id > 0" @click="deleteEntity(cardFunc.id)" title="Delete" class="btn bg-red-500" />
+          <button-z-v1 @click="saveEntity" title="Save" class="btn bg-primary-600" />
+          <button-z-v1 v-if="cardFunc.id > 0" @click="deleteEntity(cardFunc.id)" title="Delete" class="btn bg-danger-500" />
         </div>
         <div class="flex flex-row gap-2">
-          <button-z-v1 @click="cancel" title="Cancel" class="btn bg-slate-600" />
+          <button-z-v1 @click="cancel" title="Cancel" class="btn bg-secondary-600" />
         </div>
       </div>
     </div>
@@ -74,10 +74,10 @@ export default {
 }
 
 .card {
-  @apply bg-white rounded-lg shadow-xl flex flex-col text-slate-800;
+  @apply bg-white rounded-lg shadow-xl flex flex-col text-primary-900;
 
   .card-header {
-    @apply flex flex-row items-center justify-between p-2 border-b text-xl font-semibold bg-gray-600 rounded-t-lg bg-opacity-80 text-slate-100;
+    @apply flex flex-row items-center justify-between p-2 border-b text-xl font-semibold bg-primary-600 rounded-t-lg bg-opacity-80 text-secondary-100;
   }
 
   .card-body {

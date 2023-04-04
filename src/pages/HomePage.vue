@@ -14,8 +14,6 @@
           </div>
         </div>
       </div>
-      <!-- <card-choice-v1 :choiceList="choiceEmplList" :searchFunc="fetchEmployeeList" rowVisible="3"
-        :choiceFunc="choiceFunc" /> -->
     </div>
     <div class="footer text-slate-100 whitespace-nowrap flex flex-row gap-2">
       <span>&copy; {{ appAuthorName }}</span>
@@ -26,24 +24,10 @@
 </template>
 
 <script setup lang="ts">
-// import { EntityChoice } from '@/model/Choice';
-// import { useChoiceStore } from '@/stores/ChoiceStore';
-// import { storeToRefs } from 'pinia';
 
 const appName = import.meta.env.VITE_APP_NAME;
 const appAuthorName = import.meta.env.VITE_APP_AUTHOR_NAME;
 const appAurhorEMail = import.meta.env.VITE_APP_AUTHOR_EMAIL;
 const apiUrlBase = import.meta.env.VITE_BASE_URL;
-
-// const { choiceEmplList } = storeToRefs(useChoiceStore())
-// const { fetchEmployeeList } = useChoiceStore()
-
-// fetchEmployeeList()
-
-// const choiceFunc = (en: EntityChoice = new EntityChoice()) => {
-//   if (en.key != -1)
-//     console.log(en.key);
-
-// }
 
 </script>

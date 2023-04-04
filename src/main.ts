@@ -23,4 +23,12 @@ app.component("CardZ", CardZ)
 app.use(createPinia())
 app.use(router)
 
+
+app.directive('focus', {
+  mounted:(el)=>{
+    el.focus()
+  }
+})
+
+
 app.mount('#app')

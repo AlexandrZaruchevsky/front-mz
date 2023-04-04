@@ -1,6 +1,6 @@
 <template>
   <overlay-z>
-    <card-entity header="Employee Detail" class="w-full lg:w-5/6 xl:w-8/12 2xl:w-1/2">
+    <card-entity header="Employee Detail" class="w-full lg:w-5/6 xl:w-8/12 2xl:w-1/2" :cardFunc="cardFunctionPhone">
       <template #body>
         <form>
           <div class="flex flex-col gap-2 p-4">
@@ -104,7 +104,7 @@ import { useRoute } from 'vue-router';
 import { storeToRefs } from 'pinia';
 import { useEmplStore } from '@/stores/EmplStore';
 
-const { entity, orgId, orgList, depList, popList, posList } = storeToRefs(useEmplStore());
+const { entity, orgId, orgList, depList, popList, posList, cardFunctionPhone } = storeToRefs(useEmplStore());
 const { fetchEntity, fetchAllOrgs } = useEmplStore();
 
 fetchAllOrgs();

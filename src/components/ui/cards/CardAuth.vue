@@ -26,15 +26,15 @@ export default {
   @apply bg-white rounded-lg shadow-lg;
 
   .card-header {
-    @apply p-2 text-lg font-bold;
+    @apply p-2 text-lg font-bold border-b;
   }
 
   .card-body {
-    @apply text-teal-800 p-2;
+    @apply p-2;
   }
 
   .card-footer {
-    @apply px-2 py-1 text-sm border-t;
+    @apply text-sm border-t;
   }
 
 }

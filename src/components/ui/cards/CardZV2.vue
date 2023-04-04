@@ -3,7 +3,7 @@
     <div v-if="editFloat" class="absolute floating-button button-0 z-10 bottom-0 right-14"
       style="min-height: 60px;min-width: 60px;" @click="addEntity">
       <div class="absolute rigth-0 bottom-12">
-        <icon-plus class="bg-slate-600" size="xl" />
+        <icon-plus class="bg-primary-600" size="xl" />
       </div>
     </div>
     <div class="card-header" v-if="header">{{ header }}</div>
@@ -31,8 +31,8 @@
         <option v-for="opt in cardData.pageSizeOptions" :value="opt.key" :key="opt.key">{{ opt.value }}</option>
       </select>
       <div class="flex gap-2">
-        <button-z-v1 @click="previos" title="Previos" class="btn bg-slate-600" :disabled="cardData.page.first" />
-        <button-z-v1 @click="next" title="Next" class="btn bg-slate-600" :disabled="cardData.page.last" />
+        <button-z-v1 @click="previos" title="Previos" class="btn bg-primary-600" :disabled="cardData.page.first" />
+        <button-z-v1 @click="next" title="Next" class="btn bg-primary-600" :disabled="cardData.page.last" />
       </div>
       <div class="mr-16"></div>
     </div>
@@ -147,10 +147,10 @@ export default {
 }
 
 .card {
-  @apply bg-white rounded-lg flex flex-col text-slate-800;
+  @apply bg-white rounded-lg flex flex-col text-primary-900;
 
   .card-header {
-    @apply p-2 border-b text-xl font-semibold bg-slate-700 rounded-t-lg bg-opacity-80 text-slate-100;
+    @apply p-2 border-b text-xl font-semibold bg-primary-800 rounded-t-lg bg-opacity-80 text-primary-100;
   }
 
   .card-body {
