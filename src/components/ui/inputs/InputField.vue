@@ -41,7 +41,7 @@ export default {
 </script>
 <style lang="scss" scoped>
 .input-field {
-  @apply outline-none border-b-2 border-secondary-900 border-opacity-40 focus:border-opacity-90;
+  @apply outline-none border-b-2 border-primary-900 border-opacity-40 focus:border-opacity-90;
   @apply text-current px-1 py-0.5 w-full;
 }
 </style>

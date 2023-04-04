@@ -147,10 +147,10 @@ export default {
 }
 
 .card {
-  @apply bg-white rounded-lg flex flex-col text-primary-900;
+  @apply bg-white rounded-lg flex flex-col;
 
   .card-header {
-    @apply p-2 border-b text-xl font-semibold bg-primary-800 rounded-t-lg bg-opacity-80 text-primary-100;
+    @apply p-2 border-b text-xl font-semibold bg-primary-800 rounded-t-lg bg-opacity-80 text-primary-50;
   }
 
   .card-body {

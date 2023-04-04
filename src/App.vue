@@ -1,5 +1,5 @@
 <template>
-  <div class="h-full">
+  <div class="h-full text-primary-900">
     <component :is="layout">
       <RouterView />
     </component>
