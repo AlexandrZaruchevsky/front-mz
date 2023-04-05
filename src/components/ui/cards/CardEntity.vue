@@ -74,10 +74,10 @@ export default {
 }
 
 .card {
-  @apply bg-white rounded-lg shadow-xl flex flex-col text-primary-900;
+  @apply bg-white rounded-lg shadow-xl flex flex-col;
 
   .card-header {
-    @apply flex flex-row items-center justify-between p-2 border-b text-xl font-semibold bg-primary-600 rounded-t-lg bg-opacity-80 text-secondary-100;
+    @apply flex flex-row items-center justify-between p-2 border-b text-xl font-semibold bg-primary-800 rounded-t-lg bg-opacity-80 text-secondary-100;
   }
 
   .card-body {

@@ -18,7 +18,8 @@
           <select class="select-z" v-model="selectedSort" @change="changeSort">
             <option v-for="opt in cardData.sortOptions" :value="opt.key" :key="opt.key">{{ opt.value }}</option>
           </select>
-          <input type="text" v-model="searchText" @input="setSearch" @keyup="search" />
+          <!-- <input type="text" v-model="searchText" @input="setSearch" @keyup="search" /> -->
+          <input-field v-model="searchText" @input="setSearch" @keyup="search" v-focus/>
           <!-- <input type="text" v-model="searchText" @input="setSearch" @keyup.enter="search" /> -->
         </div>
       </div>

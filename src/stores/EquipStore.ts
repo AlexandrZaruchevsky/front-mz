@@ -210,6 +210,17 @@ export const useEquipStore = defineStore('equipStore', () => {
     )
   })
 
+  const cardFuncChildren = computed<CardFunction>(() => {
+    return new CardFunction(
+      entity.value.id,
+      ()=>{},
+      ()=>{},
+      () => {
+        router.go(-1)
+      }
+    )
+  })
+
   const cardFuncChild = computed<CardFunction>(() => {
     return new CardFunction(
       equipChild.value.id,
@@ -342,6 +353,7 @@ export const useEquipStore = defineStore('equipStore', () => {
     entity,
     cardData,
     cardFunction,
+    cardFuncChildren,
     cardFuncChild,
     serviceRequest,
     equipTypeList,

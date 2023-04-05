@@ -1,6 +1,6 @@
 <template>
   <overlay-z class="flex flex-col w-full">
-    <card-entity :header="header" class="w-full h-full lg:w-10/12 xl:w-8/12 2xl:w-7/1">
+    <card-entity :header="header" class="w-full h-full lg:w-10/12 xl:w-8/12 2xl:w-7/1" :cardFunc="cardFuncChildren">
       <template #body>
         <div class="p-4 flex flex-col">
           <div class="flex flex-row gap-4 py-2 border-b-2 border-slate-500">
@@ -50,7 +50,7 @@ import { useEquipStore } from '@/stores/EquipStore';
 import { computed } from 'vue';
 import { storeToRefs } from 'pinia';
 
-const { entity, equipChildren } = storeToRefs(useEquipStore());
+const { entity, equipChildren, cardFuncChildren } = storeToRefs(useEquipStore());
 const { detailForm } = useEquipStore();
 
 // const details = computed<string>(() => `/equips/${entity.value.id}/details`);
