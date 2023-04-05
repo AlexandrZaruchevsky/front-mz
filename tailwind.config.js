@@ -13,7 +13,7 @@ module.exports = {
       secondary: colors.stone,
       danger: colors.rose,
       warn: colors.orange,
-      info: colors.yellow,
+      info: colors.lime,
       slate: colors.slate,
       teal: colors.teal,
       white: colors.white,

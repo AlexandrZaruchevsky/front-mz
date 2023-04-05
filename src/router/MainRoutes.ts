@@ -65,8 +65,19 @@ export default [
         component: () => import("@/pages/user-page/arms/ArmPage.vue"),
         meta: {
           authRequired: true
-        }
+        },
+        children:[
+          
+        ]
       },
+      {
+        path:":id/details",
+        name:"ArmDetails",
+        component: ()=>import("@/pages/user-page/arms/ArmDetailsPage.vue"),
+        meta: {
+          authRequired: true
+        },
+      }
     ]
   }
 ]

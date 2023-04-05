@@ -6,7 +6,7 @@
         <form @submit.prevent class="p-2">
           <div class="flex flex-col gap-1">
             <div class="input-field-wraper">
-              <label class="label-input">Наименование:</label>
+              <label class="label-input" >Наименование:</label>
               <input-field v-model="entity.name" v-focus />
             </div>
             <div class="input-field-wraper">
@@ -33,21 +33,17 @@
             </div>
           </div>
         </form>
-        <div v-if="entity.id >= 0" class="p-2">
-          <button-z-v1 title="Details" class="bg-info-700"
-            @click="$router.push({ path: `/arms/${entity.id}/details` })"></button-z-v1>
-        </div>
       </template>
     </card-entity>
     <router-view />
   </overlay-z>
   <overlay-z class="z-20" v-if="isSetMol">
-    <card-choice-v1 :choiceList="choiceEmplList" :searchFunc="fetchEmployeeList" rowVisible="3"
-      :choiceFunc="choiceEmplFunc" class="shadow-xl mt-20" @hide="isSetMol = false" />
+    <card-choice-v1 :choiceList="choiceEmplList" :searchFunc="fetchEmployeeList" rowVisible="3" :choiceFunc="choiceEmplFunc"
+      class="shadow-xl mt-20" @hide="isSetMol = false" />
   </overlay-z>
-  <overlay-z class="z-20" v-if="isSetPop">
+  <overlay-z class="z-20" v-if="isSetPop" >
     <card-choice-v1 :choiceList="choicePopList" :searchFunc="fetchPOPList" rowVisible="3" :choiceFunc="choicePopFunc"
-      class="shadow-xl mt-20" @hide="isSetPop = false" />
+      class="shadow-xl mt-20" @hide="isSetPop = false"/>
   </overlay-z>
 </template>
 

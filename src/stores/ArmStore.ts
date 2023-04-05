@@ -138,6 +138,7 @@ export const useArmStore = defineStore("armStore", () => {
       console.log(err.response.data);
     })
   }
+  
   async function saveEntity() {
     let flag = false;
     if (serviceRequest.isAdd()) {
@@ -180,6 +181,7 @@ export const useArmStore = defineStore("armStore", () => {
       return serviceRequest.isAdd() ? "Arm | Add" : "Arm | Update"
     }),
     fetchEntities,
+    fetchEntity,
     editForm
   }
 

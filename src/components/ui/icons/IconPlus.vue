@@ -1,5 +1,5 @@
 <template>
-  <div class="rounded-full p-1 hover:cursor-pointer hover:shadow-2xl" :class="!hover ? 'bg-opacity-50' : 'bg-opacity-90'"
+  <div class="rounded-full p-1 hover:cursor-pointer hover:shadow-2xl" :class="!hover ? 'bg-opacity-60' : 'bg-opacity-90'"
     @mouseenter="hover = true" @mouseleave="hover = false">
     <svg xmlns="http://www.w3.org/2000/svg" id="Outline" viewBox="0 0 24 24" :width="iconSize" :height="iconSize">
       <path fill="white"
