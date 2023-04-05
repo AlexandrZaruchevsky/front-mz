@@ -1,18 +1,23 @@
 <template>
-  <div class="flex flex-col gap-2 bg-white rounded-lg p-4"
+  <div class="flex flex-col gap-2 bg-white rounded-lg p-4 border border-secondary-500 relative"
     style="min-height: 400px; max-height: 400px; min-width: 400px; max-width: 400px;">
+    <div class="absolute right-0 top-12">
+      <div class="absolute left-2 bottom-0 hover:cursor-pointer" @click="$emit('hide')">
+        <icon-cross />
+      </div>
+    </div>
     <div>
-      <input-field v-model="searchText" @keyup="search" v-focus placeHolder="input fio"/>
+      <input-field v-model="searchText" @keyup="search" v-focus placeHolder="Search ..."/>
     </div>
     <div class="border-t-2 border-dotted"></div>
     <div></div>
-    <div class="flex flex-col h-full overflow-auto border rounded p-2">
+    <div class="flex flex-col h-full overflow-auto border border-secondary-500 shadow-secondary-300 shadow-inner rounded p-2">
       <template v-if="choiceList.length > 0">
         <div v-for="entity of choiceList" :key="entity.key" class="flex flex-col mb-1">
-          <div class="border border-slate-500 rounded-lg p-2">
+          <div class="border border-secondary-500 rounded-lg p-2">
             <div class="flex justify-between gap-2 items-center">
               <span class="overflow-hidden whitespace-nowrap">{{ entity.value }}</span>
-              <button class="px-2 py-0.5 border border-slate-500 rounded hover:bg-slate-300"
+              <button class="px-2 py-0.5 border border-primary-500 rounded hover:bg-primary-300"
                 @click="choice(entity)">choice</button>
             </div>
             <div v-if="rowCount > 1">

@@ -1,12 +1,9 @@
-import { useAuthStore } from "@/stores/AuthStore";
-import EntityService from "./EntityService";
-import { storeToRefs } from "pinia";
-import axios from "axios";
-import type { POF, POFPage } from "@/model/POF";
+import http from './http-common';
+import type { POF } from "@/model/POF";
+import type { PageRequest } from "@/model/Page";
+import EntityServiceV1 from "./EntityServiceV1";
 
-const { token } = storeToRefs(useAuthStore())
-
-export default class POFService extends EntityService<POF, POFPage>{
+export default class POFService extends EntityServiceV1<POF, PageRequest>{
   constructor(
     public url: String,
   ) {
@@ -15,11 +12,7 @@ export default class POFService extends EntityService<POF, POFPage>{
 
   public async getAllPOFs(): Promise<Array<POF>> {
     super.getServiceRequest().start();
-    return await axios.get(`${super.getBaseFull()}/all`, {
-      headers: {
-        Authorization: token.value
-      }
-    }).then(response => {
+    return await http.get(`${this.url}/all`).then(response => {
       super.getServiceRequest().end()
       return response.data;
     }).catch(err => {
@@ -30,10 +23,7 @@ export default class POFService extends EntityService<POF, POFPage>{
 
   public async getAllPOFByOrg(orgId:Number= -1):Promise<Array<POF>>{
     super.getServiceRequest().start();
-    return await axios.get(`${super.getBaseFull()}/all`, {
-      headers: {
-        Authorization: token.value
-      },
+    return await http.get(`${this.url}/all`, {
       params:{
         orgId
       }
@@ -42,6 +32,21 @@ export default class POFService extends EntityService<POF, POFPage>{
       return response.data;
     }).catch(err => {
       super.getServiceRequest().error("Error fetch Points of Presence")
+      throw err;
+    })
+  }
+
+  public async fetchAllForChoice(name:string):Promise<Array<POF>>{
+    super.getServiceRequest().start();
+    return await http.get(`${this.url}/list-choice`,{
+      params:{
+        name
+      }
+    }).then(response=>{
+      super.getServiceRequest().end()
+      return response.data;
+    }).catch(err => {
+      super.getServiceRequest().error("Error fetch Positions")
       throw err;
     })
   }

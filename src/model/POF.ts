@@ -3,20 +3,20 @@ import { Page } from "./Page";
 export class POF {
   constructor(
     public id: number = -1,
-    public shortName: String = "",
-    public fullName: String = "",
-    public postcode: String = "",
-    public region: String = "",
-    public district: String = "",
-    public city: String = "",
-    public village: String = "",
-    public street: String = "",
-    public house: String = "",
-    public corpus: String = "",
-    public apartment: String = "",
+    public shortName: string = "",
+    public fullName: string = "",
+    public postcode: string = "",
+    public region: string = "",
+    public district: string = "",
+    public city: string = "",
+    public village: string = "",
+    public street: string = "",
+    public house: string = "",
+    public corpus: string = "",
+    public apartment: string = "",
     public bossId: number = -1,
     public orgId: number = -1,
-    public orgName: String = ""
+    public orgName: string = ""
   ) { }
 }
 

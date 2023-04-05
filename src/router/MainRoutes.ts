@@ -50,5 +50,23 @@ export default [
         ]
       }
     ]
+  },
+  {
+    path: '/arms',
+    name: 'Arms',
+    component: () => import("@/pages/user-page/arms/ArmsPage.vue"),
+    meta: {
+      layout: "default-layout",
+      authRequired: true
+    },
+    children: [
+      {
+        path: ':id',
+        component: () => import("@/pages/user-page/arms/ArmPage.vue"),
+        meta: {
+          authRequired: true
+        }
+      },
+    ]
   }
 ]

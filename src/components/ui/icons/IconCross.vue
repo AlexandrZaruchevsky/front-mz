@@ -1,9 +1,9 @@
 <template>
-  <div class="rounded-full p-1 hover:cursor-pointer hover:shadow-2xl" :class="!hover ? 'bg-opacity-50' : 'bg-opacity-90'"
-    @mouseenter="hover = true" @mouseleave="hover = false">
+  <div class="hover:cursor-pointer" :class="!hover ? 'opacity-30' : 'opacity-60'" @mouseenter="hover = true"
+    @mouseleave="hover = false">
     <svg xmlns="http://www.w3.org/2000/svg" id="Outline" viewBox="0 0 24 24" :width="iconSize" :height="iconSize">
-      <path fill="white"
-        d="M17,11H13V7a1,1,0,0,0-1-1h0a1,1,0,0,0-1,1v4H7a1,1,0,0,0-1,1H6a1,1,0,0,0,1,1h4v4a1,1,0,0,0,1,1h0a1,1,0,0,0,1-1V13h4a1,1,0,0,0,1-1h0A1,1,0,0,0,17,11Z" />
+      <path fill="black"
+        d="M18,6h0a1,1,0,0,0-1.414,0L12,10.586,7.414,6A1,1,0,0,0,6,6H6A1,1,0,0,0,6,7.414L10.586,12,6,16.586A1,1,0,0,0,6,18H6a1,1,0,0,0,1.414,0L12,13.414,16.586,18A1,1,0,0,0,18,18h0a1,1,0,0,0,0-1.414L13.414,12,18,7.414A1,1,0,0,0,18,6Z" />
     </svg>
   </div>
 </template>
@@ -11,7 +11,7 @@
 import { computed, ref } from 'vue';
 
 export default {
-  name: "IconPlus",
+  name: "IconCross",
   props: {
     size: {
       type: String,

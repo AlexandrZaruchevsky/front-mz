@@ -21,6 +21,7 @@ export const useMenuStore = defineStore('menuStore', () => {
     new LinkItem(0, "/admin", "Setting", false, "admin"),
     new LinkItem(1, "/employees", "Employees", false, "all"),
     new LinkItem(1, "/equips", "Equips", false, "all"),
+    new LinkItem(1, "/arms", "Arms", false, "all"),
     new LinkItem(2, "/dictionaries", "Dictionaries", false, "all"),
   ])
 

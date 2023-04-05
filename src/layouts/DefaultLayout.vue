@@ -18,7 +18,7 @@ export default {
 <style lang="scss" scoped>
 .content {
   height: calc(100vh - 50px);
-  @apply p-4 bg-slate-800 bg-opacity-40;
+  @apply p-4 bg-secondary-800 bg-opacity-40;
 
 }
 </style>

@@ -79,9 +79,9 @@
     </card-entity>
     <router-view />
   </overlay-z>
-  <overlay-z class="z-20" v-if="isSetMol" @click="isSetMol = false">
+  <overlay-z class="z-20" v-if="isSetMol">
     <card-choice-v1 :choiceList="choiceEmplList" :searchFunc="fetchEmployeeList" rowVisible="3" :choiceFunc="choiceFunc"
-      class="shadow-xl mt-20" @click.stop />
+      class="shadow-xl mt-20"  @hide="isSetMol = false" />
   </overlay-z>
 </template>
 

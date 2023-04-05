@@ -1,6 +1,6 @@
 <template>
   <overlay-z>
-    <card-entity header="Employee Detail" class="w-full lg:w-5/6 xl:w-8/12 2xl:w-1/2" :cardFunc="cardFunctionPhone">
+    <card-entity header="Employee Detail" class="w-full md:w-7/12 lg:w-6/12 xl:w-5/12" :cardFunc="cardFunctionPhone">
       <template #body>
         <form>
           <div class="flex flex-col gap-2 p-4">
