@@ -1,7 +1,7 @@
 import type { Arm } from "@/model/Arm";
 import { EntityChoice } from "@/model/Choice";
 import { Employee } from "@/model/Employee";
-import { Equip } from "@/model/Equip";
+import type { Equip } from "@/model/Equip";
 import type { POF } from "@/model/POF";
 import ArmServiceV1 from "@/services/ArmServiceV1";
 import EmplService from "@/services/EmplService";
