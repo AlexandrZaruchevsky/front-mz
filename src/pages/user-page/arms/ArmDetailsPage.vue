@@ -30,7 +30,8 @@
             <div class="overflow-auto w-full">
               <div v-for="armDetail of armDetailList" :key="armDetail.id" class="flex flex-col gap-2">
                 <div
-                  class="flex flex-row gap-2 rounded-md px-2 py-1 border-secondary-400 border-b-2 border-dotted w-full hover:bg-secondary-200 hover:cursor-pointer">
+                  class="flex flex-row gap-2 rounded-md px-2 py-1 border-secondary-400 border-b-2 border-dotted w-full hover:bg-secondary-200 hover:cursor-pointer"
+                  @click="$router.push({ path: `/arms/${entity.id}/details/${armDetail.id}` })">
 
                   <div class="w-1/3">{{ armDetail.name }}</div>
                   <div class="w-1/3">{{ armDetail.domainName }}</div>
@@ -43,10 +44,13 @@
       </template>
     </card-entity>
     <div class="relative">
-      <icon-plus class="absolute right-4 bottom-4 bg-primary-800" size="md" />
+      <icon-plus 
+        class="absolute right-4 bottom-4 bg-primary-800" size="md" 
+        @click="$router.push({path:`/arms/${entity.id}/details/add`})"
+      />
     </div>
-    <router-view />
   </overlay-z>
+  <router-view />
 </template>
 
 <script setup lang="ts">

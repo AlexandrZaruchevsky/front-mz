@@ -77,6 +77,15 @@ export default [
         meta: {
           authRequired: true
         },
+        children:[
+          {
+            path:":armDetailId",
+            component: ()=>import("@/pages/user-page/arms/ArmDetailPage.vue"),
+            meta:{
+              authRequired: true
+            }
+          }
+        ]
       }
     ]
   }

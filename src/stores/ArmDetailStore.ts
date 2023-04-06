@@ -26,10 +26,21 @@ export const useArmDetailStore = defineStore("armDetailStore", () => {
   const cardFunction = computed<CardFunction>(() => {
     return new CardFunction(
       armDetail.value.id,
+      ()=>{},//saveEntity,
+      ()=>{},//deleteEntity,
+      () => {
+        router.push({ path: `/arms/${entity.value.id}` })
+      }
+    )
+  })
+
+  const cardFuncDetail = computed<CardFunction>(() => {
+    return new CardFunction(
+      armDetail.value.id,
       saveEntity,
       deleteEntity,
       () => {
-        router.push({ path: `/arms/${entity.value.id}` })
+        router.push({ path: `/arms/${entity.value.id}/details` })
       }
     )
   })
@@ -40,6 +51,7 @@ export const useArmDetailStore = defineStore("armDetailStore", () => {
     serviceRequest.add(val)
     if (serviceRequest.isAdd()) {
       armDetail.value = new ArmDetail();
+      armDetail.value.armId=entity.value.id
     }
   }
 
@@ -53,7 +65,7 @@ export const useArmDetailStore = defineStore("armDetailStore", () => {
   }
 
   async function editForm() {
-    const paramId = useRoute().params.id as string;
+    const paramId = useRoute().params.armDetailId as string;
     if (!parseInt(paramId)) {
       if (paramId === "add") {
         setAdd();
@@ -84,6 +96,7 @@ export const useArmDetailStore = defineStore("armDetailStore", () => {
       console.log(err.response.data);
     })
   }
+
   async function saveEntity() {
     let flag = false;
     if (serviceRequest.isAdd()) {
@@ -91,7 +104,7 @@ export const useArmDetailStore = defineStore("armDetailStore", () => {
         flag = true;
         await fetchArmDetail(response.id);
         serviceRequest.add(false);
-        router.push({ path: `/arm-details/${entity.value.id}` })
+        router.push({ path: `/arms/${entity.value.id}/details/${response.id}` })
       })
     } else {
       await entityService.updateEntity(armDetail.value).then(async response => {
@@ -120,6 +133,7 @@ export const useArmDetailStore = defineStore("armDetailStore", () => {
     entity,
     serviceRequest,
     cardFunction,
+    cardFuncDetail,
     headerForm: computed(() => {
       return serviceRequest.isAdd() ? "ArmDetail | Add" : "ArmDetail | Update"
     }),

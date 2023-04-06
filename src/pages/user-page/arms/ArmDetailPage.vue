@@ -1,49 +1,43 @@
 <template>
-  <overlay-z class="z-20">
+  <overlay-z class="z-20 pt-10">
     <card-entity :header="headerForm" class="w-full sm:w-3/4 md:w-7/12 lg:w-6/12 xl:w-5/12 2xl:w-4/12" editable
-      :cardFunc="cardFunction">
+      :cardFunc="cardFuncDetail">
       <template #body>
-        <form @submit.prevent class="p-2">
+        <div class="p-2">
           <div class="flex flex-col gap-1">
             <div class="input-field-wraper">
+              <label class="label-input">Equip:</label>
+              <input-field v-model="armDetail.equipName" />
+              <div style="min-width: 80px;"
+                class="text-center whitespace-nowrap px-2 py-0.5 border border-slate-500 rounded hover:bg-slate-200 hover:cursor-pointer"
+                @click="isSetEquip = true">
+                Equip
+              </div>
+            </div>
+            <div class="input-field-wraper">
               <label class="label-input" >Наименование:</label>
-              <input-field v-model="entity.name" v-focus />
+              <input-field v-model="armDetail.name" v-focus />
+            </div>
+            <div class="input-field-wraper">
+              <label class="label-input">Network-name:</label>
+              <input-field v-model="armDetail.domainName" />
+            </div>
+            <div class="input-field-wraper">
+              <label class="label-input">ip-address:</label>
+              <input-field v-model="armDetail.ipV4" />
             </div>
             <div class="input-field-wraper">
               <label class="label-input">Description:</label>
-              <input-field v-model="entity.description" />
-            </div>
-            <div class="input-field-wraper">
-              <label class="label-input">МОЛ:</label>
-              <input-field v-model="entity.molFio" />
-              <div style="min-width: 80px;"
-                class="whitespace-nowrap px-2 py-0.5 border border-slate-500 rounded hover:bg-slate-200 hover:cursor-pointer"
-                @click="isSetMol = true">
-                Set MOL
-              </div>
-            </div>
-            <div class="input-field-wraper">
-              <label class="label-input">POP:</label>
-              <input-field v-model="entity.popName" />
-              <div style="min-width: 80px;"
-                class="whitespace-nowrap px-2 py-0.5 border border-slate-500 rounded hover:bg-slate-200 hover:cursor-pointer"
-                @click="isSetPop = true">
-                Set POP
-              </div>
+              <input-field v-model="armDetail.description" />
             </div>
           </div>
-        </form>
+        </div>
       </template>
     </card-entity>
-    <router-view />
   </overlay-z>
-  <overlay-z class="z-20" v-if="isSetMol">
-    <card-choice-v1 :choiceList="choiceEmplList" :searchFunc="fetchEmployeeList" rowVisible="3" :choiceFunc="choiceEmplFunc"
-      class="shadow-xl mt-20" @hide="isSetMol = false" />
-  </overlay-z>
-  <overlay-z class="z-20" v-if="isSetPop" >
-    <card-choice-v1 :choiceList="choicePopList" :searchFunc="fetchPOPList" rowVisible="3" :choiceFunc="choicePopFunc"
-      class="shadow-xl mt-20" @hide="isSetPop = false"/>
+  <overlay-z class="z-20" v-if="isSetEquip">
+    <card-choice-v1 :choiceList="choiceEquipList" :searchFunc="fetchEquipList" rowVisible="3" :choiceFunc="choiceEquipFunc"
+      class="shadow-xl mt-20" @hide="isSetEquip = false" />
   </overlay-z>
 </template>
 
@@ -51,53 +45,35 @@
 
 import { useChoiceStore } from '@/stores/ChoiceStore';
 import { EntityChoice } from '@/model/Choice';
-import { computed, ref, watch } from 'vue';
+import { ref, watch } from 'vue';
 import { storeToRefs } from 'pinia';
-import { useArmStore } from '@/stores/ArmStore';
+import { useArmDetailStore } from '@/stores/ArmDetailStore';
 
-
-const { entity, headerForm, cardFunction } = storeToRefs(useArmStore());
-const { editForm } = useArmStore();
-
-// const details = computed<string>(() => `/equips/${entity.value.id}/details`);
+const { armDetail, headerForm, cardFuncDetail } = storeToRefs(useArmDetailStore());
+const { editForm } = useArmDetailStore();
 
 editForm();
 
-const { choiceEmplList, choicePopList } = storeToRefs(useChoiceStore())
-const { fetchEmployeeList, fetchPOPList } = useChoiceStore()
+const { choiceEquipList } = storeToRefs(useChoiceStore())
+const { fetchEquipList } = useChoiceStore()
 
-/**Set Mol */
+/**Set Equip */
 
-const isSetMol = ref<boolean>(false);
+const isSetEquip = ref<boolean>(false);
 
-watch(isSetMol, async () => {
-  if (isSetMol.value)
-    await fetchEmployeeList();
+watch(isSetEquip, async () => {
+  if (isSetEquip.value)
+    await fetchEquipList();
 })
 
-const choiceEmplFunc = (en: EntityChoice = new EntityChoice()) => {
-  if (en.key != -1 && typeof en.key == "string") {
-    entity.value.mol = en.key;
-    entity.value.molFio = en.value
-    isSetMol.value = false;
-  }
-}
-
-/**End */
-
-/**Set Point of presence */
-const isSetPop = ref<boolean>(false);
-watch(isSetPop, async () => {
-  if (isSetPop.value)
-    await fetchPOPList();
-})
-const choicePopFunc = (en: EntityChoice = new EntityChoice()) => {
+const choiceEquipFunc = (en: EntityChoice = new EntityChoice()) => {
   if (en.key != -1 && typeof en.key == "number") {
-    entity.value.popId = en.key;
-    entity.value.popName = en.value
-    isSetPop.value = false;
+    armDetail.value.equipId = en.key;
+    armDetail.value.equipName = en.value
+    isSetEquip.value = false;
   }
 }
+
 /**End */
 
 </script>
