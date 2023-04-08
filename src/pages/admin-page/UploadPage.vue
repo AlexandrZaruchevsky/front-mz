@@ -3,9 +3,19 @@
     <card-z header="Upload page" class="h-full w-1/2">
       <template #body>
         <div class="p-2">
-          <div class="flex flex-row gap-2 items-center">
-            <input type="file" class=" p-2 border rounded-lg" ref="file" @change="selectFile">
-            <button-z title="UpLoad" @click="uploadFile" />
+          <div>
+            <div>Upload users</div>
+            <div class="flex flex-row gap-2 items-center">
+              <input type="file" class=" p-2 border rounded-lg" ref="fileUsers" @change="selectFileUsers">
+              <button-z title="UpLoad" @click="uploadUsers" />
+            </div>
+          </div>
+          <div>
+            <div>Upload equips</div>
+            <div class="flex flex-row gap-2 items-center">
+              <input type="file" class=" p-2 border rounded-lg" ref="fileEquips" @change="selectFileEquips">
+              <button-z title="UpLoad" @click="uploadEquips" />
+            </div>
           </div>
         </div>
       </template>
@@ -18,17 +28,33 @@ import { ref } from 'vue';
 
 import UploadService from "@/services/UploadService"
 
-const file = ref<HTMLInputElement | undefined>(undefined)
+const fileUsers = ref<HTMLInputElement | undefined>(undefined)
 const selectedFile = ref<File | undefined | null>(undefined)
-const selectFile = () => {
-  selectedFile.value = file.value?.files?.item(0)
-  console.log(selectedFile.value);
+const selectFileUsers = () => {
+  selectedFile.value = fileUsers.value?.files?.item(0)
+  console.log(selectedFile.value?.name);
+}
+
+const uploadUsers = () => {
+  if (selectedFile.value) {
+    UploadService.uploadUsers(selectedFile.value, (event: { loaded: number; total: number; }) => {
+      console.log(Math.round((100 * event.loaded) / event.total));
+    })
+  }
+}
+
+const fileEquips = ref<HTMLInputElement | undefined>(undefined)
+const selectFileEquips = () => {
+  selectedFile.value = fileEquips.value?.files?.item(0)
+  console.log(selectedFile.value?.name);
   
 }
 
-const uploadFile = () => {
+const uploadEquips = () => {
+  console.log("uploadEquips");
+  
   if (selectedFile.value) {
-    UploadService.upload(selectedFile.value, (event: { loaded: number; total: number; }) => {
+    UploadService.uploadFile("/upload/equips", selectedFile.value, (event: { loaded: number; total: number; }) => {
       console.log(Math.round((100 * event.loaded) / event.total));
     })
   }
