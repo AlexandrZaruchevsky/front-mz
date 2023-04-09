@@ -66,22 +66,22 @@ export default [
         meta: {
           authRequired: true
         },
-        children:[
-          
+        children: [
+
         ]
       },
       {
-        path:":id/details",
-        name:"ArmDetails",
-        component: ()=>import("@/pages/user-page/arms/ArmDetailsPage.vue"),
+        path: ":id/details",
+        name: "ArmDetails",
+        component: () => import("@/pages/user-page/arms/ArmDetailsPage.vue"),
         meta: {
           authRequired: true
         },
-        children:[
+        children: [
           {
-            path:":armDetailId",
-            component: ()=>import("@/pages/user-page/arms/ArmDetailPage.vue"),
-            meta:{
+            path: ":armDetailId",
+            component: () => import("@/pages/user-page/arms/ArmDetailPage.vue"),
+            meta: {
               authRequired: true
             }
           }

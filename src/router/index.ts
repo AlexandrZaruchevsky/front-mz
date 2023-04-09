@@ -18,6 +18,12 @@ const router = createRouter({
   routes: [
     {
       path: '/',
+      redirect: () => {
+        return { name: "Dashboard" }
+      }
+    },
+    {
+      path: '/about',
       name: 'Home',
       component: () => import("@/pages/HomePage.vue"),
       meta: {
@@ -26,16 +32,25 @@ const router = createRouter({
       }
     },
     {
-      path: '/admin',
-      redirect: () => {
-        return {name:"Organizations"}
+      path: '/dashboard',
+      name: 'Dashboard',
+      component: () => import("@/pages/dashboards/DashboardLayout.vue"),
+      meta: {
+        layout: "default-layout",
+        authRequired: false
       }
     },
     {
-      path:'/admin/upload',
-      name:'UploadPage',
-      component: ()=> import('@/pages/admin-page/UploadPage.vue'),
-      meta:{
+      path: '/admin',
+      redirect: () => {
+        return { name: "Organizations" }
+      }
+    },
+    {
+      path: '/admin/upload',
+      name: 'UploadPage',
+      component: () => import('@/pages/admin-page/UploadPage.vue'),
+      meta: {
         layout: "admin-layout",
         authRequired: true
       }
@@ -59,6 +74,7 @@ router.beforeEach((to, from, next) => {
   if (
     to.name === "Home" ||
     to.name === "LoginPage" ||
+    to.name === "Dashboard" ||
     (
       to.meta.authRequired &&
       isAuth.value

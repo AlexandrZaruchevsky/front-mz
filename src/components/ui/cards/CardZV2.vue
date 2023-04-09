@@ -15,7 +15,7 @@
         <button-z v-if="editable" title="add" class="bg-green-600" @click="addEntity" />
         <slot name="tool-buttons" />
         <div v-if="searchable" class="flex items-end gap-2 w-full">
-          <select class="select-z" v-model="selectedSort" @change="changeSort">
+          <select class="select-z" v-model="selectedSort" @change="changeSort" v-show="chSort==true">
             <option v-for="opt in cardData.sortOptions" :value="opt.key" :key="opt.key">{{ opt.value }}</option>
           </select>
           <!-- <input type="text" v-model="searchText" @input="setSearch" @keyup="search" /> -->
@@ -82,7 +82,11 @@ export default {
     searchable: {
       type: [Boolean, String],
       default: false
-    }
+    },
+    chSort: {
+      type: [Boolean, String],
+      default: true
+    },
   },
   setup(props) {
 

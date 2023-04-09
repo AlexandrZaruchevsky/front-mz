@@ -23,7 +23,6 @@ export const useAuthStore = defineStore('authStore', () => {
 
   const isLoaded = ref<Boolean>(false);
 
-
   function login(loginPassword: LoginPassword) {
     isLoaded.value = true;
     isAuthError.value = false;
@@ -34,9 +33,7 @@ export const useAuthStore = defineStore('authStore', () => {
         saveToLocalStorage();
         isLoaded.value = false
         errorMessage.value = "";
-        router.push({
-          name: "Home"
-        })
+        router.back()
       }).catch(err => {
         logout();
         isLoaded.value = false

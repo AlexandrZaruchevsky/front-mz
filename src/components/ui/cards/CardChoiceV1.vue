@@ -1,6 +1,6 @@
 <template>
   <div class="flex flex-col gap-2 bg-white rounded-lg p-4 border border-secondary-500 relative"
-    style="min-height: 400px; max-height: 400px; min-width: 400px; max-width: 400px;">
+    style="min-height: 400px; max-height: 400px; min-width: 600px; max-width: 600px;">
     <div class="absolute right-0 top-12">
       <div class="absolute left-2 bottom-0 hover:cursor-pointer" @click="$emit('hide')">
         <icon-cross />
