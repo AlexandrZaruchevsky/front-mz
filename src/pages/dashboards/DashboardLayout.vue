@@ -4,13 +4,21 @@
       <DashboardGuest />
     </template>
     <template v-else>
-      Dashboard for authorize user
+      <template v-if="true">
+        <DashboardAdmin />
+      </template>
+      <template v-else>
+        <div>
+          Dashboard for authorize user
+        </div>
+      </template>
     </template>
   </div>
 </template>
 <script setup lang="ts">
-import { storeToRefs } from 'pinia';
 import DashboardGuest from './DashboardGuest.vue';
+import DashboardAdmin from './DashboardAdmin.vue'
+import { storeToRefs } from 'pinia';
 import { useAuthStore } from '@/stores/AuthStore';
 
 const { isAuth } = storeToRefs(useAuthStore());
