@@ -107,8 +107,8 @@ export const useEquipStore = defineStore('equipStore', () => {
     if (!parseInt(paramId)) {
       if (paramId === "add") {
         setAddChild();
-        equipChild.value.equipTypeId = -1;
-        equipChild.value.equipModelId = -1;
+        // equipChild.value.equipTypeId = -1;
+        // equipChild.value.equipModelId = -1;
         equipChild.value.parentId = parseInt(id);
       } else {
         setAddChild(false);
@@ -205,7 +205,7 @@ export const useEquipStore = defineStore('equipStore', () => {
       saveEntity,
       deleteEntity,
       () => {
-        router.push({name:"Equips"})
+        router.push({ name: "Equips" })
       }
     )
   })
@@ -213,8 +213,8 @@ export const useEquipStore = defineStore('equipStore', () => {
   const cardFuncChildren = computed<CardFunction>(() => {
     return new CardFunction(
       entity.value.id,
-      ()=>{},
-      ()=>{},
+      () => { },
+      () => { },
       () => {
         router.go(-1)
       }
@@ -253,6 +253,10 @@ export const useEquipStore = defineStore('equipStore', () => {
     if (serviceRequest.isAdd()) {
       equipChild.value = new Equip();
       equipChild.value.children = true
+      equipChild.value.inventoryNumber = entity.value.inventoryNumber
+      equipChild.value.equipTypeId = entity.value.equipTypeId
+      equipChild.value.equipModelId = entity.value.equipModelId
+      equipChild.value.shortName = entity.value.shortName
     }
   }
 
@@ -319,7 +323,7 @@ export const useEquipStore = defineStore('equipStore', () => {
   async function deleteEntity(id: number = -1) {
     await entityService.deleteEntity(id).then(async () => {
       await fetchEntities();
-      router.push({name:"Equips"})
+      router.push({ name: "Equips" })
     }).catch(err => {
       console.log(err.response.data);
     })
@@ -346,6 +350,11 @@ export const useEquipStore = defineStore('equipStore', () => {
     })
   }
 
+  // async function gotoAddEquipChild(){
+  //   equipChild.value = new Equip();
+  //   // equipChild.value.
+  //   router.push({path:`/equips/${entity.value.id}/details/add`})
+  // }
 
   return {
     isDetails,
