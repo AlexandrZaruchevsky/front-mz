@@ -70,7 +70,9 @@
         <EmployeeInfo style="min-width: 800px; max-width: 800px; min-height: 370px;" v-if="isEmplInfo"
           @close="isEmplInfo = false" :empl="empl" />
         <!-- </div> -->
-        <div class="absolute right-0"><icon-angel-down class="cursor-pointer" size="sm" /></div>
+        <div class="absolute right-0">
+          <icon-angel-down class="cursor-pointer" size="sm" />
+        </div>
       </div>
     </div>
   </template>

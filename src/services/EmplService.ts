@@ -1,5 +1,5 @@
 import type { Employee } from "@/model/Employee";
-import http from './http-common';
+// import http from './http-common';
 import EntityServiceV1 from "./EntityServiceV1";
 import type { PageRequest } from "@/model/Page";
 
@@ -13,7 +13,7 @@ export default class EmplService extends EntityServiceV1<Employee, PageRequest>{
 
   public async getAllEmployees(orgId: Number = -1): Promise<Array<Employee>> {
     super.getServiceRequest().start();
-    return await http.get(`${this.url}/all`, {
+    return await this.http.get(`${this.url}/all`, {
       params: {
         orgId
       }
@@ -28,7 +28,7 @@ export default class EmplService extends EntityServiceV1<Employee, PageRequest>{
 
   public async fetchAllForChoice(fio: string = ""): Promise<Array<Employee>> {
     super.getServiceRequest().start();
-    return await http.get(`${this.url}/list-choice`, {
+    return await this.http.get(`${this.url}/list-choice`, {
       params: {
         fio
       }

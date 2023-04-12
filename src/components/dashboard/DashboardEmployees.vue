@@ -72,6 +72,9 @@ onMounted(async () => {
   isLoading.value = true;
   await fetchEmplStat().then(() => {
     isLoading.value = false;
+  }).catch(err=>{
+    isLoading.value = false;
+    console.log(err);
   });
 })
 

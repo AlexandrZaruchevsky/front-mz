@@ -33,7 +33,7 @@ export const useAuthStore = defineStore('authStore', () => {
         saveToLocalStorage();
         isLoaded.value = false
         errorMessage.value = "";
-        router.back()
+        router.back();
       }).catch(err => {
         logout();
         isLoaded.value = false
@@ -52,6 +52,7 @@ export const useAuthStore = defineStore('authStore', () => {
       userAuth.value.user = { ...response }
       isLoaded.value = false;
       errorMessage.value = "";
+      router.push({ path: "/" })
     }).catch(() => {
       isAuthError.value = true;
       errorMessage.value = "Invalidate token";
@@ -63,7 +64,7 @@ export const useAuthStore = defineStore('authStore', () => {
     userAuth.value = new UserAuth();
     isAuth.value = false;
     clearLocalStorage()
-    router.push({path:"/"})
+    router.push({ path: "/" })
   }
 
   function logoutWithGoHome() {

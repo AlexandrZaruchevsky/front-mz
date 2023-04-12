@@ -1,4 +1,4 @@
-import http from './http-common';
+// import http from './http-common';
 import type { POF } from "@/model/POF";
 import type { PageRequest } from "@/model/Page";
 import EntityServiceV1 from "./EntityServiceV1";
@@ -12,7 +12,7 @@ export default class POFService extends EntityServiceV1<POF, PageRequest>{
 
   public async getAllPOFs(): Promise<Array<POF>> {
     super.getServiceRequest().start();
-    return await http.get(`${this.url}/all`).then(response => {
+    return await this.http.get(`${this.url}/all`).then(response => {
       super.getServiceRequest().end()
       return response.data;
     }).catch(err => {
@@ -23,7 +23,7 @@ export default class POFService extends EntityServiceV1<POF, PageRequest>{
 
   public async getAllPOFByOrg(orgId:Number= -1):Promise<Array<POF>>{
     super.getServiceRequest().start();
-    return await http.get(`${this.url}/all`, {
+    return await this.http.get(`${this.url}/all`, {
       params:{
         orgId
       }
@@ -38,7 +38,7 @@ export default class POFService extends EntityServiceV1<POF, PageRequest>{
 
   public async fetchAllForChoice(name:string):Promise<Array<POF>>{
     super.getServiceRequest().start();
-    return await http.get(`${this.url}/list-choice`,{
+    return await this.http.get(`${this.url}/list-choice`,{
       params:{
         name
       }

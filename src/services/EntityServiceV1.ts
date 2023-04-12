@@ -1,12 +1,14 @@
 import type { Entity } from "@/model/Entity";
 import { PageRequest, type PageGen } from "@/model/Page";
 import { ServiceRequest } from "@/model/ServiceRequest";
-import http from './http-common';
+import type { AxiosInstance } from "axios";
+import { HttpAxios } from "./http-common-v1";
 
 export default class EntityServiceV1<T extends Entity, K extends PageRequest>{
   constructor(
     public url: String,
     private serviceRequest: ServiceRequest = new ServiceRequest(),
+    protected http: AxiosInstance = HttpAxios.getHttp()
   ) {
   }
 
@@ -16,7 +18,7 @@ export default class EntityServiceV1<T extends Entity, K extends PageRequest>{
 
   public async getEntities(pageRequest: PageRequest | K = new PageRequest()): Promise<PageGen<T>> {
     this.serviceRequest.start();
-    return await http.get(`${this.url}`, {
+    return await this.http.get(`${this.url}`, {
       params: pageRequest
     }).then(response => {
       this.serviceRequest.end()
@@ -29,7 +31,7 @@ export default class EntityServiceV1<T extends Entity, K extends PageRequest>{
 
   public async getAllEntities(): Promise<Array<T>> {
     this.serviceRequest.start();
-    return await http.get(`${this.url}/all`).then(response => {
+    return await this.http.get(`${this.url}/all`).then(response => {
       this.serviceRequest.end()
       return response.data;
     }).catch(err => {
@@ -40,7 +42,7 @@ export default class EntityServiceV1<T extends Entity, K extends PageRequest>{
 
   public async getEntity(id: Number = -1): Promise<T> {
     this.serviceRequest.start();
-    return await http.get(`${this.url}/${id}`).then(response => {
+    return await this.http.get(`${this.url}/${id}`).then(response => {
       this.serviceRequest.end();
       return response.data
     }).catch(err => {
@@ -51,7 +53,7 @@ export default class EntityServiceV1<T extends Entity, K extends PageRequest>{
 
   public async addEntity(department: T): Promise<T> {
     this.serviceRequest.start();
-    return await http.post(`${this.url}`, department).then(response => {
+    return await this.http.post(`${this.url}`, department).then(response => {
       this.serviceRequest.end();
       return response.data
     }).catch(() => {
@@ -61,7 +63,7 @@ export default class EntityServiceV1<T extends Entity, K extends PageRequest>{
 
   public async updateEntity(t: T): Promise<T> {
     this.serviceRequest.start();
-    return await http.put(`${this.url}`, t,).then(response => {
+    return await this.http.put(`${this.url}`, t,).then(response => {
       this.serviceRequest.end();
       return response.data
     }).catch(() => {
@@ -71,7 +73,7 @@ export default class EntityServiceV1<T extends Entity, K extends PageRequest>{
 
   public async deleteEntity(id: Number = -1): Promise<Boolean> {
     this.serviceRequest.start()
-    return await http.delete(`${this.url}/${id}`).then(() => {
+    return await this.http.delete(`${this.url}/${id}`).then(() => {
       this.serviceRequest.end()
       return true;
     }).catch(err => {

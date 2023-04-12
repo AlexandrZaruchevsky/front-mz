@@ -1,7 +1,7 @@
 import type { Equip, EquipParents } from "@/model/Equip";
 import EntityServiceV1 from "./EntityServiceV1";
 import type { PageRequestEquip } from "@/model/Page";
-import http from './http-common';
+// import http from './http-common';
 
 export default class EquipService extends EntityServiceV1<Equip, PageRequestEquip>{
   constructor(
@@ -11,7 +11,7 @@ export default class EquipService extends EntityServiceV1<Equip, PageRequestEqui
   }
 
   public async fetchAllForChoice(name: string = ""): Promise<Array<Equip>> {
-    return await http.get(`${this.url}/list-choice`, {
+    return await this.http.get(`${this.url}/list-choice`, {
       params: {
         name
       }
@@ -26,7 +26,7 @@ export default class EquipService extends EntityServiceV1<Equip, PageRequestEqui
 
   public async fetchEquipParents(): Promise<EquipParents> {
     this.getServiceRequest().start();
-    return await http.get(`${this.url}/equip-parents`).then(response => {
+    return await this.http.get(`${this.url}/equip-parents`).then(response => {
       this.getServiceRequest().end();
       return response.data
     }).catch(err=>{
@@ -37,7 +37,7 @@ export default class EquipService extends EntityServiceV1<Equip, PageRequestEqui
 
   public async fetchChildren(parentId:number): Promise<Array<Equip>> {
     this.getServiceRequest().start();
-    return await http.get(`${this.url}/${parentId}/children`).then(response => {
+    return await this.http.get(`${this.url}/${parentId}/children`).then(response => {
       this.getServiceRequest().end();
       return response.data
     }).catch(err=>{

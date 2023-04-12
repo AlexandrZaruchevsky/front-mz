@@ -9,8 +9,8 @@ module.exports = {
     colors: {
       transparent: 'transparent',
       current: 'currentColor',
-      primary: colors.zinc,
-      secondary: colors.stone,
+      primary: colors.teal,
+      secondary: colors.neutral,
       danger: colors.rose,
       warn: colors.orange,
       info: colors.lime,

@@ -19,4 +19,6 @@ const apiClient: AxiosInstance = isAuth.value
     }
   })
 
+
+
 export default apiClient

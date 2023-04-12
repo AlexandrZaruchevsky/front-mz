@@ -11,7 +11,7 @@ export default class ArmServiceV1 extends EntityServiceV1<Arm, PageRequest>{
   }
 
   public async fetchAllForChoice(name: string = ""): Promise<Array<Arm>> {
-    return await http.get(`${this.url}/list-choice`, {
+    return await this.http.get(`${this.url}/list-choice`, {
       params: {
         name
       }
