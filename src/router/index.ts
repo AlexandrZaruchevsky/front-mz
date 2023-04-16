@@ -10,6 +10,9 @@ import employeeRoutes from './EmployeeRoutes'
 import mainRoutes from './MainRoutes'
 import dicsRoutes from './DicsRoutes'
 
+
+import mainRouteV1 from './new/MainRouteV1'
+
 import { useAuthStore } from "../stores/AuthStore"
 import { storeToRefs } from 'pinia'
 
@@ -64,7 +67,8 @@ const router = createRouter({
     ...pOFRoutes,
     ...positionRoutes,
     ...employeeRoutes,
-    ...dicsRoutes
+    ...dicsRoutes,
+    ...mainRouteV1
   ]
 })
 
@@ -75,6 +79,7 @@ router.beforeEach((to, from, next) => {
     to.name === "Home" ||
     to.name === "LoginPage" ||
     to.name === "Dashboard" ||
+    to.path.includes('/v1') ||
     (
       to.meta.authRequired &&
       isAuth.value

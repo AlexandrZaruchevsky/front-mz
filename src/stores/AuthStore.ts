@@ -3,12 +3,15 @@ import { defineStore } from 'pinia'
 import { LoginPassword, User, UserAuth } from '@/model/User'
 import { AuthSevice } from '@/services/AuthService';
 import router from '@/router';
+import { useRoute } from 'vue-router';
 
 export const useAuthStore = defineStore('authStore', () => {
   const userAuth = ref<UserAuth>(new UserAuth());
   const isAuth = ref<Boolean>(false);
   const token = computed<string>(() => `Bearer ${userAuth.value.token}`);
   const user = computed<User>(() => userAuth.value.user);
+
+  const route = useRoute();
 
   const shortFIO = computed(() => {
     return user.value
@@ -52,7 +55,7 @@ export const useAuthStore = defineStore('authStore', () => {
       userAuth.value.user = { ...response }
       isLoaded.value = false;
       errorMessage.value = "";
-      router.push({ path: "/" })
+      // router.push({ path: "/" })
     }).catch(() => {
       isAuthError.value = true;
       errorMessage.value = "Invalidate token";
@@ -64,7 +67,7 @@ export const useAuthStore = defineStore('authStore', () => {
     userAuth.value = new UserAuth();
     isAuth.value = false;
     clearLocalStorage()
-    router.push({ path: "/" })
+    router.push({ path: route.fullPath })
   }
 
   function logoutWithGoHome() {
@@ -99,6 +102,10 @@ export const useAuthStore = defineStore('authStore', () => {
     await validateToken();
   }
 
+  function authPage() {
+    router.push({ name: 'LoginPage' })
+  }
+
   return {
     isAuth,
     token,
@@ -111,7 +118,8 @@ export const useAuthStore = defineStore('authStore', () => {
     init,
     login,
     logout,
-    validateToken
+    validateToken,
+    authPage
   }
 
 })

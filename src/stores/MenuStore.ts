@@ -20,9 +20,10 @@ export const useMenuStore = defineStore('menuStore', () => {
   const mainMenuList = ref<Array<LinkItem>>([
     new LinkItem(0, "/admin", "Setting", false, "admin"),
     new LinkItem(1, "/employees", "Employees", false, "all"),
-    new LinkItem(1, "/equips", "Equips", false, "all"),
-    new LinkItem(1, "/arms", "Arms", false, "all"),
-    new LinkItem(2, "/dictionaries", "Dictionaries", false, "all"),
+    new LinkItem(2, "/equips", "Equips", false, "all"),
+    new LinkItem(3, "/arms", "Arms", false, "all"),
+    new LinkItem(4, "/dictionaries", "Dictionaries", false, "all"),
+    new LinkItem(5, "/v1/dashboard", "Dictionaries", false, "all"),
   ])
 
   const menuDicList = ref<Array<LinkItem>>([

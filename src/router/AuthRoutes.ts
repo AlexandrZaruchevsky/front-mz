@@ -4,7 +4,7 @@ export default [
     name: 'LoginPage',
     component: () => import("@/pages/LoginPage.vue"),
     meta: {
-      layout: "auth-layout",
+      layout: "main-layout",
       authRequired: false
     }
   },

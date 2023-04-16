@@ -12,6 +12,7 @@ import { useRoute } from "vue-router";
 import { useAuthStore } from "./stores/AuthStore";
 
 import DefaultLayout from "./layouts/DefaultLayout.vue";
+import MainLayout from "./layouts/MainLayout.vue";
 import AuthLayout from "./layouts/AuthLayout.vue";
 import AdminLayout from "./layouts/AdminLayout.vue";
 import LayoutZ from "./layouts/LayoutZ.vue";
@@ -19,6 +20,7 @@ import LayoutZ from "./layouts/LayoutZ.vue";
 export default {
   components: {
     DefaultLayout,
+    MainLayout,
     AuthLayout,
     AdminLayout,
     LayoutZ
@@ -26,6 +28,7 @@ export default {
   setup() {
     const layout = computed(() => {
       return useRoute().meta.layout || "default-layout";
+      // return useRoute().meta.layout || "default-layout";
     });
     // const router = useRouter();
     

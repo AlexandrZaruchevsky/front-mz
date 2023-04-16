@@ -23,14 +23,14 @@ export default {
 
 <style lang="scss" scoped>
 .card {
-  @apply bg-white rounded-lg shadow-lg;
+  @apply bg-white rounded-lg;
 
   .card-header {
-    @apply p-2 text-lg font-bold border-b;
+    @apply px-4 py-2 text-lg font-bold border-b;
   }
 
   .card-body {
-    @apply p-2;
+    @apply p-4;
   }
 
   .card-footer {
