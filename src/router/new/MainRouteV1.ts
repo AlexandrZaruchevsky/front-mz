@@ -51,5 +51,11 @@ export default [
       authRequired: true,
       layout: "main-layout"
     },
+    children: [
+      {
+        path: ':id',
+        component: () => import('@/components/roles/RoleEditV1.vue')
+      }
+    ]
   },
 ]

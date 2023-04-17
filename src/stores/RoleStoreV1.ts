@@ -16,6 +16,9 @@ export const useRoleStoreV1 = defineStore("roleStoreV1", () => {
   const roles = computed<Array<Role>>(() => page.value.content);
   const role = ref<Role>(new Role());
 
+  const permissions = ref<Array<string>>(new Array());
+  // const perms = computed<Array<string>>(() => permissions.value.sort())
+
   const isAdd = ref<boolean>(false);
 
   const pageRequest = reactive<PageRequest>(new PageRequest(0, 20, "name"));
@@ -35,7 +38,7 @@ export const useRoleStoreV1 = defineStore("roleStoreV1", () => {
   ]
 
   const addEntity = async () => {
-    router.push({ path: "/v1/security/users/add" })
+    router.push({ path: "/v1/security/roles/add" })
   }
 
   const search = async () => {
@@ -47,7 +50,7 @@ export const useRoleStoreV1 = defineStore("roleStoreV1", () => {
     pageRequest.search = searchText;
   }
 
-  const changeSort = async (sort: string = "username") => {
+  const changeSort = async (sort: string = "name") => {
     pageRequest.sortBy = sort;
     pageRequest.search = ""
     await fetchRoles();
@@ -92,24 +95,28 @@ export const useRoleStoreV1 = defineStore("roleStoreV1", () => {
   const cardFunction = computed<CardFunction>(() => {
     return new CardFunction(
       role.value.id,
-      saveUser,
-      deleteUser,
+      saveRole,
+      deleteRole,
       () => {
-        router.push({ name: "RolList" })
+        router.push({ name: "RoleList" })
       }
     )
   })
 
   /**End */
 
-  async function fetchRoles(){
-    page.value = await roleService.getEntities();
+  async function fetchRoles() {
+    page.value = await roleService.getEntities(pageRequest);
   }
 
   async function initForm(): Promise<void> {
     const id = route.params.id;
-    console.log("Init Form");
-    
+
+    console.log("InitForm");
+
+
+    await fetchPermissions();
+
     if (typeof id == "string" && parseInt(id)) {
       isAdd.value = false;
       await fetchRole(parseInt(id))
@@ -119,15 +126,15 @@ export const useRoleStoreV1 = defineStore("roleStoreV1", () => {
     }
   }
 
-  async function fetchRole(id:number=-1){
+  async function fetchRole(id: number = -1) {
     role.value = await roleService.getEntity(id);
   }
 
-  async function saveUser() {
+  async function saveRole() {
     if (isAdd.value) {
       await roleService.addEntity(role.value).then(async (resp) => {
         // isAdd.value = false
-        router.push({ path: `/v1/security/users/${resp.id}` })
+        router.push({ path: `/v1/security/roles/${resp.id}` })
       });
     } else {
       await roleService.updateEntity(role.value);
@@ -135,15 +142,54 @@ export const useRoleStoreV1 = defineStore("roleStoreV1", () => {
     await fetchRoles();
   }
 
-  async function deleteUser() {
+  async function deleteRole() {
     await roleService.deleteEntity(role.value.id).then(async () => {
       await fetchRoles();
-      router.push({ name: "UserList" })
+      router.push({ name: "RoleList" })
     });
   }
 
+  async function fetchPermissions() {
+    if (permissions.value.length == 0) {
+      permissions.value = (await roleService.fetchPermissions()).sort();
+    }
+  }
 
-  return{
+  function addPermission(permission: string = "") {
+    if (permission.trim() != "") {
+      const localPerms = [
+        ...role.value.permissions
+          .filter(item => item.trim().toLocaleLowerCase() != permission.trim().toLocaleLowerCase())
+      ];
+      role.value.permissions = [
+        ...localPerms,
+        permission.trim()
+      ]
+    }
+  }
+
+  function deletePermission(permission: string = "") {
+    if (permission.trim() != "") {
+      role.value.permissions = [
+        ...role.value.permissions
+          .filter(item => item.trim().toLocaleLowerCase() != permission.trim().toLocaleLowerCase())
+      ];
+    }
+  }
+
+  async function deletePermissionFromRole(roleId: number = -1, permission: string = ""): Promise<void> {
+    if (roleId > 0 && permission.trim() != "") {
+      const roleLocal = roles.value.filter(item => item.id == roleId)[0];
+      roleLocal.permissions = [
+        ...roleLocal.permissions.filter(item => item != permission)
+      ]
+      await roleService.updateEntity(roleLocal).then(async ()=>{
+        await fetchRoles();
+      })
+    }
+  }
+
+  return {
     roles,
     role,
     serviceRequest,
@@ -151,7 +197,11 @@ export const useRoleStoreV1 = defineStore("roleStoreV1", () => {
     fetchRoles,
     initForm,
     isAdd,
-    cardFunction
+    cardFunction,
+    permissions,
+    addPermission,
+    deletePermission,
+    deletePermissionFromRole
   }
 
 })

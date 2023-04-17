@@ -9,4 +9,12 @@ export default class RoleServiceV1 extends EntityServiceV1<Role, PageRequest>{
     super(url)
   }
 
+  public async fetchPermissions(): Promise<Array<string>> {
+    console.log("getttttt");
+    
+    return await this.http.get(`/${this.url}/permissions`).then(resp => {
+      return resp.data;
+    })
+  }
+
 }
