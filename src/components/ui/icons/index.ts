@@ -5,11 +5,16 @@ import IconSpiner from './IconSpiner.vue';
 import IconSpinerRefresh from './IconSpinerRefresh.vue'
 import IconAngelDown from './IconAngelDown.vue'
 import IconAngelLeft from './IconAngelLeft.vue'
+import IconAngelRight from './IconAngelRight.vue'
+import IconAngelDoubleLeft from './IconAngelDoubleLeft.vue'
+import IconAngelDoubleRight from './IconAngelDoubleRight.vue'
 import IconLogout from './IconLogout.vue'
 import IconLogin from './IconLogin.vue'
 import IconSetting from './IconSetting.vue'
+import IconTrash from './IconTrash.vue'
+import IconShopBagAdd from './IconShopBagAdd.vue'
 
-export default[
+export default [
   XIcon,
   IconPlus,
   IconCross,
@@ -17,7 +22,12 @@ export default[
   IconSpinerRefresh,
   IconAngelDown,
   IconAngelLeft,
+  IconAngelRight,
+  IconAngelDoubleLeft,
+  IconAngelDoubleRight,
   IconLogout,
   IconLogin,
-  IconSetting
+  IconSetting,
+  IconTrash,
+  IconShopBagAdd
 ]

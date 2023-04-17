@@ -2,7 +2,9 @@
   <div :class="!disabled ? 'cursor-pointer' : ''">
     <svg xmlns="http://www.w3.org/2000/svg" id="Bold" viewBox="0 0 24 24" :width="iconSize" :height="iconSize">
       <path :fill="disabled ? '#c0c0c0' : '#808080'"
-        d="M10.6,12.71a1,1,0,0,1,0-1.42l4.59-4.58a1,1,0,0,0,0-1.42,1,1,0,0,0-1.41,0L9.19,9.88a3,3,0,0,0,0,4.24l4.59,4.59a1,1,0,0,0,.7.29,1,1,0,0,0,.71-.29,1,1,0,0,0,0-1.42Z" />
+        d="M13.1,19a1,1,0,0,1-.7-1.71L17,12.71a1,1,0,0,0,0-1.42L12.4,6.71a1,1,0,0,1,0-1.42,1,1,0,0,1,1.41,0L18.4,9.88a3,3,0,0,1,0,4.24l-4.59,4.59A1,1,0,0,1,13.1,19Z" />
+        <path :fill="disabled ? '#c0c0c0' : '#808080'"
+        d="M6.1,19a1,1,0,0,1-.7-1.71L10.69,12,5.4,6.71a1,1,0,0,1,0-1.42,1,1,0,0,1,1.41,0l6,6a1,1,0,0,1,0,1.42l-6,6A1,1,0,0,1,6.1,19Z" />
     </svg>
   </div>
 </template>
@@ -10,7 +12,7 @@
 import { computed } from 'vue';
 
 export default {
-  name: "IconAngelLeft",
+  name: "IconAngelDoubleRight",
   props: {
     size: {
       type: String,

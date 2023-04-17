@@ -14,7 +14,18 @@ export const useMenuStore = defineStore('menuStore', () => {
     new LinkItem(4, "/admin/employees", "Employees", false, "admin"),
     new LinkItem(5, "/admin/users", "Users", false, "security"),
     new LinkItem(6, "/admin/roles", "Roles", false, "security"),
-    new LinkItem(7, "/admin/upload", "Upload", false, "security")
+    new LinkItem(7, "/admin/upload", "Upload", false, "admin")
+  ]);
+
+  const menu = ref<Array<LinkItem>>([
+    new LinkItem(0, "/admin/organizations", "Organizations", false, "admin"),
+    new LinkItem(1, "/admin/departments", "Departments", false, "admin"),
+    new LinkItem(2, "/admin/point-of-presences", "PointOfPresences", false, "admin"),
+    new LinkItem(3, "/admin/positions", "Positions", false, "admin"),
+    new LinkItem(4, "/admin/employees", "Employees", false, "admin"),
+    new LinkItem(5, "/v1/security/users", "Users", false, "security"),
+    new LinkItem(6, "/v1/security/roles", "Roles", false, "security"),
+    new LinkItem(7, "/admin/upload", "Upload", false, "admin")
   ]);
 
   const mainMenuList = ref<Array<LinkItem>>([
@@ -23,7 +34,7 @@ export const useMenuStore = defineStore('menuStore', () => {
     new LinkItem(2, "/equips", "Equips", false, "all"),
     new LinkItem(3, "/arms", "Arms", false, "all"),
     new LinkItem(4, "/dictionaries", "Dictionaries", false, "all"),
-    new LinkItem(5, "/v1/dashboard", "Dictionaries", false, "all"),
+    new LinkItem(5, "/v1/dashboard", "DashboardV1", false, "all"),
   ])
 
   const menuDicList = ref<Array<LinkItem>>([
@@ -38,16 +49,23 @@ export const useMenuStore = defineStore('menuStore', () => {
   const menuDics = computed<Array<LinkItem>>(() => setItemLinkActive(menuDicList.value));
 
   const mainMenu = computed<Array<LinkItem>>(() => {
-    if(useAuthStore().isAuth){
+    if (useAuthStore().isAuth) {
       if (!useAuthStore().isAdmin) {
         return setItemLinkActive(mainMenuList.value.filter(item => item.access != "admin"));
       } else {
         return setItemLinkActive(mainMenuList.value);
       }
-    }else{
+    } else {
       return []
     }
   })
+
+  const menuSecurity = computed<Array<LinkItem>>(() => {
+    const menuSec = [...menu.value.filter(item => item.access.includes("security"))]
+    return setItemLinkActive(menuSec);
+  })
+
+  // const securityMenu
 
   function setItemLinkActive(menuList: Array<LinkItem> = []): Array<LinkItem> {
     const itemIndex = menuList
@@ -69,7 +87,8 @@ export const useMenuStore = defineStore('menuStore', () => {
   return {
     settingMenu,
     mainMenu,
-    menuDics
+    menuDics,
+    menuSecurity
   }
 
 })

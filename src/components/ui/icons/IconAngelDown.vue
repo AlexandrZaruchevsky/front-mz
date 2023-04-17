@@ -1,8 +1,8 @@
 <template>
   <div>
     <svg xmlns="http://www.w3.org/2000/svg" id="Bold" viewBox="0 0 24 24" :width="iconSize" :height="iconSize">
-      <path fill="gray"
-        d="M19.061,7.854a1.5,1.5,0,0,0-2.122,0l-4.586,4.585a.5.5,0,0,1-.707,0L7.061,7.854A1.5,1.5,0,0,0,4.939,9.975l4.586,4.586a3.5,3.5,0,0,0,4.95,0l4.586-4.586A1.5,1.5,0,0,0,19.061,7.854Z" />
+      <path  :fill="color"
+        d="M18.71,8.21a1,1,0,0,0-1.42,0l-4.58,4.58a1,1,0,0,1-1.42,0L6.71,8.21a1,1,0,0,0-1.42,0,1,1,0,0,0,0,1.41l4.59,4.59a3,3,0,0,0,4.24,0l4.59-4.59A1,1,0,0,0,18.71,8.21Z" />
     </svg>
   </div>
 </template>
@@ -16,6 +16,11 @@ export default {
       type: String,
       default: "normal",
       required: false
+    },
+    color: {
+      type: String,
+      required: false,
+      default: () => 'gray'
     }
   },
   setup(props) {

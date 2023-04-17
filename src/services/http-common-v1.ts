@@ -1,11 +1,11 @@
+import { storeToRefs } from "pinia";
 import { useAuthStore } from "@/stores/AuthStore";
 import axios, { type AxiosInstance } from "axios";
-import { storeToRefs } from "pinia";
 
-const { token, isAuth } = storeToRefs(useAuthStore())
 
 export class HttpAxios {
   public static getHttp(): AxiosInstance {
+    const { token, isAuth } = storeToRefs(useAuthStore())
     apiClient.interceptors.request.use(config => {
       if (isAuth.value) {
         config.headers.Authorization = token.value

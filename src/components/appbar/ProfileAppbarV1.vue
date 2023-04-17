@@ -1,5 +1,5 @@
 <template>
-  <div class="relative flex items-center justify-end" style="min-height: 50px; min-width: 150px;">
+  <div class="relative flex items-center justify-end z-50" style="min-height: 50px; min-width: 150px;">
     <template v-if="isAuth">
       <div class="" @mouseenter="hover = true" @mouseleave="hover = false">
         <div class="absolute w-full h-full gap-2 flex items-center left-0 top-0 justify-end">

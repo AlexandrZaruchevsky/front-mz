@@ -7,7 +7,7 @@
       <div class="sidebar">
         <RouterView name="sidebar" />
       </div>
-      <main class="">
+      <main class="p-2">
         <RouterView />
       </main>
     </div>
