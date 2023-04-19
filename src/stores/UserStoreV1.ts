@@ -1,5 +1,5 @@
 import { defineStore } from "pinia";
-import { CardData, CardFunction, PageGen, PageRequest, SelectOption } from "@/model/Page";
+import { CardData, CardDataV1, CardFunction, PageGen, PageRequest, SelectOption } from "@/model/Page";
 import type { ServiceRequest } from "@/model/ServiceRequest";
 import { User } from "@/model/User";
 import router from "@/router";
@@ -73,6 +73,21 @@ export const useUserStoreV1 = defineStore('userStoreV1', () => {
     }
   }
 
+  /**Add functions for CardDataV1 */
+  const firstPage = async () => {
+    if (!page.value.first) {
+      pageRequest.pageCurrent = 0;
+      await fetchUsers();
+    }
+  }
+
+  const lastPage = async () => {
+    if (!page.value.last) {
+      pageRequest.pageCurrent = page.value.totalPages - 1;
+      await fetchUser();
+    }
+  }
+
   const setPageSize = async (pageSize: number | string = 20) => {
     pageRequest.pageSize = pageSize as number
     pageRequest.pageCurrent = 0;
@@ -93,6 +108,24 @@ export const useUserStoreV1 = defineStore('userStoreV1', () => {
       nextPage,
       setPageSize
     )
+  })
+
+  const cardDataV1 = computed<CardDataV1>(() => {
+    return new CardDataV1(
+      page.value,
+      pageRequest,
+      [...pageSizeList],
+      [...sortByList],
+      addEntity,
+      search,
+      setSearchText,
+      changeSort,
+      previosPage,
+      nextPage,
+      firstPage,
+      lastPage,
+      setPageSize
+    );
   })
 
   const cardFunction = computed<CardFunction>(() => {
@@ -117,7 +150,7 @@ export const useUserStoreV1 = defineStore('userStoreV1', () => {
   async function initForm(): Promise<void> {
     const id = route.params.id;
     console.log("Init Form");
-    
+
     if (typeof id == "string" && parseInt(id)) {
       isAdd.value = false;
       await fetchUser(parseInt(id))
@@ -172,6 +205,7 @@ export const useUserStoreV1 = defineStore('userStoreV1', () => {
     user,
     serviceRequest,
     cardData,
+    cardDataV1,
     fetchUsers,
     cardFunction,
     initForm,

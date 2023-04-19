@@ -155,6 +155,99 @@ export class CardData {
 
 }
 
+export class CardDataV1 {
+  constructor(
+    public page: Page = new Page(),
+    public pageRequest: PageRequest = new PageRequest(),
+    public pageSizeOptions: Array<SelectOption> = [new SelectOption()],
+    public sortOptions: Array<SelectOption> = [new SelectOption()],
+    public addEntityFunc?: Function,
+    public searchFunc?: Function,
+    public setSearchFunc?: Function,
+    public changeSortFunc?: Function,
+    public previosPageFunc?: Function,
+    public nextPageFunc?: Function,
+    public firstPageFunc?: Function,
+    public lastPageFunc?: Function,
+    public changePageSizeFunc?: Function
+  ) { }
+
+  public addEntity() {
+    if (typeof this.addEntityFunc == "function") {
+      this.addEntityFunc()
+    } else {
+      console.log("previos not implemented");
+    }
+  }
+
+  public setSearch(searchText: string = "") {
+    if (typeof this.setSearchFunc == "function") {
+      this.setSearchFunc(searchText)
+    } else {
+      console.log("previos not implemented");
+    }
+  }
+
+  public search() {
+    if (typeof this.searchFunc == "function") {
+      this.searchFunc()
+    } else {
+      console.log("previos not implemented");
+    }
+  }
+
+  public changeSort(sort: string = "") {
+    if (typeof this.changeSortFunc == "function") {
+      this.changeSortFunc(sort)
+    } else {
+      console.log("previos not implemented");
+    }
+  }
+
+  public previos() {
+    if (typeof this.previosPageFunc == "function") {
+      this.previosPageFunc()
+    } else {
+      console.log("previos not implemented");
+    }
+  }
+
+  public next() {
+    if (typeof this.nextPageFunc == "function") {
+      this.nextPageFunc();
+    } else {
+      console.log("next not implemented");
+    }
+  }
+
+  public first() {
+    if (typeof this.firstPageFunc == "function") {
+      this.firstPageFunc()
+    } else {
+      console.log("previos not implemented");
+    }
+  }
+
+  public last() {
+    if (typeof this.lastPageFunc == "function") {
+      this.lastPageFunc();
+    } else {
+      console.log("next not implemented");
+    }
+  }
+
+  public changeSizePage(pageSize: number | string = 20) {
+    if (typeof this.changePageSizeFunc == "function") {
+      this.changePageSizeFunc(pageSize);
+    } else {
+      console.log("changeSizePage not implemented");
+    }
+  }
+
+}
+
+
+
 export class CardFunction {
   constructor(
     public id: number = -1,

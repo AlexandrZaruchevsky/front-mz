@@ -1,7 +1,7 @@
 <template>
   <div class="sidebar-menu">
     <div class="sidebar-menu__header" @click="collapse = !collapse">
-      <span class="pl-2">
+      <span class="pl-2 font-bold">
         SECURITY
       </span>
       <IconAngelLeft color="gray" v-if="collapse" class="p-1" size="sm" />
@@ -9,7 +9,7 @@
     </div>
     <div v-if="!collapse" class="sidebar-menu__body">
       <div 
-        class="flex border-b-2 border-primary-800 border-dotted border-opacity-0 hover:border-opacity-50" 
+        class="flex border-l border-secondary-500 border-dotted border-opacity-0 hover:border-opacity-80" 
         v-for="item of menuSecurity" 
         :key="item.id"
       >

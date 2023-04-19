@@ -20,6 +20,7 @@ const {isGuardian} = storeToRefs(useAuthStore())
 
 <style lang="scss">
 .sidebar {
+  min-width: 180px;
   @apply p-2;
 }
 

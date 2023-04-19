@@ -1,5 +1,5 @@
 <template>
-  <div>Menu-appbar</div>
+  <div></div>
 </template>
 <script lang="ts">
 export default{

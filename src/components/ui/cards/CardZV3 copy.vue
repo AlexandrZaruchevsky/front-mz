@@ -27,16 +27,16 @@
     </div>
     <div class="tool-pagination" v-if="navigation">
       <div class="flex gap-2">
-        <span class="pr-2 border-r" style="min-width: 110px;">Page  {{ currentPage }} of {{ cardData.page.totalPages }}</span>
+        <span class="pr-2 border-r">Page  {{ currentPage }} of {{ cardData.page.totalPages }}</span>
       </div>
       <select class="select-z" v-model="selectedPageSize" @change="changePageSize">
         <option v-for="opt in cardData.pageSizeOptions" :value="opt.key" :key="opt.key">{{ opt.value }}</option>
       </select>
       <div class="flex items-center">
-        <IconAngelDoubleLeft @click="first" size="sm" :disabled="cardData.page.first" />
+        <IconAngelDoubleLeft size="sm" :disabled="cardData.page.first" />
         <IconAngelLeft @click="previos" :disabled="cardData.page.first" size="sm" />
         <IconAngelRight @click="next" :disabled="cardData.page.last" size="sm" />
-        <IconAngelDoubleRight @click="last" :disabled="cardData.page.last" size="sm" />
+        <IconAngelDoubleRight :disabled="cardData.page.last" size="sm" />
       </div>
       <div class="mr-16"></div>
     </div>
@@ -61,15 +61,15 @@
   
 <script lang="ts">
 import debounce from 'lodash.debounce'
-import { CardData, CardDataV1 } from "@/model/Page";
+import { CardData } from "@/model/Page";
 import { computed, ref, watch } from "vue";
 export default {
   name: "CardZV3",
   props: {
     cardData: {
-      type: CardDataV1,
+      type: CardData,
       required: false,
-      default: new CardDataV1()
+      default: new CardData()
     },
     header: {
       type: String,
@@ -141,19 +141,9 @@ export default {
       props.cardData.next()
     }
 
-    const first = () => {
-      props.cardData.first()
-    }
-
-    const last = () => {
-      props.cardData.last()
-    }
-
     return {
       previos,
       next,
-      first,
-      last,
       selectedPageSize,
       changePageSize,
       selectedSort,

@@ -1,6 +1,6 @@
 <template>
   <div class="h-full p-2 relative">
-    <card-z-v3 class="h-full border" navigation editFloat searchable :cardData="cardData">
+    <card-z-v3 class="h-full border" navigation editFloat searchable :cardData="cardDataV1">
       <template #body>
         <template v-if="!isLoading">
           <div class="flex flex-col p-2 w-full gap-1">
@@ -29,7 +29,7 @@ import { useUserStoreV1 } from '@/stores/UserStoreV1';
 import { onMounted, ref } from 'vue';
 import UserEntityList from './UserEntityList.vue';
 
-const { cardData, users } = storeToRefs(useUserStoreV1());
+const { cardDataV1, users } = storeToRefs(useUserStoreV1());
 const { fetchUsers } = useUserStoreV1();
 
 const isLoading = ref<boolean>(false)

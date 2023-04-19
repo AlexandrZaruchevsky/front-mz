@@ -1,4 +1,4 @@
-import { CardData, CardFunction, PageGen, PageRequest, SelectOption } from "@/model/Page";
+import { CardData, CardDataV1, CardFunction, PageGen, PageRequest, SelectOption } from "@/model/Page";
 import { Role } from "@/model/Role";
 import type { ServiceRequest } from "@/model/ServiceRequest";
 import router from "@/router";
@@ -70,6 +70,23 @@ export const useRoleStoreV1 = defineStore("roleStoreV1", () => {
     }
   }
 
+    /**Add functions for CardDataV1 */
+    const firstPage = async () => {
+      if (!page.value.first) {
+        pageRequest.pageCurrent = 0;
+        await fetchRoles();
+      }
+    }
+  
+    const lastPage = async () => {
+      if (!page.value.last) {
+        pageRequest.pageCurrent = page.value.totalPages - 1;
+        await fetchRoles();
+      }
+    }
+  
+  
+
   const setPageSize = async (pageSize: number | string = 20) => {
     pageRequest.pageSize = pageSize as number
     pageRequest.pageCurrent = 0;
@@ -90,6 +107,24 @@ export const useRoleStoreV1 = defineStore("roleStoreV1", () => {
       nextPage,
       setPageSize
     )
+  })
+
+  const cardDataV1 = computed<CardDataV1>(() => {
+    return new CardDataV1(
+      page.value,
+      pageRequest,
+      [...pageSizeList],
+      [...sortByList],
+      addEntity,
+      search,
+      setSearchText,
+      changeSort,
+      previosPage,
+      nextPage,
+      firstPage,
+      lastPage,
+      setPageSize
+    );
   })
 
   const cardFunction = computed<CardFunction>(() => {
@@ -194,6 +229,7 @@ export const useRoleStoreV1 = defineStore("roleStoreV1", () => {
     role,
     serviceRequest,
     cardData,
+    cardDataV1,
     fetchRoles,
     initForm,
     isAdd,

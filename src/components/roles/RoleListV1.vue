@@ -1,6 +1,6 @@
 <template>
   <div class="h-full p-2 relative">
-    <card-z-v3 class="h-full border" navigation editFloat searchable :cardData="cardData">
+    <card-z-v3 class="h-full border" navigation editFloat searchable :cardData="cardDataV1">
       <template #body>
         <template v-if="!isLoading">
           <div class="p-2">
@@ -31,7 +31,7 @@ import { storeToRefs } from 'pinia';
 import { onMounted, ref } from 'vue';
 import RoleEntityListV1 from './RoleEntityListV1.vue';
 
-const { cardData, roles } = storeToRefs(useRoleStoreV1());
+const { cardDataV1, roles } = storeToRefs(useRoleStoreV1());
 const { fetchRoles, deletePermissionFromRole } = useRoleStoreV1();
 
 const isLoading = ref<boolean>(false)

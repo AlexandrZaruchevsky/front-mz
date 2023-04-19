@@ -5,6 +5,7 @@ import DashboardSidebar from '@/pages/dashboard/DashboardSidebar.vue'
 import SidebarMain from '@/components/sidebar-main/SidebarMain.vue'
 import UserListV1 from '@/components/users/UserListV1.vue'
 import RoleListV1 from '@/components/roles/RoleListV1.vue'
+import PhoneListV1 from '@/components/employees/PhoneListV1.vue'
 
 export default [
   {
@@ -12,7 +13,7 @@ export default [
     name: "DashboardV1",
     components: {
       header: AppBarV1,
-      default: DashboardMain,
+      default: PhoneListV1,
       sidebar: SidebarMain
     },
     meta: {

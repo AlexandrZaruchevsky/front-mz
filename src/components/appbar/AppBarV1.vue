@@ -3,7 +3,7 @@
     <div class="">
       <LogoAppbarV1 />
     </div>
-    <div class="border">
+    <div class="">
       <MenuAppbarV1 />
     </div>
     <div class="">
