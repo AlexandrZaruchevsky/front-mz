@@ -4,23 +4,25 @@
       <RouterLink to="/v1/dashboard">Dashboard</RouterLink>
     </div>
     <div class="sidebar-body">
-      <SidebarMenuGuardian v-if="isGuardian" class="border rounded"/>
+      <SidebarMenu v-if="isAuth" header="ADMIN MENU" :items="menuAdmin" class="border border-secondary-500 rounded shadow-sm shadow-secondary-500" />
+      <SidebarMenu v-if="isGuardian" header="SECURITY" :items="menuSecurity" class="border border-secondary-500 rounded shadow-sm shadow-secondary-500" />
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
 import { useAuthStore } from '@/stores/AuthStore';
+import { useMenuStore } from '@/stores/MenuStore';
 import { storeToRefs } from 'pinia';
 
+const { isGuardian, isAuth } = storeToRefs(useAuthStore())
 
-const {isGuardian} = storeToRefs(useAuthStore())
+const { menuAdmin, menuSecurity } = storeToRefs(useMenuStore());
 
 </script>
 
 <style lang="scss">
 .sidebar {
-  min-width: 180px;
   @apply p-2;
 }
 
@@ -28,7 +30,7 @@ const {isGuardian} = storeToRefs(useAuthStore())
   @apply text-2xl whitespace-nowrap font-semibold;
 }
 
-.sidebar-body{
-  @apply pt-4;
+.sidebar-body {
+  @apply flex flex-col gap-2 pt-4;
 }
 </style>

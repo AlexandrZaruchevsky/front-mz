@@ -169,7 +169,10 @@ export class CardDataV1 {
     public nextPageFunc?: Function,
     public firstPageFunc?: Function,
     public lastPageFunc?: Function,
-    public changePageSizeFunc?: Function
+    public changePageSizeFunc?: Function,
+    //additional
+    public fetchEntityFunc?: Function,
+    public sortDefault: string = ""
   ) { }
 
   public addEntity() {
@@ -244,7 +247,91 @@ export class CardDataV1 {
     }
   }
 
+  public async fetchEntity() {
+    if (typeof this.fetchEntityFunc == "function") {
+      await this.fetchEntityFunc();
+    } else {
+      console.log("fetchEntity not implemented");
+    }
+  }
+
 }
+
+const cardDataV1 = new CardDataV1();
+
+cardDataV1.pageSizeOptions = [
+  new SelectOption(10, 10),
+  new SelectOption(20, 20),
+  new SelectOption(50, 50)
+]
+
+cardDataV1.searchFunc = async () => {
+  cardDataV1.pageRequest.pageCurrent = 0;
+  await cardDataV1.fetchEntity();
+}
+
+cardDataV1.previosPageFunc = async () => {
+  if (!cardDataV1.page.first) {
+    cardDataV1.pageRequest.pageCurrent -= 1;
+    await cardDataV1.fetchEntity();
+  }
+}
+
+cardDataV1.nextPageFunc = async () => {
+  if (!cardDataV1.page.last) {
+    cardDataV1.pageRequest.pageCurrent += 1;
+    await cardDataV1.fetchEntity();
+  }
+}
+
+cardDataV1.firstPageFunc = async () => {
+  if (!cardDataV1.page.first) {
+    cardDataV1.pageRequest.pageCurrent = 0;
+    await cardDataV1.fetchEntity();
+  }
+}
+
+cardDataV1.lastPageFunc = async () => {
+  if (!cardDataV1.page.last) {
+    cardDataV1.pageRequest.pageCurrent = cardDataV1.page.totalPages - 1;
+    await cardDataV1.fetchEntity();
+  }
+}
+
+cardDataV1.changePageSizeFunc = async (pageSize: number | string = 20) => {
+  cardDataV1.pageRequest.pageSize = pageSize as number
+  cardDataV1.pageRequest.pageCurrent = 0;
+  // console.log(cardDataV1.pageRequest);
+  
+  await cardDataV1.fetchEntity();
+}
+
+cardDataV1.changeSortFunc = async (sort: string) => {
+  if(sort){
+    cardDataV1.pageRequest.sortBy = sort;
+  }else{
+    cardDataV1.pageRequest.sortBy = cardDataV1.sortDefault;
+  }
+  cardDataV1.pageRequest.search = ""
+  await cardDataV1.fetchEntity();
+}
+
+export const cardData = cardDataV1;
+
+// export const cardData = new CardDataV1(
+//   new Page(),
+//   new PageRequest(),
+//   [
+//     new SelectOption(10, 10),
+//     new SelectOption(20, 20),
+//     new SelectOption(50, 50)
+//   ],
+//   [new SelectOption()],
+//   () => { },  //addEntityFunc
+//   ()=>{
+//     this.pageRequest
+//   }
+// );
 
 
 

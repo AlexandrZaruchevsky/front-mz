@@ -1,7 +1,7 @@
-import SidebarMenuGuardian from './SidebarMenuGuardian.vue'
+import SidebarMenu from './SidebarMenu.vue'
 import SidebarMain from './SidebarMain.vue'
 
 export default[
-  SidebarMenuGuardian,
+  SidebarMenu,
   SidebarMain
 ]

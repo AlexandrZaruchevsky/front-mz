@@ -61,11 +61,17 @@ export const useMenuStore = defineStore('menuStore', () => {
   })
 
   const menuSecurity = computed<Array<LinkItem>>(() => {
-    const menuSec = [...menu.value.filter(item => item.access.includes("security"))]
-    return setItemLinkActive(menuSec);
+    return getMenuByRole(menu.value, "security")
   })
 
-  // const securityMenu
+  const menuAdmin = computed<Array<LinkItem>>(()=>{
+    return getMenuByRole(menu.value, "admin")
+  })
+
+  function getMenuByRole(menu:Array<LinkItem> = new Array(), permission:string=""){
+    return setItemLinkActive([...menu.filter(item => item.access.includes(permission))])
+  }
+
 
   function setItemLinkActive(menuList: Array<LinkItem> = []): Array<LinkItem> {
     const itemIndex = menuList
@@ -88,7 +94,8 @@ export const useMenuStore = defineStore('menuStore', () => {
     settingMenu,
     mainMenu,
     menuDics,
-    menuSecurity
+    menuSecurity,
+    menuAdmin
   }
 
 })
