@@ -1,10 +1,10 @@
 import type { Entity } from "@/model/Entity";
-import { PageRequest, type Page, PageGen, SelectOption } from "@/model/Page";
+import { PageRequest, PageGen, SelectOption } from "@/model/Page";
 import { ServiceRequest } from "@/model/ServiceRequest";
 import http from './http-common';
 import router from "@/router";
 import { useRoute } from "vue-router";
-import { reactive, ref } from "vue";
+import { reactive } from "vue";
 
 
 export default class TestServiceV1<T extends Entity>{

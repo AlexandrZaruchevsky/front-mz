@@ -1,3 +1,41 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+
+
+.card-shadow{
+  @apply shadow shadow-secondary-800 border border-secondary-400;
+}
+
+.list-row{
+  @apply cursor-pointer w-full flex flex-row items-center gap-2 px-1 py-0.5 border-b-2 border-dotted border-secondary-400 rounded;
+}
+
+.list-row:hover{
+  @apply bg-secondary-200;
+}
+
+.list-cell {
+  @apply px-1 py-0.5 truncate;
+}
+
+.entity{
+  @apply flex flex-col gap-1;
+}
+
+.entity-row{
+  @apply flex flex-row items-center gap-4 pb-0.5 border-b border-dotted border-secondary-400;
+}
+
+.select-list{
+  @apply bg-secondary-50 px-2 py-1 rounded border-2 border-primary-800 border-opacity-25 cursor-pointer;
+}
+
+.select-list:hover{
+  @apply border-opacity-90 shadow shadow-secondary-500;
+}
+
+.select-list:focus{
+  @apply outline-none border-opacity-70;
+}

@@ -41,7 +41,7 @@
 
 import { EntityChoice } from '@/model/Choice';
 import debounce from 'lodash.debounce';
-import { ref, computed, watch, onMounted } from 'vue';
+import { ref, computed, onMounted } from 'vue';
 
 export default {
   name: "CardChoiceV1",

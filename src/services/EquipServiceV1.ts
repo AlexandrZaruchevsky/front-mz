@@ -1,7 +1,6 @@
 import type { Equip, EquipParents } from "@/model/Equip";
 import EntityServiceV1 from "./EntityServiceV1";
 import type { PageRequestEquip } from "@/model/Page";
-// import http from './http-common';
 
 export default class EquipService extends EntityServiceV1<Equip, PageRequestEquip>{
   constructor(

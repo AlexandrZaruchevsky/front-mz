@@ -1,6 +1,6 @@
 <template>
   <div class="h-full p-2 relative">
-    <card-z-v3 class="h-full border" navigation editFloat searchable :cardData="cardDataV1">
+    <card-z-v3 class="h-full" navigation editFloat searchable :cardData="cardDataV1">
       <template #body>
         <template v-if="!isLoading">
           <div class="p-2">

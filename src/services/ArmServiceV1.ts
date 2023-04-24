@@ -1,6 +1,5 @@
 import EntityServiceV1 from "./EntityServiceV1";
 import type { PageRequest } from "@/model/Page";
-import http from './http-common';
 import type { Arm } from "@/model/Arm";
 
 export default class ArmServiceV1 extends EntityServiceV1<Arm, PageRequest>{

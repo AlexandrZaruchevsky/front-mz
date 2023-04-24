@@ -51,7 +51,7 @@
 
 import { useChoiceStore } from '@/stores/ChoiceStore';
 import { EntityChoice } from '@/model/Choice';
-import { computed, ref, watch } from 'vue';
+import { ref, watch } from 'vue';
 import { storeToRefs } from 'pinia';
 import { useArmStore } from '@/stores/ArmStore';
 

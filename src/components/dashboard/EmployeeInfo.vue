@@ -27,7 +27,7 @@
 <script setup lang="ts">
 import type { Employee } from '@/model/Employee';
 import StatService from '@/services/StatService';
-import { onMounted, ref, type PropType, onUpdated} from 'vue';
+import { onMounted, ref, type PropType} from 'vue';
 import ArmsInfo from './ArmsInfo.vue'
 import { EmplInfo } from '@/model/Info';
 

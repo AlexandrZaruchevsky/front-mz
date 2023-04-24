@@ -26,7 +26,7 @@ export default {
 }
 
 header{
-  @apply shadow;
+  @apply shadow shadow-secondary-600;
 }
 
 .content{

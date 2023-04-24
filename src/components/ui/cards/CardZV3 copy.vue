@@ -165,7 +165,7 @@ export default {
 }
 
 .card {
-  @apply h-full bg-white rounded-lg flex flex-col;
+  @apply h-full bg-white rounded-lg flex flex-col ;
 
   .card-header {
     @apply p-2 border-b text-xl font-semibold bg-primary-800 rounded-t-lg bg-opacity-80 text-primary-50;

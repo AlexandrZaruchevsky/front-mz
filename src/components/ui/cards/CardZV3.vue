@@ -1,5 +1,5 @@
 <template>
-  <div class="card relative">
+  <div class="card relative card-shadow">
     <div v-if="editFloat" class="absolute floating-button button-0 z-10 bottom-0 right-10"
       style="min-height: 60px;min-width: 60px;" @click="addEntity">
       <div class="absolute rigth-0 bottom-8">
@@ -15,9 +15,13 @@
         <button-z v-if="editable" title="add" class="bg-green-600" @click="addEntity" />
         <slot name="tool-buttons" />
         <div v-if="searchable" class="flex items-end gap-2 w-full">
-          <select class="select-z" v-model="selectedSort" @change="changeSort" v-show="chSort==true">
-            <option v-for="opt in cardData.sortOptions" :value="opt.key" :key="opt.key">{{ opt.value }}</option>
-          </select>
+          <SelectZV1 
+            class="select-list" 
+            :options="cardData.sortOptions" 
+            v-model="selectedSort" 
+            @change="changeSort" 
+            v-show="chSort==true"
+          />
           <input-field v-model="searchText" @input="setSearch" @keyup="search" v-focus/>
         </div>
       </div>
@@ -40,29 +44,13 @@
       </div>
       <div class="mr-16"></div>
     </div>
-    <!-- <div class="tool-pagination" v-if="navigation">
-      <select class="select-z" v-model="selectedPageSize" @change="changePageSize">
-        <option v-for="opt in cardData.pageSizeOptions" :value="opt.key" :key="opt.key">{{ opt.value }}</option>
-      </select>
-      <div class="flex gap-2">
-        <button-z-v1 @click="previos" title="Previos" class="btn bg-primary-600" :disabled="cardData.page.first" />
-        <button-z-v1 @click="next" title="Next" class="btn bg-primary-600" :disabled="cardData.page.last" />
-      </div>
-      <div class="mr-16"></div>
-    </div> -->
-    <!-- <div class="card-footer" v-if="footer">
-      <div class="flex gap-2">
-        <span class="pr-2 border-r">Всего записей - {{ cardData.page.totalElements }}</span>
-        <span class="pr-2 border-r">Страница - {{ currentPage }} / {{ cardData.page.totalPages }}</span>
-      </div>
-    </div> -->
   </div>
 </template>
   
 <script lang="ts">
 import debounce from 'lodash.debounce'
-import { CardData, CardDataV1 } from "@/model/Page";
-import { computed, ref, watch } from "vue";
+import { CardDataV1 } from "@/model/Page";
+import { computed, ref } from "vue";
 export default {
   name: "CardZV3",
   props: {

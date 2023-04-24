@@ -1,5 +1,6 @@
 <template>
-  <div class="bg-secondary-50 p-4 shadow-sm rounded shadow-secondary-800">
+  <!-- <div class="bg-secondary-50 p-4 shadow-sm rounded shadow-secondary-800"> -->
+  <div class="bg-secondary-50 p-4 rounded">
     <div>
       <slot name="header" />
     </div>

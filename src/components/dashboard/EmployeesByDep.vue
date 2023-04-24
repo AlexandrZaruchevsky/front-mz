@@ -37,10 +37,7 @@ import { storeToRefs } from 'pinia';
 import { onMounted, ref } from 'vue';
 import DepService from '@/services/DepService';
 import type { DepV1 } from '@/model/DepV1';
-import EmplEntity from './EmplEntity.vue';
 import EmplEntityV1 from './EmplEntityV1.vue';
-
-import debounce from "lodash.debounce"
 
 const isLoading = ref<boolean>(false);
 const search = ref<string>("");

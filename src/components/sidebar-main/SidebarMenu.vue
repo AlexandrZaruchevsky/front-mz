@@ -1,6 +1,6 @@
 <template>
   <div class="sidebar-menu">
-    <div class="sidebar-menu__header" @click="collapse = !collapse">
+    <div class="sidebar-menu__header  bg-secondary-200" @click="collapse = !collapse">
       <span class="pl-2 font-bold whitespace-nowrap">
         {{ header }}
       </span>
@@ -8,7 +8,7 @@
       <IconAngelDown color="gray" v-else class="p-1" size="sm" />
     </div>
     <div v-if="!collapse" class="sidebar-menu__body">
-      <div class="flex border-l border-secondary-500 border-dotted border-opacity-0 hover:border-opacity-80"
+      <div class="flex border-l-2 border-secondary-600 border-dotted border-opacity-0 hover:border-opacity-80"
         v-for="item of items" :key="item.id">
         <RouterLink class="px-2 py-1 border-l-4 border-opacity-0 border-primary-800 w-full font-semibold"
           :class="item.active ? 'border-opacity-80' : ''" :to="item.link">
@@ -34,10 +34,15 @@ export default {
       type: Array<LinkItem>,
       required: false,
       default: () => new Array()
+    },
+    isCollapse: {
+      type: Boolean,
+      requred: false,
+      default: () => true
     }
   },
-  setup() {
-    const collapse = ref<boolean>(false);
+  setup(props) {
+    const collapse = ref<boolean>(props.isCollapse);
     return {
       collapse,
     }
@@ -46,7 +51,7 @@ export default {
 </script>
 <style lang="scss" scoped>
 .sidebar-menu {
-  @apply flex flex-col;
+  @apply flex flex-col rounded;
 }
 
 .sidebar-menu__header {

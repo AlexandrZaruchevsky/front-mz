@@ -3,7 +3,6 @@ import { defineStore } from 'pinia'
 import { LoginPassword, User, UserAuth } from '@/model/User'
 import { AuthSevice } from '@/services/AuthService';
 import router from '@/router';
-import { useRoute } from 'vue-router';
 
 export const useAuthStore = defineStore('authStore', () => {
   const userAuth = ref<UserAuth>(new UserAuth());
@@ -11,7 +10,6 @@ export const useAuthStore = defineStore('authStore', () => {
   const token = computed<string>(() => `Bearer ${userAuth.value.token}`);
   const user = computed<User>(() => userAuth.value.user);
 
-  const route = useRoute();
 
   const shortFIO = computed(() => {
     return user.value

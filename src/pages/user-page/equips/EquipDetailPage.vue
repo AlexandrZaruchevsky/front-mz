@@ -89,7 +89,6 @@
 <script setup lang="ts">
 
 import { useEquipStore } from '@/stores/EquipStore';
-import { computed } from 'vue';
 import { storeToRefs } from 'pinia';
 
 const { equipChild, cardFuncChild, equipTypeListForChild, equipModelListForChild } = storeToRefs(useEquipStore());

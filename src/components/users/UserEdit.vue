@@ -1,6 +1,6 @@
 <template>
   <overlay-z-v1>
-    <card-entity-v1 style="min-width: 400px;" :cardFunc="cardFunction">
+    <card-entity-v1 class="card-shadow" style="min-width: 400px;" :cardFunc="cardFunction">
       <template #body>
         <div class="flex flex-col">
           <UserEntity v-model="user" :editable="true" :update="!isAdd" />

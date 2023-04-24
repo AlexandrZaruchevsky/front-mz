@@ -25,7 +25,8 @@ export const useMenuStore = defineStore('menuStore', () => {
     new LinkItem(4, "/admin/employees", "Employees", false, "admin"),
     new LinkItem(5, "/v1/security/users", "Users", false, "security"),
     new LinkItem(6, "/v1/security/roles", "Roles", false, "security"),
-    new LinkItem(7, "/admin/upload", "Upload", false, "admin")
+    new LinkItem(7, "/admin/upload", "Upload", false, "admin"),
+    new LinkItem(8, "/v1/equips", "Equips", false, "all"),
   ]);
 
   const mainMenuList = ref<Array<LinkItem>>([
@@ -64,11 +65,15 @@ export const useMenuStore = defineStore('menuStore', () => {
     return getMenuByRole(menu.value, "security")
   })
 
-  const menuAdmin = computed<Array<LinkItem>>(()=>{
+  const menuAdmin = computed<Array<LinkItem>>(() => {
     return getMenuByRole(menu.value, "admin")
   })
 
-  function getMenuByRole(menu:Array<LinkItem> = new Array(), permission:string=""){
+  const menuAll = computed<Array<LinkItem>>(() => {
+    return getMenuByRole(menu.value, "all")
+  })
+
+  function getMenuByRole(menu: Array<LinkItem> = new Array(), permission: string = "") {
     return setItemLinkActive([...menu.filter(item => item.access.includes(permission))])
   }
 
@@ -95,7 +100,8 @@ export const useMenuStore = defineStore('menuStore', () => {
     mainMenu,
     menuDics,
     menuSecurity,
-    menuAdmin
+    menuAdmin,
+    menuAll
   }
 
 })

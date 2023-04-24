@@ -1,6 +1,6 @@
 <template>
   <div class="h-full p-2 relative">
-    <card-z-v3 class="h-full shadow shadow-secondary-800" navigation searchable :chSort="false" :cardData="cardDataV1">
+    <card-z-v3 class="h-full" navigation searchable :chSort="false" :cardData="cardDataV1">
       <template #body>
         <template v-if="!isLoading">
           <div class="flex flex-col p-2 w-full gap-1">
