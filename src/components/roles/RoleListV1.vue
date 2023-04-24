@@ -26,7 +26,7 @@
   </div>
 </template>
 <script setup lang="ts">
-import { useRoleStoreV1 } from '@/stores/RoleStoreV1';
+import { useRoleStoreV1 } from '@/stores/v1/RoleStoreV1';
 import { storeToRefs } from 'pinia';
 import { onMounted, ref } from 'vue';
 import RoleEntityListV1 from './RoleEntityListV1.vue';

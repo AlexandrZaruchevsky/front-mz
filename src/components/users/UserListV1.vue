@@ -25,7 +25,7 @@
 </template>
 <script setup lang="ts">
 import { storeToRefs } from 'pinia';
-import { useUserStoreV1 } from '@/stores/UserStoreV1';
+import { useUserStoreV1 } from '@/stores/v1/UserStoreV1';
 import { onMounted, ref } from 'vue';
 import UserEntityList from './UserEntityList.vue';
 

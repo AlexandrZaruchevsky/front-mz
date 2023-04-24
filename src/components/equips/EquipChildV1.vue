@@ -28,7 +28,7 @@ import { storeToRefs } from 'pinia';
 import { onMounted, onUpdated, ref } from 'vue';
 import EquipEntityV1 from './EquipEntityV1.vue'
 import { SelectOption } from '@/model/Page';
-import { useEquipStoreV1 } from '@/stores/EquipStoreV1';
+import { useEquipStoreV1 } from '@/stores/v1/EquipStoreV1';
 
 const { equipChild, equipTypeListForEquipChild, equipModelListForEquipChild, cardFunctionChild } = storeToRefs(useEquipStoreV1());
 

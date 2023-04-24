@@ -39,7 +39,7 @@
   <RouterView />
 </template>
 <script setup lang="ts">
-import { useEquipStoreV1 } from '@/stores/EquipStoreV1';
+import { useEquipStoreV1 } from '@/stores/v1/EquipStoreV1';
 import { storeToRefs } from 'pinia';
 import { onMounted, onUpdated, ref } from 'vue';
 import EquipEntityV1 from '@/components/equips/EquipEntityV1.vue'

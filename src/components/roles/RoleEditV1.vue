@@ -35,7 +35,7 @@
 </template>
 
 <script setup lang="ts">
-import { useRoleStoreV1 } from '@/stores/RoleStoreV1';
+import { useRoleStoreV1 } from '@/stores/v1/RoleStoreV1';
 import { storeToRefs } from 'pinia';
 import { onMounted, onUpdated, ref } from 'vue';
 

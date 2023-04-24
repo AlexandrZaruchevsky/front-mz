@@ -36,7 +36,7 @@
   </div>
 </template>
 <script setup lang="ts">
-import { useEquipStoreV1 } from '@/stores/EquipStoreV1';
+import { useEquipStoreV1 } from '@/stores/v1/EquipStoreV1';
 import { storeToRefs } from 'pinia';
 import { onMounted, ref } from 'vue';
 import EquipEntityListV1 from './EquipEntityListV1.vue';
