@@ -5,6 +5,7 @@ import CardZV3 from "./CardZV3.vue"
 import CardEntity from "./CardEntity.vue"
 import CardEntityV1 from "./CardEntityV1.vue"
 import CardChoiceV1 from "./CardChoiceV1.vue"
+import CardChoiceV2 from "./CardChoiceV2.vue"
 
 export default [
     CardDefault,
@@ -13,5 +14,6 @@ export default [
     CardZV3,
     CardEntity,
     CardEntityV1,
-    CardChoiceV1
+    CardChoiceV1,
+    CardChoiceV2
 ]

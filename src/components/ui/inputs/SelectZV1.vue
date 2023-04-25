@@ -7,7 +7,8 @@
   </select>
 </template>
 <script lang="ts">
-import { SelectOption } from '@/model/Page';
+/** __vue_virtual_code_placeholder */
+import type { SelectOption } from '@/model/Page';
 import { computed, type PropType } from 'vue';
 export default {
   name: 'SelectZV1',
@@ -25,7 +26,7 @@ export default {
     defaultOption: {
       type: Object as PropType<SelectOption>,
       required: false,
-      default: () => new SelectOption(-1, "Nooo")
+      // default: () => new SelectOption(-1, "Nooo")
     }
   },
   emits: ["update:modelValue", "change"],

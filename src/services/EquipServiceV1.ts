@@ -23,6 +23,21 @@ export default class EquipService extends EntityServiceV1<Equip, PageRequestEqui
     })
   }
 
+  public async fetchAllForChoiceWithSort(sortBy: string = "", name: string = ""): Promise<Array<Equip>> {
+    return await this.http.get(`${this.url}/list-choice`, {
+      params: {
+        sortBy,
+        name
+      }
+    }).then(response => {
+      super.getServiceRequest().end()
+      return response.data;
+    }).catch(err => {
+      super.getServiceRequest().error("Error fetch Positions")
+      throw err;
+    })
+  }
+
   public async fetchEquipParents(): Promise<EquipParents> {
     this.getServiceRequest().start();
     return await this.http.get(`${this.url}/equip-parents`).then(response => {

@@ -13,6 +13,7 @@ import IconLogin from './IconLogin.vue'
 import IconSetting from './IconSetting.vue'
 import IconTrash from './IconTrash.vue'
 import IconShopBagAdd from './IconShopBagAdd.vue'
+import IconAdd from './IconAdd.vue'
 
 export default [
   XIcon,
@@ -29,5 +30,6 @@ export default [
   IconLogin,
   IconSetting,
   IconTrash,
-  IconShopBagAdd
+  IconShopBagAdd,
+  IconAdd
 ]

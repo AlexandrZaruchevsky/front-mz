@@ -2,20 +2,10 @@
   <div class="h-full p-2 relative">
     <card-z-v3 class="h-full" navigation editFloat searchable :cardData="cardDataV1">
       <template #tool-buttons>
-        <SelectZV1
-          style="width: 200px; min-width: 200px; max-width: 200px;" 
-          class="select-list" 
-          :defaultOption="defaultOptionEquipType" 
-          :options="equipTypeList" 
-          v-model="pageRequest.equipTypeId"
-        />
-        <SelectZV1
-          style="width: 200px; min-width: 200px; max-width: 200px;" 
-          class="select-list" 
-          :defaultOption="defaultOptionEquipModel" 
-          :options="equipModelList" 
-          v-model="pageRequest.equipModelId"
-        />
+        <SelectZV1 style="width: 200px; min-width: 200px; max-width: 200px;" class="select-list"
+          :defaultOption="defaultOptionEquipType" :options="equipTypeList" v-model="pageRequest.equipTypeId" />
+        <SelectZV1 style="width: 200px; min-width: 200px; max-width: 200px;" class="select-list"
+          :defaultOption="defaultOptionEquipModel" :options="equipModelList" v-model="pageRequest.equipModelId" />
       </template>
       <template #body>
         <template v-if="!isLoading">
@@ -49,8 +39,8 @@ const { equips, cardDataV1, equipTypeList, equipModelList, pageRequest } = store
 
 const { fetchEquips, fetchEquipTypes } = useEquipStoreV1();
 
-const defaultOptionEquipType = ref<SelectOption>(new SelectOption("-1",'All types'));
-const defaultOptionEquipModel = ref<SelectOption>(new SelectOption("-1",'All models'));
+const defaultOptionEquipType = ref<SelectOption>(new SelectOption("-1", 'All types'));
+const defaultOptionEquipModel = ref<SelectOption>(new SelectOption("-1", 'All models'));
 
 onMounted(async () => {
   isLoading.value = true;

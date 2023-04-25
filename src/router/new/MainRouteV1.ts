@@ -4,6 +4,7 @@ import UserListV1 from '@/components/users/UserListV1.vue'
 import RoleListV1 from '@/components/roles/RoleListV1.vue'
 import PhoneListV1 from '@/components/employees/PhoneListV1.vue'
 import EquipListV1 from '@/components/equips/EquipListV1.vue'
+import ArmListV1 from '@/components/arms/ArmListV1.vue'
 
 
 export default [
@@ -40,9 +41,9 @@ export default [
     ]
   },
   {
-    path:'/v1/equips',
-    name:'EquipList',
-    components:{
+    path: '/v1/equips',
+    name: 'EquipList',
+    components: {
       header: AppBarV1,
       sidebar: SidebarMain,
       default: EquipListV1
@@ -55,12 +56,39 @@ export default [
       {
         path: ':id',
         component: () => import('@/components/equips/EquipEditV1.vue'),
-        children:[
+        children: [
           {
             path: 'children/:childId',
-            component: ()=> import('@/components/equips/EquipChildV1.vue')
+            component: () => import('@/components/equips/EquipChildV1.vue')
           }
         ]
+      }
+    ]
+  },
+  {
+    path: '/v1/arms',
+    name: 'ArmList',
+    components: {
+      header: AppBarV1,
+      sidebar: SidebarMain,
+      default: ArmListV1
+    },
+    meta: {
+      authRequired: true,
+      layout: 'main-layout'
+    },
+    children: [
+      {
+        path: ':id',
+        component: () => import('@/components/arms/ArmEditV1.vue'),
+        children: [
+          {
+            path: 'details/:idArmDetail',
+            component: () => import('@/components/arms/ArmDetailEditV1.vue'),
+            
+          }
+        ]
+            
       }
     ]
   },

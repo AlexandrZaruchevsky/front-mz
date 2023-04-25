@@ -70,9 +70,9 @@ export const useChoiceStore = defineStore("choiceStore", () => {
     })
   })
 
-  async function fetchArmList(name:string=""):Promise<void>{
-    await armService.fetchAllForChoice(name).then(resp=>{
-      arms.value=resp
+  async function fetchArmList(name: string = ""): Promise<void> {
+    await armService.fetchAllForChoice(name).then(resp => {
+      arms.value = resp
     }).catch(err => {
       console.log(err.response.data);
       empls.value = new Array();
@@ -87,20 +87,31 @@ export const useChoiceStore = defineStore("choiceStore", () => {
   const equipService = new EquipService("equips");
   const equips = ref<Array<Equip>>(new Array());
 
-  const choiceEquipList = computed<Array<EntityChoice>>(()=>{
-    return equips.value.map(equip=>{
+  const choiceEquipList = computed<Array<EntityChoice>>(() => {
+    return equips.value.map(equip => {
       return new EntityChoice(equip.id, equip.shortName, equip.inventoryNumber, equip.equipTypeName);
     })
   })
 
-  async function fetchEquipList(name:string=""):Promise<void>{
-    await equipService.fetchAllForChoice(name).then(resp=>{
-      equips.value=resp
+  async function fetchEquipList(name: string = ""): Promise<void> {
+    await equipService.fetchAllForChoice(name).then(resp => {
+      equips.value = resp
     }).catch(err => {
       console.log(err.response.data);
       empls.value = new Array();
     })
   }
+
+  async function fetchEquipListWithSort(sortBy: string = "", name: string = ""): Promise<void> {
+    await equipService.fetchAllForChoiceWithSort(sortBy, name).then(resp => {
+      equips.value = resp
+    }).catch(err => {
+      console.log(err.response.data);
+      empls.value = new Array();
+    })
+  }
+
+
 
   /**end */
 
@@ -112,7 +123,8 @@ export const useChoiceStore = defineStore("choiceStore", () => {
     choiceArmList,
     fetchArmList,
     choiceEquipList,
-    fetchEquipList
+    fetchEquipList,
+    fetchEquipListWithSort
   }
 
 })
